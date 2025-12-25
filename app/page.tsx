@@ -1,65 +1,90 @@
-import Image from "next/image";
+import type { Metadata } from "next";
+import HeroSection from "./components/HeroSection";
+import VideoPlayer from "./components/VideoPlayer";
+
+import IconicBrandPitch from "./components/IconicBrandPitch";
+import LogoLoopco from "./components/logoloopco";
+import AnimatedTextSection from "./components/AnimatedTextSection";
+import TextLoop from "./components/textloop";
+import LeftAlignedPitch from "./components/LeftAlignedPitch";
+import ServiceCards from "./components/ServiceCards";
+import HeroServicesCards from "./components/HeroServicesCards";
+import StatisticsSection from "./components/StatisticsSection";
+import CallToActionBanner from "./components/CallToActionBanner";
+import AdaptTextSection from "./components/AdaptTextSection";
+import LeftGallerySec from "./components/LeftGallerySec";
+import HorizontalGallery from "./components/HorizontalGallery";
+import HoverImage from "./components/HoverImage";
+import IndustrySection from "./components/IndustrySection";
+import FinalSection from "./components/finalSection";
+import TestimonialSection from "./components/TestimonialSection";
+import Map from "./components/Map";
+import ThreeCardSection from "./components/ThreeCardSection";
+
+import TypographySection from "./components/TypographySection";
+import { homePageData } from "@/lib/data";
+
+const MY_WORDS = [
+  { word: "GREAT WORK", alignment: "start" },
+  { word: "DOES'T JUST ", alignment: "center" },
+  { word: "GUIDES", alignment: "start" },
+  { word: "BEHAVIOURS", alignment: "start" },
+  { word: "it speaks", alignment: "center" },
+  { word: "directly with the", alignment: "end" },
+
+  { word: "nervous system", alignment: "start" },
+];
+
+
+export const metadata: Metadata = {
+  title: "Antrosys",
+  description:
+    "Welcome to Antrosys - Your trusted partner for innovative solutions",
+};
 
 export default function Home() {
+  // Variant 1: "Our Work" section
+  const homeData = homePageData[0];
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <>
+      <HeroSection />
+      <VideoPlayer videoSource="/Herobg.mp4" />
+      <IconicBrandPitch accentClass="hover:text-accent">
+        We design, build, and scale digital systems that move businesses
+        forward. From AI, automation, and cloud platforms to full-stack
+        development, apps, e-commerce, branding, and growth — we turn complex
+        ideas into high-performing products people trust and love.
+      </IconicBrandPitch>
+      <LogoLoopco />
+      <AnimatedTextSection words={MY_WORDS as any} />
+      <LeftAlignedPitch
+        text="We engineer digital experiences that shape perception."
+        accentColorClass="hover:text-accent-400"
+      />
+      <ServiceCards />
+      <HeroServicesCards />
+      <CallToActionBanner />
+
+      <StatisticsSection />
+      <CallToActionBanner />
+      <LeftGallerySec />
+      <TextLoop
+        texts={[
+          "Future-Proof Architecture Scalability Built-In Transparent Processes Exceptional Performance Security First Results-Driven Partnership Innovation Delivered Custom Solutions",
+        ]}
+      />
+      <HorizontalGallery />
+      <AdaptTextSection />
+      <ThreeCardSection />
+
+      <HoverImage />
+      <IndustrySection data={homeData.industries} />
+      <FinalSection data={homeData.finalSection} />
+      <TestimonialSection />
+      <Map />
+      <TypographySection />
+
+    </>
   );
 }
