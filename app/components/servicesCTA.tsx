@@ -3,109 +3,106 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ChevronRight } from 'lucide-react';
-// 1. DecryptedText component import is removed
-// import { DecryptedText } from '@/components/ui/decrypted-text'; // Remove this line if it was here
 
 export default function CTASection() {
     const [isVisible, setIsVisible] = useState(false);
-    // mousePos and handleMouseMove are kept but not visually used in the new design style
-    const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
     useEffect(() => {
         setIsVisible(true);
     }, []);
 
-    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        setMousePos({
-            x: e.clientX - rect.left,
-            y: e.clientY - rect.top
-        });
-    };
-
     return (
-        <section className="relative bg-black py-16 md:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-            {/* Background Elements - Kept for styling */}
-            <div className="absolute inset-0">
-                <div className="absolute top-10 left-10 w-96 h-96 bg-red-600/10 rounded-full blur-3xl" />
-                <div className="absolute bottom-10 right-10 w-96 h-96 bg-stone-700/10 rounded-full blur-3xl" />
+        <section className="relative bg-black py-20 md:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden" aria-labelledby="cta-heading">
+            {/* Ambient Background - Optimized for Performance */}
+            <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+                <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-red-600/10 rounded-full blur-[120px] animate-pulse" />
+                <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-stone-700/10 rounded-full blur-[120px]" />
             </div>
 
             <div className="max-w-7xl mx-auto relative z-10">
-                {/* Main CTA Content Container - Simplified from the original */}
-                <div className="relative p-0 overflow-hidden min-h-[400px]">
-                    <p className="text-secondary text-center uppercase tracking-widest text-sm mb-4 transition-opacity duration-1000">
-                        Let's Collaborate With Us
+                <div className="relative p-0 min-h-[450px] flex flex-col justify-center">
+                    
+                    {/* SEO Subheading: Long-tail Keyword Rich */}
+                    <p className="text-secondary text-center uppercase tracking-[0.3em] text-xs md:text-sm mb-6 transition-opacity duration-1000 font-semibold">
+                        Award-Winning Full-Service Digital Agency
                     </p>
 
-                    {/* 2. Heading is now a standard <h1> with the text directly inside */}
-                    <h1 // Use an h1 for semantic correctness, and pass its styles as className
-                        className={`text-6xl sm:text-7xl md:text-8xl lg:text-[8rem] xl:text-[8rem] font-extrabold text-accent text-center leading-none transition-all duration-1200 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                            }`}
+                    {/* Main H1: High-Value Keywords for Google Ranking */}
+                    <h1 
+                        id="cta-heading"
+                        className={`text-5xl sm:text-7xl md:text-8xl lg:text-[7rem] xl:text-[8.5rem] font-black text-accent text-center leading-[0.9] tracking-tighter transition-all duration-1000 ease-out ${
+                            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                        }`}
                     >
-                        Ready To Transform Your Digital Presence?
-                        {/* DecryptedText component has been removed */}
+                        Scale Your Brand With <span className="text-secondary">Next-Gen</span> AI & Design.
                     </h1>
                     
-                    {/* Footer Content and Button - Positioned to the bottom-left and bottom-right */}
-                    <div className="mt-16 flex justify-between items-end pt-12 border-t border-stone-800">
-                        {/* Description - Bottom Left */}
+                    {/* Bottom Content Bar */}
+                    <div className="mt-20 flex flex-col md:flex-row justify-between items-center md:items-end gap-8 pt-12 border-t border-stone-900">
+                        
+                        {/* Descriptive SEO Copy */}
                         <div
-                            className={`max-w-md transition-all duration-1200 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                                }`}
+                            className={`max-w-xl transition-all duration-1000 delay-300 ${
+                                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                            }`}
                         >
-                            <p className="text-accent font-light text-base leading-tight">
-                                Let's discuss your project and explore how we can help you achieve your business goals
+                            <h2 className="text-stone-400 text-sm uppercase tracking-widest mb-2 font-bold">Expert Solutions</h2>
+                            <p className="text-accent font-light text-lg md:text-xl leading-relaxed italic">
+                                From custom software development to immersive UI/UX design, Ai automations, AI Art and data-driven marketing—we build the future of your digital ecosystem.
                             </p>
                         </div>
 
-                        {/* CTA Button - Bottom Right */}
+                        {/* Interactive CTA Button */}
                         <div
-                            className={`transition-all duration-1200 delay-800 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                                }`}
+                            className={`transition-all duration-1000 delay-500 ${
+                                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                            }`}
                         >
-                            <Link href="/contact" className="group relative px-6 py-3 bg-red-700 bg-secondary text-accent rounded-[25px] font-medium text-base transition-all duration-300 hover:shadow-xl flex items-center">
+                            <Link 
+                                href="/contact" 
+                                aria-label="Book a free consultation for digital services"
+                                className="group relative px-8 py-5 bg-secondary/50 text-accent rounded-full font-bold text-lg transition-all duration-500 hover:bg-secondary hover:scale-105 hover:shadow-[0_0_30px_rgba(185,28,28,0.4)] flex items-center overflow-hidden"
+                            >
                                 <span className="relative z-10 flex items-center">
-                                    Book Free Consultation
-                                    <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-0.5 transition-transform duration-300" />
+                                    Start Your Project
+                                    <ChevronRight className="w-6 h-6 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
                                 </span>
                             </Link>
                         </div>
                     </div>
                 </div>
 
-                ---
-
-                {/* Community Endorsement - RETAINED AS REQUESTED */}
+                {/* Social Proof Section - Highlighting Performance & Growth */}
                 <div
-                    className={`mt-12 text-center transition-all duration-1200 delay-1200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                        }`}
+                    className={`mt-24 text-center transition-all duration-1000 delay-700 ${
+                        isVisible ? 'opacity-100' : 'opacity-0'
+                    }`}
                 >
-                    <p className="text-stone-500 text-sm mb-8">
-                        Supported and loved by a growing community of developers and creators
+                    <p className="text-stone-500 text-xs md:text-sm mb-10 uppercase tracking-widest">
+                        Trusted by Innovators in Web3, SaaS, and Creative Tech
                     </p>
-                    <div className="flex flex-wrap justify-center gap-12">
-                        {/* Community Metric 1: Discord/Slack Members */}
-                        <div className="text-center">
-                            <p className="text-3xl font-bold text-white">400+</p>
-                            <p className="text-stone-400 text-sm">Clients</p>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-16 max-w-4xl mx-auto">
+                        <div className="group">
+                            <p className="text-4xl md:text-5xl font-black text-white group-hover:text-secondary transition-colors">400+</p>
+                            <p className="text-stone-500 text-xs mt-2 font-bold uppercase tracking-tighter">Global Partners</p>
                         </div>
-                        {/* Community Metric 2: Open Source Stars/Forks (e.g., GitHub) */}
-                        <div className="text-center">
-                            <p className="text-3xl font-bold text-white">120+</p>
-                            <p className="text-stone-400 text-sm">Projects</p>
+                        <div className="group">
+                            <p className="text-4xl md:text-5xl font-black text-white group-hover:text-secondary transition-colors">120+</p>
+                            <p className="text-stone-500 text-xs mt-2 font-bold uppercase tracking-tighter">Products Launched</p>
                         </div>
-                        {/* Call to Action for Trust */}
-                        <div className="text-center">
-                            <p className="text-3xl font-bold text-white">Active</p>
-                            <p className="text-stone-400 text-sm">Weekly Development</p>
+                        <div className="group">
+                            <p className="text-4xl md:text-5xl font-black text-white group-hover:text-secondary transition-colors">99%</p>
+                            <p className="text-stone-500 text-xs mt-2 font-bold uppercase tracking-tighter">Client Retention</p>
                         </div>
                     </div>
+                    
                     <a
-                        href="https://www.instagram.com/antrosys/" // IMPORTANT: Link this to your Discord/GitHub
-                        className="mt-6 inline-block text-sm font-medium text-white border-b border-white hover:text-stone-300 hover:border-stone-300 transition"
+                        href="https://www.instagram.com/antrosys/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-12 inline-flex items-center text-sm font-bold text-stone-400 border-b-2 border-stone-800 pb-1 hover:text-white hover:border-secondary transition-all duration-300"
                     >
-                        Join us on Instagram
+                        Follow the journey on Instagram
                     </a>
                 </div>
             </div>

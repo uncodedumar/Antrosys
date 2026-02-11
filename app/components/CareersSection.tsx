@@ -1,51 +1,76 @@
-// components/CareersSection.tsx
-
 import React from 'react';
-import { FiUpload } from 'react-icons/fi'; // Using react-icons for the upload arrow
+import { FiUpload } from 'react-icons/fi';
 
-// Define the component
 const CareersSection: React.FC = () => {
-  // Define the main background color from the image (light beige/cream)
-
-  // Define the text color (dark black/navy)
-  const textColor = 'text-accent'; 
+  // SEO Content Constants
+  const sectionTitle = "Join Our Creative Design Agency Team";
+  const subheadline = "We’re not hiring now, but we’re always keen to connect with talented creatives and visionary designers.";
 
   return (
-    // Main container with the background color and padding
-    <section className={`py-16 md:py-24 lg:py-32 ${textColor}`}>
-      {/* Centering container for the content */}
+    <section 
+      className="py-16 md:py-24 lg:py-32 text-accent bg-transparent transition-colors duration-500 ease-in-out"
+      aria-labelledby="careers-heading"
+    >
+      {/* Schema.org JSON-LD for Job Openings (Speculative/General) */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "Your Agency Name",
+          "description": "Looking for talented UI/UX designers, creative directors, and digital strategists.",
+          "jobTitle": "Creative Talent Pool"
+        })}
+      </script>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Flex container to hold the two main columns */}
-        {/* On mobile (default), it stacks them (flex-col). 
-             On medium screens and up (md:), it places them side-by-side (md:flex-row) */}
         <div className="flex flex-col md:flex-row justify-between md:space-x-12">
 
-          {/* === Left Section: "Join Our Team" === */}
+          {/* === Left Section === */}
           <div className="mb-12 md:mb-0 md:w-1/2">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight">
+            <h2 
+              id="careers-heading"
+              className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight leading-tight"
+            >
+              {/* Using a span for a subtle SEO boost without changing the look */}
+              <span className="sr-only">Career Opportunities at </span>
               Join Our Team
             </h2>
           </div>
 
-          {/* === Right Section: Details and Drop Resume === */}
-          {/* We'll use the other half of the space (md:w-1/2) and align the text to the left */}
+          {/* === Right Section === */}
           <div className="md:w-1/2">
-            
-            {/* Main paragraph */}
-            <p className="text-xl sm:text-2xl font-medium mb-12 lg:mb-16">
-              We’re Not Hiring Now, But We’re Always Keen To Connect With Talented Creatives.
+            <p className="text-xl sm:text-2xl font-medium mb-12 lg:mb-16 leading-relaxed">
+              {subheadline}
             </p>
 
-            {/* "Drop Your Resume" button/link area */}
+            {/* Accessible & Interactive CTA */}
+{/* 
             <a 
-              href="#" // Replace with your actual resume drop link/functionality
-              className="inline-flex items-center text-xl sm:text-2xl font-semibold hover:opacity-80 transition-opacity"
+              href="#upload" 
+              className="group inline-flex items-center text-xl sm:text-2xl font-semibold transition-all duration-300 hover:translate-x-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent rounded-sm"
+              aria-label="Submit your resume to join our creative talent pool"
             >
-              Drop Your Resume
-              {/* The upload icon, slightly smaller and positioned like the reference image */}
-              <FiUpload className="ml-2 w-5 h-5 sm:w-6 sm:h-6 transform rotate-180" />
-            </a>
+              <span className="border-b-2 border-transparent group-hover:border-accent transition-all duration-300">
+                Drop Your Resume
+              </span>
+              
+              {/* Icon with smooth animation */}
+              {/* <div className="ml-3 p-1 rounded-full overflow-hidden">
+                <FiUpload 
+                  className="w-5 h-5 sm:w-6 sm:h-6 transform rotate-180 transition-transform duration-300 group-hover:-translate-y-1" 
+                  aria-hidden="true"
+                />
+              </div>
+            </a> */}
+
+            {/* Visually hidden long-tail keywords for SEO indexing */}
+            <div className="sr-only">
+              <h3>Creative Jobs and Design Careers</h3>
+              <p>
+                Seeking remote UI/UX designer roles, senior art director positions, 
+                and creative tech opportunities in a high-growth design studio.
+              </p>
+            </div>
           </div>
         </div>
       </div>

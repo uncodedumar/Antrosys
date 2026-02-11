@@ -1,239 +1,276 @@
 "use client";
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, ArrowRight, Quote } from 'lucide-react';
+import Image from 'next/image';
+import { motion, AnimatePresence, LayoutGroup } from 'framer-motion';
+import { ChevronDown } from 'lucide-react';
+import { ServicePageData } from '@/lib/data';
 
 // --- Types ---
 type ServiceCardData = {
   id: string;
   category: string;
-  subCategory: string;
   specific: string;
   slug: string;
   title: string;
   description: string;
-  techStack: string[];
-  testimonial: {
-    text: string;
-    author: string;
-    role: string;
-    avatar: string; // Added avatar field
-  };
+  metrics: { label: string; value: string }[];
   images: string[];
 };
 
-// --- Mock Data ---
-const SERVICES_DATA: ServiceCardData[] = [
-  {
-    id: '1',
-    category: 'Development',
-    subCategory: 'Web Development',
-    specific: 'Front End Development',
-    slug: 'custom-software-development',
-    title: 'Front-End That Feels Alive, Fast, And Flawless',
-    description: 'We Build Web Interfaces That Don’t Just Look Good—They Perform Flawlessly.',
-    techStack: ['React', 'Next.js', 'Tailwind'],
-    testimonial: { 
-      text: "Fast and intuitive.", 
-      author: "Cooper Williams", 
-      role: "CEO At Bricklix",
-      avatar: "https://i.pravatar.cc/150?u=cooper" // Example Avatar
-    },
-    images: ['/img1.jpg', '/img2.jpg']
-  },
-  {
-    id: '2',
-    category: 'UI/UX',
-    subCategory: 'Mobile Design',
-    specific: 'App Prototyping',
-    slug: 'app-prototyping',
-    title: 'Visual Journeys Designed for Conversion',
-    description: 'We craft experiences that turn visitors into loyal customers through design.',
-    techStack: ['Figma', 'Adobe XD', 'Protopie'],
-    testimonial: { 
-      text: "Stunning visuals.", 
-      author: "Sarah Jane", 
-      role: "Product Manager",
-      avatar: "https://i.pravatar.cc/150?u=sarah" // Example Avatar
-    },
-    images: ['/img3.jpg', '/img4.jpg']
-  },
-];
+// --- SEO Schema Component ---
+// This tells Google exactly what your services are without visual changes
+const ServiceSchema = ({ services }: { services: ServiceCardData[] }) => {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": services.map((s, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "item": {
+        "@type": "Service",
+        "name": s.title,
+        "description": s.description,
+        "url": `https://antrosys.com/services/${s.slug}`, // Update with your domain
+        "provider": { "@type": "Digital Agency", "name": "Antrosys" }
+      }
+    }))
+  };
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />;
+};
 
-// Array of background colors for Testimonial Cards
-const TESTIMONIAL_BGS = [
-  'bg-[#1E1E1E]', // Dark Charcoal
-  'bg-[#2D3142]', // Muted Blue/Gray
-  'bg-[#0F4C5C]', // Deep Teal
-  'bg-[#5F0F40]', // Deep Plum
-  'bg-[#1B4332]'  // Forest Green
-];
+const getCategory = (slug: string): string => {
+  if (['Automated-Chat-Systems', 'AI-Solutions'].includes(slug)) return 'AI Development';
+  if (['App-Dev', 'Next-Gen-Desktop-Applications'].includes(slug)) return 'Application Development';
+  if (['Logo-n-Brand-Identity', 'Web-n-Application-Design', 'Art-n-Illustration', 'Print-Design', 'Packaging-n-Label-Design', 'Social-Media-Graphics'].includes(slug)) return 'Design';
+  if (['Marketing-n-Advertising', 'Growth-Analytics-n-Marketing-Automation'].includes(slug)) return 'Marketing';
+  if (slug === 'QA-QC') return 'QA Testing';
+  if (slug === 'custom-software-development') return 'Software Development';
+  return 'Web Development';
+};
+
+const getSpecific = (slug: string): string => {
+  const mapping: Record<string, string> = {
+    'AI-Solutions': 'AI Solutions',
+    'App-Dev': 'Mobile Apps',
+    'Next-Gen-Desktop-Applications': 'Desktop Applications',
+    'Logo-n-Brand-Identity': 'Brand Identity',
+    'Web-n-Application-Design': 'Web & App Design',
+    'Art-n-Illustration': 'Art & Illustration',
+    'Print-Design': 'Print Design',
+    'Packaging-n-Label-Design': 'Packaging Design',
+    'Social-Media-Graphics': 'Social Media Graphics',
+    'Marketing-n-Advertising': 'Advertising',
+    'Growth-Analytics-n-Marketing-Automation': 'Growth & Analytics',
+    'QA-QC': 'Quality Assurance',
+    'custom-software-development': 'Custom Software',
+    'Front-End-Development': 'Front-End Development',
+    'Back-End-Web-Development': 'Back-End Development',
+    'Full-Stack Web Development': 'Full-Stack Development',
+    'Website-Maintenance': 'Website Maintenance',
+    'No-Code-Easy-to-Manage-Websites': 'No-Code Websites',
+    'WordPress-Engineered-Websites': 'WordPress',
+    'Shopify-Websites': 'Shopify',
+    'Automated-Chat-Systems': 'Chat Systems',
+    'Cloud-Solutions': 'Cloud Solutions',
+  };
+  return mapping[slug] || slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+};
+
+const transformServiceData = (services: ServicePageData[]): ServiceCardData[] => {
+  return services.map((service, index) => ({
+    id: String(index + 1),
+    category: getCategory(service.slug),
+    specific: getSpecific(service.slug),
+    slug: service.slug,
+    title: service.hero.title,
+    description: service.hero.description,
+    metrics: [
+      { label: 'Client Satisfaction', value: '95%' },
+      { label: 'Project Success', value: '100%' },
+      { label: 'On-Time Delivery', value: '98%' },
+      { label: 'Quality Score', value: 'A+' },
+    ],
+    images: service.hero.imageUrl ? [service.hero.imageUrl] : ['/a.webp'],
+  }));
+};
+
+const SERVICES_DATA: ServiceCardData[] = transformServiceData(ServicePageData);
 
 const AllServicesCards = () => {
-  const [filter, setFilter] = useState({ 
-    cat: 'Development', 
-    sub: 'Web Development', 
-    spec: 'Front End Development' 
-  });
+  const [filter, setFilter] = useState({ cat: 'All', spec: 'All' });
 
-  const categories = useMemo(() => Array.from(new Set(SERVICES_DATA.map(s => s.category))), []);
-  const subCategories = useMemo(() => 
-    Array.from(new Set(SERVICES_DATA.filter(s => s.category === filter.cat).map(s => s.subCategory))), 
-    [filter.cat]
-  );
-  const specifics = useMemo(() => 
-    Array.from(new Set(SERVICES_DATA.filter(s => s.subCategory === filter.sub).map(s => s.specific))), 
-    [filter.sub]
-  );
+  const allCategories = useMemo(() => ['All', ...Array.from(new Set(SERVICES_DATA.map(s => s.category))).sort()], []);
+  
+  const specifics = useMemo(() => {
+    const base = filter.cat === 'All' 
+      ? SERVICES_DATA.map(s => s.specific) 
+      : SERVICES_DATA.filter(s => s.category === filter.cat).map(s => s.specific);
+    return ['All', ...Array.from(new Set(base)).sort()];
+  }, [filter.cat]);
 
-  const sortedServices = useMemo(() => {
-    return [...SERVICES_DATA].sort((a, b) => {
-      const aScore = (a.category === filter.cat ? 1 : 0) + (a.subCategory === filter.sub ? 1 : 0) + (a.specific === filter.spec ? 1 : 0);
-      const bScore = (b.category === filter.cat ? 1 : 0) + (b.subCategory === filter.sub ? 1 : 0) + (b.specific === filter.spec ? 1 : 0);
-      return bScore - aScore;
-    });
+  useEffect(() => {
+    if (filter.cat !== 'All' && !specifics.includes(filter.spec)) {
+      setFilter(prev => ({ ...prev, spec: 'All' }));
+    }
+  }, [filter.cat, specifics, filter.spec]);
+
+  const filteredServices = useMemo(() => {
+    return SERVICES_DATA
+      .filter(s => (filter.cat === 'All' || s.category === filter.cat) && (filter.spec === 'All' || s.specific === filter.spec))
+      .sort((a, b) => a.category.localeCompare(b.category));
   }, [filter]);
 
   return (
-    <div className="min-h-screen py-10 md:py-20 px-6 font-sans text-[#1A1A1A]">
-      <div className="max-w-7xl mx-auto">
+    <section className="min-h-screen py-10 bg-primary text-accent selection:bg-secondary selection:text-secondary">
+      <ServiceSchema services={filteredServices} />
+      <div className="max-w-[1400px] mx-auto px-6">
         
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl text-accent font-bold mb-12 tracking-tight">WHERE DO YOU BEGIN?</h2>
-          <div className="flex flex-wrap justify-center gap-6">
-            <Dropdown num="1" options={categories} value={filter.cat} onChange={(val) => setFilter(f => ({ ...f, cat: val }))} />
-            <Dropdown num="2" options={subCategories} value={filter.sub} onChange={(val) => setFilter(f => ({ ...f, sub: val }))} />
-            <Dropdown num="3" options={specifics} value={filter.spec} onChange={(val) => setFilter(f => ({ ...f, spec: val }))} />
-          </div>
-        </div>
+        <nav className="flex flex-wrap gap-4 mb-16 justify-center" aria-label="Service Category Filters">
+          <Dropdown num="1" options={allCategories} value={filter.cat} onChange={(val) => setFilter(f => ({ ...f, cat: val }))} />
+          <Dropdown num="2" options={specifics} value={filter.spec} onChange={(val) => setFilter(f => ({ ...f, spec: val }))} />
+        </nav>
 
-        <h3 className="text-xl md:text-2xl font-bold mb-8 uppercase text-accent tracking-widest">HERE YOU BEGIN</h3>
+        <LayoutGroup>
+          <motion.div layout className="space-y-12">
+            <AnimatePresence mode="popLayout">
+              {filteredServices.map((service) => (
+                <ServiceGroup key={service.id} service={service} />
+              ))}
+            </AnimatePresence>
+          </motion.div>
+        </LayoutGroup>
 
-        <div className="space-y-12 md:space-y-24">
-          <AnimatePresence mode="popLayout">
-            {sortedServices.map((service, index) => (
-              <ServiceGroup key={service.id} service={service} index={index} />
-            ))}
-          </AnimatePresence>
-        </div>
+        {filteredServices.length === 0 && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center text-gray-400 py-20">
+            <p>No services found matching your criteria.</p>
+          </motion.div>
+        )}
       </div>
-    </div>
+    </section>
   );
 };
 
-const ServiceGroup = ({ service, index }: { service: ServiceCardData, index: number }) => {
-  // Select background color based on index
-  const bgColor = TESTIMONIAL_BGS[index % TESTIMONIAL_BGS.length];
-
+const ServiceGroup = ({ service }: { service: ServiceCardData }) => {
   return (
-    <motion.div 
+    <motion.article 
       layout
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ duration: 0.4, ease: "circOut" }}
-      className="grid grid-cols-1 md:grid-cols-12 gap-4"
+      initial={{ opacity: 0, scale: 0.98 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.98 }}
+      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      className="grid grid-cols-1 md:grid-cols-12 gap-4 h-auto md:h-[600px]"
     >
-      {/* Main Info Card */}
-      <Link href={`/services/${service.slug}`} className="md:col-span-5">
-        <TiltCard className="bg-white p-8 md:p-10 rounded-xl shadow-sm flex flex-col justify-between h-full group">
-          <div>
-            <h3 className="text-2xl md:text-3xl font-bold mb-6 leading-tight">{service.title}</h3>
-            <p className="text-gray-600 leading-relaxed mb-6">{service.description}</p>
-            <div className="flex flex-wrap gap-2">
-                {service.techStack.map(tech => <span key={tech} className="text-xs font-bold uppercase text-[#FF6B2C]">{tech}</span>)}
-            </div>
-          </div>
-          <div className="flex justify-end mt-4">
-            <ArrowRight className="w-8 h-8 group-hover:translate-x-2 transition-transform" />
-          </div>
-        </TiltCard>
-      </Link>
+      <div className="md:col-span-4 bg-primary border border-secondary rounded-[30px] md:rounded-[40px] p-8 md:p-10 flex flex-col justify-between ">
+      <Link 
+          href={`/services/${service.slug}`} 
+          
+          aria-label={` ${service.title}`}
+        >
 
-      {/* Testimonial Card - Now with Dynamic BG and Author Image */}
-      <div className="hidden md:block md:col-span-4">
-        <TiltCard className={`${bgColor} text-white p-10 rounded-xl h-full flex flex-col justify-between`}>
-          <div>
-            <Quote className="w-12 h-12 text-[#F9F5E9] mb-6 fill-current opacity-20" />
-            <p className="text-xl font-bold italic leading-snug">{service.testimonial.text}</p>
+       
+        <div>
+          <h3 className="text-3xl text-accent font-medium mb-4 tracking-tight">{service.title}</h3>
+          <p className="text-gray-500 text-sm leading-relaxed mb-10 max-w-sm">
+            {service.description}
+          </p>
+
+          <div className="grid grid-cols-2 gap-y-8 gap-x-4">
+            {service.metrics.map((m, i) => (
+              <div key={i} className="flex flex-col">
+                <span className="text-2xl font-semibold mb-1 tabular-nums">{m.value}</span>
+                <span className="text-[10px] uppercase tracking-[0.1em] text-gray-500 font-bold">
+                  {m.label}
+                </span>
+              </div>
+            ))}
           </div>
-          <div className="flex items-center gap-4 mt-8">
-            <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white/20">
-              <img 
-                src={service.testimonial.avatar} 
-                alt={service.testimonial.author} 
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div>
-              <p className="font-bold">{service.testimonial.author}</p>
-              <p className="text-sm text-white/60">{service.testimonial.role}</p>
-            </div>
-          </div>
-        </TiltCard>
+        </div>
+   
+        </Link>
+        <Link 
+          href={`/services/${service.slug}`} 
+          className="group inline-flex items-center gap-2 bg-gray-900  rounded-full px-4 py-2 text-sm mt-10 w-fit transition-all hover:text-white text-gray-400"
+          aria-label={`Learn more about ${service.title}`}
+        >
+          Explore <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
+          
+        </Link>
       </div>
 
-      {/* Image Column */}
-      <div className="hidden md:flex md:col-span-3 flex-col gap-4">
-        <TiltCard className="h-1/2 rounded-xl overflow-hidden relative bg-gray-300 min-h-[150px]" />
-        <TiltCard className="h-1/2 rounded-xl overflow-hidden relative bg-gray-400 min-h-[150px]" />
+      <div className="md:col-span-8 relative rounded-[25px] overflow-hidden group min-h-[300px] bg-neutral-900">
+      <Link 
+          href={`/services/${service.slug}`} 
+      
+          aria-label={`${service.title}`}
+        >  
+      
+        <Image 
+          src={service.images[0]} 
+          alt={`${service.title} - High Performance ${service.category}`}
+          fill
+          sizes="(max-width: 768px) 100vw, 66vw"
+          className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
+          priority={service.id === '1'}
+          loading={service.id === '1' ? 'eager' : 'lazy'}
+        />
+        </Link>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
       </div>
-    </motion.div>
+    </motion.article>
   );
 };
 
-// ... Dropdown and TiltCard components remain the same ...
 const Dropdown = ({ num, value, options, onChange }: { num: string, value: string, options: string[], onChange: (v: string) => void }) => {
   const [isOpen, setIsOpen] = useState(false);
+  
+  const handleClose = useCallback(() => setIsOpen(false), []);
+
   return (
-    <div className="relative min-w-[280px]">
-      <div 
+    <div className="relative min-w-[240px]">
+      <button 
         onClick={() => setIsOpen(!isOpen)}
-        className="bg-[#FF6B2C] text-white px-5 py-4 rounded-full flex items-center justify-between cursor-pointer hover:bg-[#e85a1f] transition-all"
+        onKeyDown={(e) => e.key === 'Escape' && handleClose()}
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
+        className="w-full bg-[#1a1a1a] border border-white/10 text-white px-6 py-3 rounded-full flex items-center justify-between cursor-pointer hover:border-white/30 hover:bg-[#222] transition-all focus:outline-none focus:ring-2 focus:ring-white/20"
       >
-        <div className="flex items-center gap-3">
-          <span className="w-8 h-8 rounded-full bg-white text-[#FF6B2C] flex items-center justify-center font-bold text-sm">
-            {num}
-          </span>
-          <span className="border-b border-white/50 pb-1 text-lg font-medium">{value}</span>
+        <div className="flex items-center gap-3 pointer-events-none">
+          <span className="text-gray-500 font-mono text-xs" aria-hidden="true">{num.padStart(2, '0')}</span>
+          <span className="text-sm font-medium">{value}</span>
         </div>
-        <ChevronDown className={`w-5 h-5 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
-      </div>
+        <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+      </button>
+      
       <AnimatePresence>
         {isOpen && (
-          <motion.ul 
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 5 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="absolute z-50 w-full bg-white border border-gray-200 rounded-2xl shadow-xl overflow-hidden mt-2"
-          >
-            {options.map((opt) => (
-              <li 
-                key={opt}
-                onClick={() => { onChange(opt); setIsOpen(false); }}
-                className="px-6 py-3 hover:bg-[#F9F5E9] cursor-pointer transition-colors text-gray-800"
-              >
-                {opt}
-              </li>
-            ))}
-          </motion.ul>
+          <>
+            <div className="fixed inset-0 z-40" onClick={handleClose} />
+            <motion.ul 
+              initial={{ opacity: 0, y: 10, scale: 0.95 }}
+              animate={{ opacity: 1, y: 5, scale: 1 }}
+              exit={{ opacity: 0, y: 10, scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+              className="absolute z-50 w-full bg-[#141414] border border-white/10 rounded-2xl shadow-2xl overflow-hidden mt-2 max-h-[300px] overflow-y-auto custom-scrollbar"
+              role="listbox"
+            >
+              {options.map((opt) => (
+                <li 
+                  key={opt}
+                  role="option"
+                  aria-selected={value === opt}
+                  onClick={() => { onChange(opt); handleClose(); }}
+                  className={`px-6 py-3 cursor-pointer text-sm transition-colors ${value === opt ? 'bg-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-gray-200'}`}
+                >
+                  {opt}
+                </li>
+              ))}
+            </motion.ul>
+          </>
         )}
       </AnimatePresence>
     </div>
-  );
-};
-
-const TiltCard = ({ children, className }: { children?: React.ReactNode, className?: string }) => {
-  return (
-    <motion.div
-      whileHover={{ rotateX: 2, rotateY: -2, scale: 1.01 }}
-      style={{ perspective: 1000 }}
-      className={`transition-shadow hover:shadow-2xl ${className}`}
-    >
-      {children}
-    </motion.div>
   );
 };
 

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import HeroSection from "./components/HeroSection";
 import VideoPlayer from "./components/VideoPlayer";
 
@@ -12,27 +13,40 @@ import HeroServicesCards from "./components/HeroServicesCards";
 import StatisticsSection from "./components/StatisticsSection";
 import CallToActionBanner from "./components/CallToActionBanner";
 import AdaptTextSection from "./components/AdaptTextSection";
-import LeftGallerySec from "./components/LeftGallerySec";
-import HorizontalGallery from "./components/HorizontalGallery";
 import HoverImage from "./components/HoverImage";
 import IndustrySection from "./components/IndustrySection";
 import FinalSection from "./components/finalSection";
 import TestimonialSection from "./components/TestimonialSection";
-import Map from "./components/Map";
 import ThreeCardSection from "./components/ThreeCardSection";
-
 import TypographySection from "./components/TypographySection";
 import { homePageData } from "@/lib/data";
 
-const MY_WORDS = [
-  { word: "GREAT WORK", alignment: "start" },
-  { word: "DOES'T JUST ", alignment: "center" },
-  { word: "GUIDES", alignment: "start" },
-  { word: "BEHAVIOURS", alignment: "start" },
-  { word: "it speaks", alignment: "center" },
-  { word: "directly with the", alignment: "end" },
+// Dynamic imports for heavy components below the fold
+const LeftGallerySec = dynamic(() => import("./components/LeftGallerySec"), {
+  loading: () => <div className="min-h-screen bg-black" aria-label="Loading gallery" />,
+  ssr: true,
+});
 
-  { word: "nervous system", alignment: "start" },
+const HorizontalGallery = dynamic(() => import("./components/HorizontalGallery"), {
+  loading: () => <div className="min-h-[80vh] bg-black" aria-label="Loading gallery" />,
+  ssr: true,
+});
+
+const MobileTestimonialSlider = dynamic(() => import("./components/MobileTestimonialSlider"), {
+  loading: () => null,
+  ssr: true,
+});
+
+const Map = dynamic(() => import("./components/Map"), {
+  loading: () => <div className="min-h-[400px] bg-black" aria-label="Loading map" />,
+  ssr: true,
+});
+
+const MY_WORDS = [
+  { word: "Scalability", alignment: "start" },
+  { word: "Curiosity", alignment: "end" },
+  { word: "Creativity", alignment: "start" },
+
 ];
 
 
@@ -49,25 +63,28 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      <VideoPlayer videoSource="/Herobg.mp4" />
-      <IconicBrandPitch accentClass="hover:text-accent">
-        We design, build, and scale digital systems that move businesses
-        forward. From AI, automation, and cloud platforms to full-stack
-        development, apps, e-commerce, branding, and growth — we turn complex
-        ideas into high-performing products people trust and love.
-      </IconicBrandPitch>
+      <VideoPlayer videoSource="/Hero.mp4" />
+      <TypographySection />
+     
+      <ServiceCards />
+      
       <LogoLoopco />
+      <HeroServicesCards />
       <AnimatedTextSection words={MY_WORDS as any} />
       <LeftAlignedPitch
         text="We engineer digital experiences that shape perception."
         accentColorClass="hover:text-accent-400"
       />
-      <ServiceCards />
-      <HeroServicesCards />
+
+      <IconicBrandPitch >
+        We design, build, and scale digital systems that move businesses
+        forward. From AI, automation, and cloud platforms to full-stack
+        development, apps, e-commerce, branding, and growth — we turn complex
+        ideas into high-performing products people trust and love.
+      </IconicBrandPitch>
       <CallToActionBanner />
 
       <StatisticsSection />
-      <CallToActionBanner />
       <LeftGallerySec />
       <TextLoop
         texts={[
@@ -81,9 +98,9 @@ export default function Home() {
       <HoverImage />
       <IndustrySection data={homeData.industries} />
       <FinalSection data={homeData.finalSection} />
+      < MobileTestimonialSlider/>
       <TestimonialSection />
       <Map />
-      <TypographySection />
 
     </>
   );

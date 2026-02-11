@@ -6,18 +6,23 @@ import Navigation from "./components/Navigation";
 import TopNavBar from './components/TopNavBar';
 import Footer from './components/Footer';
 import CursorFollower from './components/CursorFollower'
+import { Analytics } from "@vercel/analytics/next"
+
 
 const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+  preload: true,
+  fallback: ["system-ui", "arial"],
 });
 
 // ✅ This works because layout.tsx is a Server Component
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.antrosys.com'),
   title: {
-    default: "Bricklix | Strategic Technology For Intelligent Growth",
+    default: "Antrosys | Strategic Technology For Intelligent Growth",
     template: "%s | Antrosys"
   },
   description: "Strategic Technology For Intelligent Growth. Transform your business with innovative digital solutions, cutting-edge technology, and expert development services.",
@@ -42,7 +47,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "ANtrosys",
+    title: "Antrosys",
   },
   openGraph: {
     type: "website",
@@ -79,9 +84,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    // Add your verification codes here if needed
-    // google: "your-google-verification-code",
-    // yandex: "your-yandex-verification-code",
+
   },
   alternates: {
     canonical: "https://www.antrosys.com",
@@ -94,17 +97,50 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Antrosys",
+    "url": "https://www.antrosys.com",
+    "logo": "https://www.antrosys.com/logo.svg",
+    "description": "Strategic Technology For Intelligent Growth. Transform your business with innovative digital solutions, cutting-edge technology, and expert development services.",
+    "sameAs": [
+      "https://www.linkedin.com/company/antrosys",
+      "https://www.instagram.com/antrosys/",
+      "https://github.com/uncodedumar",
+      "https://x.com/antrosys"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "sayhi@antrosys.com",
+      "contactType": "Customer Service"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": ["US", "EU", "AE", "CA", "AU", "TR", "PK"]
+    }
+  };
+
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+      </head>
       <body
         className={`${poppins.variable} antialiased`}
       >
         <LoadingBar />
         <TopNavBar />
+
         <Navigation />
+        
         <CursorFollower/>
         {children}
         <Footer />
+        <Analytics />
       </body>
     </html>
   );

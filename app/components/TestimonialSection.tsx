@@ -1,5 +1,6 @@
 'use client';
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { Star, Phone, Quote } from 'lucide-react';
 
 interface CardData {
@@ -11,6 +12,7 @@ interface CardData {
   role: string;
   company: string;
   review: string;
+  src: string;
 }
 
 const TestimonialCard = ({ 
@@ -80,7 +82,21 @@ const TestimonialCard = ({
       </div>
 
       <div className="absolute bottom-8 left-8 right-6 flex items-center gap-3">
-        <div className={`w-10 h-10 rounded-full flex-shrink-0 ${data.bgColor === '#3D2924' ? 'bg-zinc-100/10' : 'bg-zinc-800/10'}`} />
+        <div className={`relative w-10 h-10 rounded-full flex-shrink-0 overflow-hidden ${data.bgColor === '#3D2924' ? 'bg-zinc-100/10' : 'bg-zinc-800/10'}`}>
+          <Image
+            src={data.src}
+            alt={`${data.name} - ${data.role} at ${data.company}`}
+            width={40}
+            height={40}
+            className="object-cover w-full h-full"
+            loading="lazy"
+            sizes="40px"
+            onError={(e) => {
+              // Fallback: hide image on error, background color will show
+              e.currentTarget.style.display = 'none';
+            }}
+          />
+        </div>
         <div className="flex flex-col overflow-hidden">
           <span className={`text-sm font-bold truncate ${data.textColor}`}>{data.name}</span>
           <span className={`text-[9px] uppercase opacity-70 truncate ${data.textColor}`}>
@@ -92,16 +108,18 @@ const TestimonialCard = ({
   );
 };
 
+export const testimonialCards: CardData[] = [
+  { rotation: '-6', bgColor: '#F5F2E9', textColor: 'text-zinc-900', starColor: '#FF6B2C', name: "Anas Shahid", role: "Managing Director", company: "Bricklix", review: "Their attention to detail in the UI phase was unlike anything we've seen. Truly a top-tier partner.", src: "/People/a.jpeg" },
+  { rotation: '-3', bgColor: '#3D2924', textColor: 'text-zinc-100', starColor: '#FF6B2C', name: "Alex Chen", role: "Founder", company: "Vantagy", review: "The scaling issues we had were solved in weeks. If you want results, this is the team.", src: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop&crop=faces&auto=format&q=80" },
+  { rotation: '-2', bgColor: '#F5F2E9', textColor: 'text-zinc-900', starColor: '#FF6B2C', name: "Sarah Jenkins", role: "CTO", company: "Orbit", review: "Communication was seamless. It felt like they were an extension of our internal team.", src: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=faces&auto=format&q=80" },
+  { rotation: '3', bgColor: '#3D2924', textColor: 'text-zinc-100', starColor: '#FF6B2C', name: "Marcus Thorne", role: "Director", company: "Neduus", review: "We increased our conversion rate by 40% after the relaunch. The ROI speaks for itself.", src: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=faces&auto=format&q=80" },
+  { rotation: '6', bgColor: '#F5F2E9', textColor: 'text-zinc-900', starColor: '#FF6B2C', name: "Elena Rossi", role: "VP", company: "Solaris", review: "Creative, fast, and technically sound. They delivered exactly what they promised on time.", src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=faces&auto=format&q=80" },
+];
+
 export default function TestimonialSection() {
   const [isHovered, setIsHovered] = useState(false);
 
-  const cards: CardData[] = [
-    { rotation: '-6', bgColor: '#F5F2E9', textColor: 'text-zinc-900', starColor: '#FF6B2C', name: "Cooper Williams", role: "CEO", company: "Bricklix", review: "Their attention to detail in the UI phase was unlike anything we've seen. Truly a top-tier partner." },
-    { rotation: '-3', bgColor: '#3D2924', textColor: 'text-zinc-100', starColor: '#FF6B2C', name: "Alex Chen", role: "Founder", company: "Vantage", review: "The scaling issues we had were solved in weeks. If you want results, this is the team." },
-    { rotation: '-2', bgColor: '#F5F2E9', textColor: 'text-zinc-900', starColor: '#FF6B2C', name: "Sarah Jenkins", role: "CTO", company: "Orbit", review: "Communication was seamless. It felt like they were an extension of our internal team." },
-    { rotation: '3', bgColor: '#3D2924', textColor: 'text-zinc-100', starColor: '#FF6B2C', name: "Marcus Thorne", role: "Director", company: "Nexus", review: "We increased our conversion rate by 40% after the relaunch. The ROI speaks for itself." },
-    { rotation: '6', bgColor: '#F5F2E9', textColor: 'text-zinc-900', starColor: '#FF6B2C', name: "Elena Rossi", role: "VP", company: "Solaris", review: "Creative, fast, and technically sound. They delivered exactly what they promised on time." },
-  ];
+  const cards: CardData[] = testimonialCards;
 
   return (
     // Added 'hidden sm:flex' to hide on mobile and show on tablet/desktop

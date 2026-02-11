@@ -6,9 +6,10 @@ import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import { 
   SiReact, SiNextdotjs, SiAngular, SiVuedotjs, SiDjango, SiPhp, SiLaravel, 
   SiShopify, SiWordpress, SiOdoo, SiWebflow, SiWix, SiGithub, SiJavascript,
-  SiTailwindcss, SiTypescript, SiFigma, SiFramer, SiNodedotjs
+  SiTailwindcss, SiTypescript, SiFigma, SiFramer, SiNodedotjs,
+  SiOpenai, SiDialogflow, SiRasa, SiAdobexd, SiMiro, SiSketch, SiAdobephotoshop, SiAdobeillustrator, SiAdobeindesign, SiNotion, SiCoreldraw, SiAffinitydesigner,SiMeta, SiInstagram, SiFacebook, SiLinkedin,  SiYoutube, SiTiktok, SiPinterest, SiReddit, SiDiscord, SiTelegram, SiWhatsapp,SiCplusplus,SiDotnet,SiQt, SiAmazonwebservices,SiDocker,SiKubernetes,SiSwift,SiKotlin
 } from "react-icons/si";
-import { FaQuoteLeft } from "react-icons/fa6";
+import { FaQuoteLeft, FaRobot, FaEye, FaBrain, FaComments, FaDatabase } from "react-icons/fa6";
 
 // --- Types & Data ---
 
@@ -29,87 +30,88 @@ interface CardData {
 const CARDS: CardData[] = [
   {
     id: 1,
-    slug: "ai-solutions",
+    slug: "AI-Solutions",
     title: "AI-Powered Business Intelligence Solutions",
-    description: "We transform raw data into actionable insights using advanced AI and predictive analytics. From automating repetitive tasks to optimizing decision-making.",
+    description: "Our AI solutions help businesses optimize operations, personalize experiences, and scale intelligently using data-driven intelligence.",
     testimonial: "Working with them completely changed how we make decisions. Our productivity skyrocketed, and the AI solutions feel like they anticipate our needs!",
-    authorpic: "/b.webp",
-    author: "boris",
-    role: "Manager",
+    authorpic: "/People/r.jpg",
+    author: "Emily Harris",
+    role: "Manager @Imperia Tech",
     bgColor: "#222222",
-    techIcons: [SiPython, SiDjango, SiJavascript, SiGithub],
+    techIcons: [SiOpenai, FaRobot,FaBrain, FaEye,FaComments,FaDatabase,SiDialogflow,SiRasa,
+    ],
     images: [
-      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=400",
-      "https://images.unsplash.com/photo-1589156229687-496a31ad1d1f?q=80&w=400",
-      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=400"
+      "/heroservcards/ai.avif",
+      "/heroservcards/ai2.avif",
+      "/heroservcards/ai3.avif"
     ]
   },
   {
     id: 1,
-    slug: "web-experiences",
-    title: "Web Experiences That Drive Engagement",
-    description: "We craft visually stunning, high-performance websites and web apps that aren’t just beautiful—they convert. Every pixel, animation, and interaction is designed to engage users.",
-    testimonial: "Our website went from bland to iconic. Engagement doubled, and investors keep complimenting the design. They’re truly game-changers.",
-    authorpic: "/a.webp",
-    author: "jayden",
-    role: "CFO",
+    slug: "Logo-n-Brand-Identity",
+    title: "Brand Identities That Stick and Sell",
+    description: "We build high-performance digital experiences where aesthetics meet ROI. We don't just design for the eyes; we design for the click",
+    testimonial: "The transformation was more than aesthetic; it was structural. We saw a 100% increase in user interaction thanks to their high-performance design.",
+    authorpic: "/People/j.jpg",
+    author: "Jayden Dave",
+    role: "CTO @dota inc",
     bgColor: "#3D2FA9",
-    techIcons: [SiReact, SiNextdotjs, SiTailwindcss, SiFramer],
+    techIcons: [SiFigma,SiAdobephotoshop,SiAdobeillustrator,SiAdobeindesign,SiAdobeindesign,SiNotion ,SiCoreldraw ,SiAffinitydesigner],
     images: [
-      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=400",
-      "https://images.unsplash.com/photo-1589156229687-496a31ad1d1f?q=80&w=400",
-      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=400"
+      "/heroservcards/brand3.avif",
+      "/heroservcards/brand.avif",
+      "/heroservcards/brand2.avif"
     ]
   },
   {
     id: 1,
-    slug: "brand-growth",
+    slug: "Marketing-n-Advertising",
     title: "Brand Growth And Marketing Mastery",
-    description: "We design strategies that amplify your brand’s reach and ROI. From AI-driven marketing to growth hacking campaigns, we deliver measurable results.",
+    description: "We design strategies that amplify your brand's reach and ROI. From AI-driven marketing to growth hacking campaigns, we deliver measurable results.",
     testimonial: "Their marketing strategies delivered more than we imagined. Leads, conversions, and awareness—all skyrocketed. Real growth partners!.",
-    authorpic: "/author.webp",
-    author: "kate",
-    role: "CEO",
+    authorpic: "/People/o.jpg",
+    author: "kate .W",
+    role: "CEO @kryptek inc",
     bgColor: "#FF7722",
-    techIcons: [SiShopify, SiWordpress, SiWix, SiWebflow],
+    techIcons: [SiNotion, SiMeta, SiInstagram, SiFacebook, SiLinkedin, SiYoutube, SiTiktok, SiPinterest, SiReddit, SiDiscord, SiTelegram, SiWhatsapp, SiOdoo ],
     images: [
-      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=400",
-      "https://images.unsplash.com/photo-1589156229687-496a31ad1d1f?q=80&w=400",
-      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=400"
+      "/heroservcards/marketwoman.avif",
+      "/heroservcards/market.avif",
+      "/heroservcards/market2.avif"
     ]
   },
   {
     id: 1,
-    slug: "immersive-design",
+    slug: "Web-n-Application-Design",
     title: "Immersive Design And User Experiences",
     description: "We create design systems, UI/UX flows, animations, and visual storytelling that captivate audiences. Every touchpoint is designed to feel intuitive.",
     testimonial: "Their design approach is magical. Every interaction feels seamless and premium. Customers notice, and we stand out in the market.",
-    authorpic: "/d.webp",
-    author: "james",
-    role: "CTO",
+    authorpic: "/People/a.jpg",
+    author: "Sofia Coleman",
+    role: "CTO @wizards llc",
     bgColor: "#FF3C34",
-    techIcons: [SiFigma, SiFramer, SiTailwindcss, SiTypescript],
+    techIcons: [SiFigma,SiAdobexd, SiMiro, SiSketch, SiFramer, SiTailwindcss, SiTypescript,SiShopify, SiWordpress, SiWix, SiWebflow],
     images: [
-      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=400",
-      "https://images.unsplash.com/photo-1589156229687-496a31ad1d1f?q=80&w=400",
-      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=400"
+      "/heroservcards/art3.avif",
+      "/heroservcards/art4.avif",
+      "/heroservcards/art.avif"
     ]
   },
   {
     id: 1,
-    slug: "product-dev",
-    title: "Scalable Product Development Excellence",
+    slug: "custom-software-development",
+    title: "Scalable software Development Excellence",
     description: "We turn ideas into fully functional, scalable products. From mobile apps to web platforms, our development is fast, secure, and future-proof.",
     testimonial: "They delivered our product ahead of schedule, with flawless execution. The quality is unmatched, and our users love it.",
-    authorpic: "/e.webp",
-    author: "Cooper K.",
+    authorpic: "/People/e.jpg",
+    author: "Adrian James",
     role: "Tech Entrepreneur",
-    bgColor: "#785F47",
-    techIcons: [SiNodedotjs, SiPhp, SiLaravel, SiOdoo],
+      bgColor: "#785F47",
+      techIcons: [SiPython, SiNodedotjs, SiPhp, SiLaravel, SiNodedotjs,SiCplusplus,SiDotnet,SiQt, SiAmazonwebservices,SiDocker,SiKubernetes,SiSwift,SiKotlin ],
     images: [
-      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=400",
-      "https://images.unsplash.com/photo-1589156229687-496a31ad1d1f?q=80&w=400",
-      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=400"
+      "/heroservcards/st.avif",
+      "/heroservcards/st2.avif",
+      "/heroservcards/st3.avif"
     ]
   }
 ];
@@ -175,7 +177,7 @@ const Card = ({ i, title, description, testimonial, author, authorpic, role, bgC
             {/* Testimonial Section with fixed spacing */}
             <div className="mt-auto pt-6">
               <FaQuoteLeft className="text-3xl mb-3 opacity-100" />
-              <p className="text-base md:text-lg font-light italic max-w-md mb-6 leading-snug lowercase">
+              <p className="text-base md:text-lg font-light italic max-w-md mb-6 leading-snug ">
                 {testimonial}
               </p>
               
@@ -193,10 +195,10 @@ const Card = ({ i, title, description, testimonial, author, authorpic, role, bgC
                 <div className="flex flex-col">
                   <div className="flex items-center gap-2">
                     {/* The decorative circle before name */}
-                    <div className="w-2 h-2 rounded-full bg-white opacity-80" />
-                    <span className="font-bold text-base md:text-lg uppercase tracking-wider">{author}</span>
+                    
+                    <span className="font-medium text-base md:text-lg uppercase tracking-wider">{author}</span>
                   </div>
-                  <span className="text-xs md:text-sm opacity-70 font-medium uppercase">{role}</span>
+                  <span className="text-xs md:text-sm opacity-70 font-light ">{role}</span>
                 </div>
               </div>
             </div>

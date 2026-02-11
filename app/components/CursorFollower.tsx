@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 
 const images = [
   "https://api.dicebear.com/7.x/shapes/svg?seed=1",
@@ -11,41 +12,50 @@ const images = [
 ];
 
 const CursorFollower = () => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const followerRef = useRef<HTMLDivElement>(null);
   const [imgIndex, setImgIndex] = useState(0);
 
+  // 1. Handle Position via direct DOM manipulation (Extreme Speed)
   useEffect(() => {
-    // 1. Update position on mouse move
+    const follower = followerRef.current;
+    if (!follower) return;
+
     const handleMouseMove = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY });
+      // Use translate3d to trigger GPU acceleration
+      follower.style.transform = `translate3d(${e.clientX + 15}px, ${e.clientY + 15}px, 0)`;
     };
 
-    // 2. Cycle through images every 300ms
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
+  // 2. Cycle images (State is okay here since it's infrequent)
+  useEffect(() => {
     const interval = setInterval(() => {
       setImgIndex((prev) => (prev + 1) % images.length);
     }, 500);
-
-    window.addEventListener("mousemove", handleMouseMove);
-    
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      clearInterval(interval);
-    };
+    return () => clearInterval(interval);
   }, []);
 
   return (
     <div 
-      className="hidden lg:block pointer-events-none fixed z-[9999] transition-all duration-75 ease-in-out"
+      ref={followerRef}
+      className="hidden lg:block pointer-events-none fixed top-0 left-0 z-[9999] will-change-transform"
       style={{ 
-        left: `${position.x + 15}px`, 
-        top: `${position.y + 15}px`,
-        transform: 'translate(-50%, -50%)' 
+        // We remove transition-all because it adds lag to a cursor follower
+        // If you want a "trailing" effect, use a very short transition on transform only
+        transition: 'transform 0.05s linear' 
       }}
     >
-      <img 
+      <Image 
         src={images[imgIndex]} 
-        alt="cursor-effect" 
-        className="w-8 h-8 rounded-full  shadow-sm" 
+        alt="" 
+        width={24}
+        height={24}
+        className="w-6 h-6 rounded-full shadow-sm"
+        aria-hidden="true"
+        unoptimized
       />
     </div>
   );

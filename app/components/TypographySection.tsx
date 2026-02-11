@@ -1,139 +1,285 @@
 "use client";
 
-import React, { useRef } from "react";
-import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
+import React, { useState, useEffect, useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
 
-const phrases = [
-  {
-    lines: ["NOT", "EVERYONE", "GETS HERE.", "YOU DID."],
-    align: "items-start text-left",
-    containerAlign: "self-start",
-  },
-  {
-    lines: ["WHAT YOU", "NEED IS A", "TEAM", "OBSESSED", "WITH YOUR", "OUTCOME,", "NOT JUST", "YOUR", "OUTPUT."],
-    align: "items-end text-right",
-    containerAlign: "self-end",
-  },
-  {
-    lines: ["STOP", "PLANNING IN", "ISOLATION.", "LET'S BUILD", "IN", "ALIGNMENT."],
-    align: "items-start text-left",
-    containerAlign: "self-start",
-  },
-  {
-    lines: ["BOOK A", "CALL AND", "TURN", "PRESSURE", "INTO", "PROGRESS."],
-    align: "items-end text-right",
-    containerAlign: "self-end",
-  },
+const services = [
+  "AI-driven software ecosystems",
+  "high-converting UI/UX design",
+  "enterprise web app development",
+  "full-scale digital marketing",
+  "Seductive Branding",
+  "strategic brand scaling",
+  "Startup Acceleration",
 ];
 
-// Parallax background image that moves up as the section scrolls into view
-const ParallaxImage = ({
-  src,
-  top,
-  left,
-  speed,
-  progress,
-}: {
-  src: string;
-  top: string;
-  left: string;
-  speed: number;
-  progress: MotionValue<number>;
-}) => {
-  // As scroll progress goes from 0 → 1, y moves from 0 → -speed (scroll down, image moves up)
-  const y = useTransform(progress, [0, 1], [0, speed]);
+const Typewriter = () => {
+  const [index, setIndex] = useState(0);
+  const [subIndex, setSubIndex] = useState(0);
+  const [reverse, setReverse] = useState(false);
+
+  useEffect(() => {
+    if (subIndex === services[index].length + 1 && !reverse) {
+      const timeout = setTimeout(() => setReverse(true), 1500);
+      return () => clearTimeout(timeout);
+    }
+
+    if (subIndex === 0 && reverse) {
+      setReverse(false);
+      setIndex((prev) => (prev + 1) % services.length);
+      return;
+    }
+
+    const timeout = setTimeout(
+      () => {
+        setSubIndex((prev) => prev + (reverse ? -1 : 1));
+      },
+      reverse ? 40 : 80
+    );
+
+    return () => clearTimeout(timeout);
+  }, [subIndex, index, reverse]);
 
   return (
-    <motion.div
-      style={{ y, top, left }}
-      className="absolute w-24 h-24 md:w-32 md:h-32 opacity-20 pointer-events-none z-0"
-    >
-      <img src={src} alt="" className="w-full h-full object-cover grayscale rounded-sm" />
-    </motion.div>
+    <span className="text-secondary font-medium inline-block">
+      {services[index].substring(0, subIndex)}
+      <span className="animate-pulse ml-0.5">|</span>
+    </span>
   );
 };
 
-const AnimatedLetter = ({ letter }: { letter: string }) => {
-  const randomRotation = Math.random() * 6 - 3;
-
-  return (
-    <motion.span
-      initial={{ rotate: randomRotation }}
-      whileHover={{
-        rotate: 0,
-        color: "#facc15",
-        scale: 1.2,
-        transition: { type: "spring", stiffness: 900 },
-      }}
-      className="inline-block cursor-default transition-colors duration-200"
-    >
-      {letter === " " ? "\u00A0" : letter}
-    </motion.span>
-  );
-};
-
-const PhraseBlock = ({ phrase }: { phrase: typeof phrases[0] }) => {
-  const ref = useRef(null);
+export default function AntrosysHeartLetter() {
+  const containerRef = useRef(null);
+  
+  // Parallax and Scaling Logic
   const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end center"],
-  });
-
-  const opacity = useTransform(scrollYProgress, [0, 0.6], [0, 1]);
-  const y = useTransform(scrollYProgress, [0, 0.6], [40, 20]);
-
-  return (
-    <motion.div
-      ref={ref}
-      style={{ opacity, y }}
-      className={`flex flex-col mb-24 md:mb-32 max-w-[100%] md:max-w-[90%] z-10 ${phrase.containerAlign}`}
-    >
-      <div className={`flex flex-col ${phrase.align}`}>
-        {phrase.lines.map((line, lineIdx) => (
-          <h2 
-            key={lineIdx} 
-            className="text-6xl md:text-8xl lg:text-9xl font-black leading-[0.9] text-[#EBE3D5] uppercase"
-          >
-            {line.split("").map((char, charIdx) => (
-              <AnimatedLetter key={charIdx} letter={char} />
-            ))}
-          </h2>
-        ))}
-      </div>
-    </motion.div>
-  );
-};
-
-export default function TypographySection() {
-  const sectionRef = useRef<HTMLElement | null>(null);
-
-  // Track scroll progress for this section only
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
+    target: containerRef,
     offset: ["start end", "end start"],
   });
 
+  const textScale = useTransform(scrollYProgress, [0, 0.5], [0.9, 1.1]);
+  const imgY1 = useTransform(scrollYProgress, [0, 1], [0, -150]);
+  const imgY2 = useTransform(scrollYProgress, [0, 1], [0, -250]);
+  const imgY3 = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const imgY4 = useTransform(scrollYProgress, [0, 1], [0, -250]);
+  const imgY5 = useTransform(scrollYProgress, [0, 1], [0, -100]);
+
   return (
-    <section
-      ref={sectionRef}
-      className="relative min-h-screen py-20 px-6 md:px-16 lg:px-24 flex flex-col overflow-hidden"
+    <section 
+      ref={containerRef}
+      className="relative w-full bg-primary flex flex-col items-center font-poppins text-white overflow-hidden"
     >
-      {/* Background Parallax Elements */}
-      {/* Higher speed values will make the image move up faster */}
-      <ParallaxImage src="/a.webp" top="10%" left="75%" speed={100} progress={scrollYProgress} />
-      <ParallaxImage src="/b.webp" top="30%" left="5%" speed={500} progress={scrollYProgress} />
-      <ParallaxImage src="/c.webp" top="60%" left="55%" speed={250} progress={scrollYProgress} />
-      <ParallaxImage src="/d.webp" top="85%" left="10%" speed={450} progress={scrollYProgress} />
-      <ParallaxImage src="/a.webp" top="20%" left="55%" speed={300} progress={scrollYProgress} />
-      <ParallaxImage src="/b.webp" top="40%" left="40%" speed={500} progress={scrollYProgress} />
-      <ParallaxImage src="/c.webp" top="50%" left="85%" speed={250} progress={scrollYProgress} />
-      <ParallaxImage src="/d.webp" top="75%" left="50%" speed={450} progress={scrollYProgress} />
-      
-      <div className="relative z-10 flex flex-col w-full">
-        {phrases.map((phrase, idx) => (
-          <PhraseBlock key={idx} phrase={phrase} />
-        ))}
+      {/* SEO Hidden H2 */}
+      <h2 className="sr-only">
+        Expert Web App UI/UX Design, AI Software Development, and Digital
+        Marketing Agency
+      </h2>
+
+      {/* Parallax Background Images (Black & White, Overlapping, 25px rounded) */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <motion.div 
+          style={{ y: imgY1 }}
+          className="absolute top-[10%] -left-10 w-64 h-80 rounded-[25px] opacity-20 overflow-hidden"
+        >
+          <Image
+            src="https://picsum.photos/400/500?grayscale&sig=1"
+            alt="Abstract tech 1"
+            width={400}
+            height={500}
+            className="w-full h-full object-cover grayscale brightness-50"
+            loading="lazy"
+            sizes="256px"
+          />
+        </motion.div>
+        <motion.div 
+          style={{ y: imgY2 }}
+          className="absolute top-[40%] -right-20 w-80 h-96 rounded-[25px] opacity-25 rotate-12 overflow-hidden"
+        >
+          <Image
+            src="https://picsum.photos/400/500?grayscale&sig=2"
+            alt="Abstract tech 2"
+            width={400}
+            height={500}
+            className="w-full h-full object-cover grayscale brightness-50"
+            loading="lazy"
+            sizes="320px"
+          />
+        </motion.div>
+        <motion.div 
+          style={{ y: imgY3 }}
+          className="absolute bottom-[10%] left-[15%] w-72 h-72 rounded-[25px] opacity-15 -rotate-6 overflow-hidden"
+        >
+          <Image
+            src="https://picsum.photos/400/500?grayscale&sig=3"
+            alt="Abstract tech 3"
+            width={400}
+            height={500}
+            className="w-full h-full object-cover grayscale brightness-50"
+            loading="lazy"
+            sizes="288px"
+          />
+        </motion.div>
+        <motion.div 
+          style={{ y: imgY4 }}
+          className="absolute top-[40%] -right-20 w-80 h-96 rounded-[25px] opacity-25 rotate-12 overflow-hidden"
+        >
+          <Image
+            src="https://picsum.photos/400/500?grayscale&sig=4"
+            alt="Abstract tech 4"
+            width={400}
+            height={500}
+            className="w-full h-full object-cover grayscale brightness-50"
+            loading="lazy"
+            sizes="320px"
+          />
+        </motion.div>
+        <motion.div 
+          style={{ y: imgY5 }}
+          className="absolute bottom-[10%] left-[15%] w-72 h-72 rounded-[25px] opacity-15 -rotate-6 overflow-hidden"
+        >
+          <Image
+            src="https://picsum.photos/400/500?grayscale&sig=5"
+            alt="Abstract tech 5"
+            width={400}
+            height={500}
+            className="w-full h-full object-cover grayscale brightness-50"
+            loading="lazy"
+            sizes="288px"
+          />
+        </motion.div>
       </div>
+
+
+      {/* Background Texture */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')] z-10" />
+
+      <motion.article 
+        style={{ scale: textScale }}
+        className="max-w-3xl w-full relative z-20 px-4 py-12 md:py-20"
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, ease: [0.19, 1, 0.22, 1] }}
+        >
+          {/* Header */}
+          <header className="mb-12 border-b border-white/10 pb-6 flex justify-between items-end">
+            <div>
+              <p className="text-[10px] uppercase tracking-[0.5em] text-secondary mb-1 font-bold">
+                Premium Digital Agency
+              </p>
+              <h1 className="text-xl italic font-light tracking-tight">
+                The Heart of Antrosys
+              </h1>
+            </div>
+            <p className="text-[9px] opacity-40 uppercase tracking-[0.2em]">
+              MMXXVI
+            </p>
+          </header>
+
+          {/* Body */}
+          <div className="space-y-10 text-lg md:text-xl leading-relaxed font-light text-white/90">
+            <p>
+              There is a specific kind of hunger that only the visionary knows.
+              It is the restless desire to not just exist in the digital
+              landscape, but to{" "}
+              <span className="italic text-secondary font-medium">
+                dominate
+              </span>{" "}
+              it. Our agency specializes in{" "}
+              <span className="text-secondary">something</span> that refuses the
+              average.
+            </p>
+
+            <p className="text-lg leading-relaxed">
+              At Antrosys, we cultivate digital obsessions through full-stack
+              excellence. From{" "}
+              <span className="text-secondary font-medium">
+                Web & Mobile App Development
+              </span>{" "}
+              to bespoke{" "}
+              <span className="text-secondary font-medium">
+                AI & Software Engineering
+              </span>
+              , we build robust{" "}
+              <span className="text-secondary font-medium">
+                Cloud Architectures
+              </span>
+              . By integrating seamless{" "}
+              <span className="text-secondary font-medium">APIs</span> and
+              automated{" "}
+              <span className="text-secondary font-medium">
+                DevOps workflows
+              </span>
+              , we create systems that leave competitors in a state of permanent
+              envy.
+            </p>
+
+            {/* Dynamic Section */}
+            <div className="py-6 border-y border-white/5 group">
+              <p className="mb-2 text-[10px] uppercase tracking-[0.3em] text-white/40 group-hover:text-secondary transition-colors">
+                Our Core Expertise:
+              </p>
+              <div className="text-2xl md:text-3xl min-h-[1.2em] italic">
+                <Typewriter />
+              </div>
+            </div>
+
+            <p className="text-lg leading-relaxed">
+              From the raw visual gravity of our{" "}
+              <span className="border-b border-secondary/40 text-white">
+                bespoke art and illustrations
+              </span>{" "}
+              to the high-octane psychology behind our{" "}
+              <span className="text-secondary font-medium">
+                branding and sales funnels
+              </span>
+              , we don't just create—we dominate. Every asset is a weaponized
+              piece of
+              <span className="text-secondary font-medium">
+                {" "}
+                marketing & ad strategy
+              </span>{" "}
+              designed to capture attention and force conversions.
+            </p>
+
+            <blockquote className="border-l-2 border-secondary pl-6 my-10 italic text-2xl md:text-4xl text-white py-2">
+              "Your brand should not beg for a glance. It should demand{" "}
+              <span className="text-secondary">total surrender</span>."
+            </blockquote>
+
+            {/* CTA */}
+            <footer className="pt-10 flex flex-col items-center md:items-start gap-10">
+              <div className="space-y-6 w-full">
+                <p className="text-[11px] uppercase tracking-[0.4em] opacity-50">
+                  Ready for Global Ranking?
+                </p>
+                <a
+                  href="#contact"
+                  className="group relative inline-block w-full md:w-auto overflow-hidden border border-secondary/30 px-12 py-5 transition-all duration-500 hover:border-secondary rounded-lg text-center"
+                >
+                  <span className="relative z-10 text-secondary group-hover:text-primary transition-colors duration-500 tracking-[0.2em] uppercase text-xs font-bold">
+                    Start Your Project
+                  </span>
+                  <div className="absolute inset-0 bg-secondary translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
+                </a>
+              </div>
+
+              <div className="w-full pt-8 border-t border-white/10">
+                <p className="text-xs italic text-white/50">
+                  Built for Speed, Performance, and Unyielding Results.
+                  <br />
+                  <span className="text-secondary text-lg not-italic mt-2 block font-semibold tracking-tight">
+                    Antrosys Digital Architecture
+                  </span>
+                </p>
+              </div>
+            </footer>
+          </div>
+        </motion.div>
+      </motion.article>
     </section>
   );
 }

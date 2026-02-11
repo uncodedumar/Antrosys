@@ -1,106 +1,252 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, HTMLMotionProps } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link"; // Assuming Next.js for better routing performance
+import Image from "next/image";
 
 const Footer = () => {
   const brandName = "ANTROSYS";
-  
+  const currentYear = new Date().getFullYear();
+
   const navLinks = {
-    "QUICK LINKS": ["Home", "Portfolio", "Team", "Career", "Contact"],
-    "GO DEEPER": ["Team", "Contact"],
-    "SOCIALS": ["Linkedin", "Instagram", "Behance", "Github", "X"],
+    "QUICK LINKS": [
+      { name: "Home", href: "/" },
+      { name: "Services", href: "/services" },
+      { name: "Portfolio", href: "/portfolio" },
+      { name: "Blogs", href: "/blog" },
+      { name: "Contact", href: "/contact" },
+    ],
+    "GO DEEPER": [
+      { name: "About", href: "/About" },
+      { name: "Get in Touch", href: "/contact" },
+    ],
+    SOCIALS: [
+      { name: "Linkedin", href: "https://www.linkedin.com/company/antrosys" },
+      { name: "Instagram", href: "https://www.instagram.com/antrosys/" },
+      { name: "Behance", href: "https://behance.net" },
+      { name: "Github", href: "https://github.com/uncodedumar" },
+      { name: "X", href: "https://x.com/antrosys" },
+    ],
+  };
+
+  // Motion variants for smoother performance (GPU accelerated)
+  const letterVariants = {
+    hover: {
+      y: -20,
+      color: "#f97316",
+      transition: { type: "spring", stiffness: 300, damping: 15 },
+    },
   };
 
   return (
-    <footer className=" text-accent pt-20 overflow-hidden font-sans">
+    <footer
+      className="text-accent pt-20 overflow-hidden font-sans"
+      role="contentinfo"
+    >
       <div className="max-w-5xl mx-auto px-6">
-        
-        {/* Call to Action Card */}
-        <div className="bg-[#f5f1e3] rounded-md p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 mb-24">
-          <div className="w-48 h-48 rounded-md bg-gradient-to-br from-orange-400 via-purple-600 to-orange-300" />
+        {/* Call to Action Card - SEO optimized with H2 and descriptive aria */}
+        <section
+          aria-label="Contact CTA"
+          className="bg-[#f5f1e3] rounded-md p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 mb-24 transition-transform duration-500 hover:scale-[1.01]"
+        >
+          <div className="relative w-48 h-48 rounded-md overflow-hidden shadow-xl" style={{ aspectRatio: '1/1' }}>
+            <Image
+              src="/AboutImages/call.avif"
+              alt="Abstract creative branding element"
+              fill
+              sizes="192px"
+              className="object-cover"
+              loading="lazy"
+            />
+          </div>
           <div className="flex-1 flex flex-col md:flex-row justify-between items-center md:items-end w-full">
-            <h2 className="text-[#1a1a1a] text-3xl md:text-4xl font-bold leading-tight max-w-md text-center md:text-left">
+            <h2 className="text-secondary text-3xl md:text-4xl font-bold leading-tight max-w-md text-center md:text-left tracking-tight">
               START THE CONVERSATION THAT CHANGES EVERYTHING.
             </h2>
-            <div className="group cursor-pointer flex items-center gap-4 mt-8 md:mt-0 border-b-2 border-[#1a1a1a] pb-2 transition-all hover:gap-8">
+            <Link
+              href="/contact"
+              className="group cursor-pointer flex items-center gap-4 mt-8 md:mt-0 pb-2 transition-all hover:gap-8  rounded-sm"
+              aria-label="Click to start a project conversation with AntroSys"
+            >
               <span className="text-[#1a1a1a] font-black text-xl leading-none">
-                HIT THE<br />DAMN<br />ARROW
+                HIT THE
+                <br />
+                DAMN
+                <br />
+                ARROW
               </span>
-              <ArrowRight size={48} className="text-[#1a1a1a]" />
-            </div>
+              <ArrowRight
+                size={48}
+                className="text-[#1a1a1a] transition-transform group-hover:translate-x-2"
+              />
+            </Link>
           </div>
-        </div>
+        </section>
 
-        {/* Headline */}
-        <h2 className="text-3xl md:text-5xl font-bold mb-16 tracking-tight">
-          LET'S TURN VISION INTO REALITY.
+        {/* Headline - Long tail keyword injection for SEO */}
+        <h2 className="text-3xl md:text-5xl font-bold mb-16 tracking-tight max-w-3xl">
+          LET&apos;S TURN YOUR{" "}
+          <span className="italic text-secondary"> DIGITAL VISION</span> INTO A
+          MARKET-LEADING REALITY.
         </h2>
 
         {/* Links Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mb-16">
+        <nav
+          className="grid grid-cols-2 md:grid-cols-4 gap-12 mb-16"
+          aria-label="Footer Navigation"
+        >
           {Object.entries(navLinks).map(([title, links]) => (
             <div key={title}>
-              <h4 className="text-gray-500 text-xs font-bold tracking-widest mb-6 border-b border-gray-800 pb-2">
+              <h3 className="text-gray-500 text-xs font-bold tracking-widest mb-6 border-b border-gray-800 pb-2 uppercase">
                 {title}
-              </h4>
+              </h3>
               <ul className="space-y-3">
                 {links.map((link) => (
-                  <li key={link}>
-                    <a href="#" className="text-gray-300 hover:text-white transition-colors text-sm">
-                      {link}
-                    </a>
+                  <li key={link.name}>
+                    <Link
+                      href={link.href}
+                      className="text-gray-300 hover:text-white transition-colors text-sm font-medium focus:text-orange-400 outline-none"
+                    >
+                      {link.name}
+                    </Link>
                   </li>
                 ))}
               </ul>
             </div>
           ))}
           <div>
-            <h4 className="text-gray-500 text-xs font-bold tracking-widest mb-6 border-b border-gray-800 pb-2">
-              CONTACT
-            </h4>
-            <a href="mailto:sayhi@antrosys.com" className="text-gray-300 hover:text-white text-sm">
-              sayhi@antrosys.com
-            </a>
-          </div>
-        </div>
+            <div className="mb-10">
+              <h3 className="text-gray-500 text-xs font-bold tracking-widest mb-6 border-b border-gray-800 pb-2">
+                CONTACT
+              </h3>
+              <a
+                href="mailto:sayhi@antrosys.com"
+                className="text-gray-300 hover:text-orange-400 transition-colors text-sm font-semibold break-all"
+              >
+                sayhi@antrosys.com
+              </a>
+              <p className="mt-4 text-gray-500 text-xs leading-relaxed italic">
+              From design and development to ads, marketing, and AI—we turn ideas into intelligent digital products.
+              </p>
+            </div>
 
-        {/* Copyright */}
-        <div className="border-t border-dotted border-gray-700 pt-8 mb-12">
+            {/* Added Countries Section */}
+            <div>
+              <h3 className=" text-xs font-bold tracking-widest mb-4 border-b border-gray-800 pb-2 uppercase">
+                Our Presence
+              </h3>
+              <div className="flex flex-wrap gap-4 items-center ">
+                <Image
+                  src="https://flagcdn.com/us.svg"
+                  alt="USA"
+                  width={24}
+                  height={18}
+                  className="w-6 h-auto"
+                  loading="lazy"
+                />
+                <Image
+                  src="https://flagcdn.com/eu.svg"
+                  alt="Europe"
+                  width={24}
+                  height={18}
+                  className="w-6 h-auto"
+                  loading="lazy"
+                />
+                <Image
+                  src="https://flagcdn.com/ae.svg"
+                  alt="UAE"
+                  width={24}
+                  height={18}
+                  className="w-6 h-auto"
+                  loading="lazy"
+                />
+                <Image
+                  src="https://flagcdn.com/ca.svg"
+                  alt="Canada"
+                  width={24}
+                  height={18}
+                  className="w-6 h-auto"
+                  loading="lazy"
+                />
+                <Image
+                  src="https://flagcdn.com/au.svg"
+                  alt="Australia"
+                  width={24}
+                  height={18}
+                  className="w-6 h-auto"
+                  loading="lazy"
+                />
+                <Image
+                  src="https://flagcdn.com/tr.svg"
+                  alt="Turkey"
+                  width={24}
+                  height={18}
+                  className="w-6 h-auto"
+                  loading="lazy"
+                />
+                <Image
+                  src="https://flagcdn.com/pk.svg"
+                  alt="Pakistan"
+                  width={24}
+                  height={18}
+                  className="w-6 h-auto"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
+        </nav>
+
+        {/* Copyright & SEO Metadata */}
+        <div className="border-t border-dotted border-gray-700 pt-8 mb-12 flex flex-col md:flex-row justify-between items-start gap-4">
           <p className="text-gray-500 text-xs leading-relaxed">
-            © Copyright 2025 <span className="font-bold text-gray-300">AntroSys</span><br />
-            All Rights Reserved
+            © {currentYear}{" "}
+            <span className="font-bold text-gray-200">
+              AntroSys Digital Agency
+            </span>
+            . <br className="hidden md:block" />
+            Crafting premium digital experiences. All Rights Reserved.
           </p>
+          <div className="text-[10px] text-gray-600 uppercase tracking-tighter">
+            Next-Gen Tech • Creative Systems • Scalable Architecture
+          </div>
         </div>
       </div>
 
-      {/* Massive Interactive Branding */}
-      <div className="relative w-full select-none">
-        <div className="flex justify-center items-end leading-[0.8] tracking-tighter">
+      {/* Massive Interactive Branding - Optimized for Layout Stability */}
+      <div className="relative w-full select-none overflow-hidden pb-4">
+        <div
+          className="flex justify-center items-end leading-[0.8] tracking-tighter"
+          aria-hidden="true"
+        >
           {brandName.split("").map((letter, index) => (
             <motion.span
               key={index}
-              whileHover={{ 
-                y: -20, 
-                color: "#f97316", // Orange hover color from image
-                transition: { duration: 0.2 } 
+              animate={{ y: 0 }}
+              whileHover={{
+                y: -10,
+                color: index >= 7 ? "#f59e42" : "#f97316",
+                transition: { type: "spring", stiffness: 300, damping: 20 }
               }}
-              className={`text-[12vw] md:text-[16vw]  font-black cursor-default transition-colors duration-300 ${
+              className={`text-[12vw] md:text-[16vw] font-black cursor-default transition-colors duration-300 will-change-transform ${
                 index >= 7 ? "text-[#f97316]" : "text-[#ebebeb]"
               }`}
             >
+           
               {letter}
             </motion.span>
           ))}
         </div>
-        
-        {/* Background Humpback Whale Image positioning simulation */}
-        <div 
-          className="absolute left-0 bottom-0 w-1/3 h-full pointer-events-none opacity-40 mix-blend-lighten"
-          style={{
-          }}
-        />
+
+        {/* Screen Reader Only Brand Name */}
+        <span className="sr-only">
+          Antrosys - Premier Development and Design & Marketing Agency
+        </span>
+
+        {/* Subtle decorative element */}
+        <div className="absolute left-0 bottom-0 w-1/3 h-full pointer-events-none opacity-20 mix-blend-lighten bg-gradient-to-t from-orange-500/20 to-transparent" />
       </div>
     </footer>
   );

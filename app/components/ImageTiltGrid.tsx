@@ -1,25 +1,19 @@
 /**
  * Title: ImageTiltGrid.tsx
- * Description: Updated with 90% width and increased height.
- * Each image tilts in 3D space upon hover.
+ * Optimized for: Performance, SEO, and Mobile UX.
  */
 'use client';
-import React, { useRef, useState, useCallback } from 'react';
+import React, { useRef, useState, useCallback, useMemo } from 'react';
 import type { CSSProperties, MouseEventHandler, TouchEventHandler } from 'react';
+import Image from 'next/image';
 
-// --- 1. TYPES & DATA ---
-
-interface GridImage {
-  id: number;
-  src: string;
-  alt: string;
-}
-
-const IMAGES_DATA: GridImage[] = [
-  { id: 1, src: 'https://images.unsplash.com/photo-1542401886-65d6c61db217?q=80&w=2070&auto=format&fit=crop', alt: 'Ocean Waves' },
-  { id: 2, src: '/b.webp', alt: 'Mountain Sunset' },
-  { id: 3, src: '/c.webp', alt: 'City Skyline' },
-  { id: 4, src: '/d.webp', alt: 'Forest Path' },
+// --- 1. SEO-OPTIMIZED DATA ---
+// Using long-tail keywords in alt text helps Google Image search rank your agency.
+const IMAGES_DATA = [
+  { id: 1, src: '/AboutImages/building.webp', alt: 'Innovative Digital Agency Software Development Architecture' },
+  { id: 2, src: '/AboutImages/table.webp', alt: 'Collaborative UI UX Design Strategy and Planning' },
+  { id: 3, src: '/AboutImages/working.webp', alt: 'Full Stack Web Development and AI Integration Experts' },
+  { id: 4, src: '/AboutImages/workspace.webp', alt: 'Creative Brand Marketing and Digital Ads Management' },
 ];
 
 interface TiltState {
@@ -27,23 +21,20 @@ interface TiltState {
   rotateY: number;
 }
 
-// --- 2. TILT HOOK ---
-
+// --- 2. HIGH-PERFORMANCE TILT HOOK ---
 const useTiltEffect = (maxTilt: number = 7) => {
   const ref = useRef<HTMLDivElement>(null);
   const [tiltState, setTiltState] = useState<TiltState>({ rotateX: 0, rotateY: 0 });
 
   const handleMouseMove: MouseEventHandler<HTMLDivElement> = useCallback((event) => {
     if (!ref.current) return;
+    // Using requestAnimationFrame would be overkill here, but 
+    // transition: transform 0.15s handles the "smoothness" factor.
     const rect = ref.current.getBoundingClientRect();
-    const { width, height } = rect;
-    const { clientX, clientY } = event;
-    const centerX = rect.left + width / 2;
-    const centerY = rect.top + height / 2;
-    const mouseX = clientX - centerX;
-    const mouseY = clientY - centerY;
-    const rotateY = (mouseX / (width / 2)) * maxTilt;
-    const rotateX = (mouseY / (height / 2)) * -maxTilt;
+    const mouseX = event.clientX - rect.left;
+    const mouseY = event.clientY - rect.top;
+    const rotateY = ((mouseX / rect.width) - 0.5) * (maxTilt * 2);
+    const rotateX = ((mouseY / rect.height) - 0.5) * -(maxTilt * 2);
     setTiltState({ rotateX, rotateY });
   }, [maxTilt]);
 
@@ -54,10 +45,13 @@ const useTiltEffect = (maxTilt: number = 7) => {
   const handleTouchMove: TouchEventHandler<HTMLDivElement> = useCallback((event) => {
     if (event.touches.length === 1) {
       const touch = event.touches[0];
-      const syntheticEvent = { clientX: touch.clientX, clientY: touch.clientY } as React.MouseEvent<HTMLDivElement>;
-      handleMouseMove(syntheticEvent);
+      const rect = ref.current?.getBoundingClientRect();
+      if (!rect) return;
+      const rotateY = ((touch.clientX - rect.left) / rect.width - 0.5) * (maxTilt * 2);
+      const rotateX = ((touch.clientY - rect.top) / rect.height - 0.5) * -(maxTilt * 2);
+      setTiltState({ rotateX, rotateY });
     }
-  }, [handleMouseMove]);
+  }, [maxTilt]);
 
   const style: CSSProperties = {
     transform: `perspective(1000px) rotateX(${tiltState.rotateX}deg) rotateY(${tiltState.rotateY}deg)`,
@@ -66,64 +60,67 @@ const useTiltEffect = (maxTilt: number = 7) => {
   return { ref, style, handlers: { onMouseMove: handleMouseMove, onMouseLeave: handleMouseLeave, onTouchMove: handleTouchMove, onTouchEnd: handleMouseLeave } };
 };
 
-// --- 3. SUB-COMPONENT ---
-
-interface TiltCardProps {
-  image: GridImage;
-  className?: string;
-}
-
-const TiltCard: React.FC<TiltCardProps> = ({ image, className }) => {
-  const { ref, style, handlers } = useTiltEffect(7);
+// --- 3. COMPONENT ---
+const TiltCard: React.FC<{ image: typeof IMAGES_DATA[0]; className?: string }> = ({ image, className }) => {
+  const { ref, style, handlers } = useTiltEffect(8);
 
   return (
-    <div ref={ref} style={style} className={`tilt-card-wrapper ${className || ''}`} {...handlers}>
+    <figure 
+      ref={ref} 
+      style={style} 
+      className={`tilt-card-wrapper ${className || ''}`} 
+      {...handlers}
+    >
       <div className="tilt-card-inner">
-        <img src={image.src} alt={image.alt} className="tilt-card-image" loading="lazy" />
-        <div className="tilt-card-overlay">
-          <p className="tilt-card-text">{image.alt}</p>
-        </div>
+        <Image 
+          src={image.src} 
+          alt={image.alt} 
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="tilt-card-image" 
+          loading="lazy" 
+        />
+
       </div>
-    </div>
+    </figure>
   );
 };
 
-// --- 4. MAIN COMPONENT ---
-
 const ImageTiltGrid: React.FC = () => {
   return (
-    <div className="full-page-wrapper">
+    <section className="agency-grid-section" aria-label="Our Creative Portfolio">
       <style jsx global>{`
-        *, *::before, *::after { box-sizing: border-box; }
-
-        .full-page-wrapper {
+        .agency-grid-section {
           min-height: 100vh;
-          background-color:primary;
           display: flex;
           justify-content: center;
           align-items: center;
-          padding: 40px 20px;
+          padding: 60px 20px;
+          background-color: var(--primary-bg, #000); /* Fallback */
         }
 
         .image-tilt-grid-container {
-          width: 90%; /* Updated: Width set to 90% */
-          max-width: 1400px; /* Increased max-width to allow 90% to scale on large screens */
+          width: 90%;
+          max-width: 1400px;
           display: grid;
-          grid-template-columns: 2fr 1fr; 
-          grid-template-rows: 1fr 1fr; 
-          gap: 20px;
-          height: 70vh; /* Increased: Explicit height for the grid container */
-          min-height: 600px; /* Increased: Ensures visibility on shorter viewports */
+          grid-template-columns: 2fr 1fr;
+          grid-template-rows: 1fr 1fr;
+          gap: 24px;
+          height: 75vh;
+          min-height: 650px;
         }
 
         .tilt-card-wrapper {
-          transition: transform 0.1s ease-out;
+          margin: 0; /* Remove default figure margin */
+          transition: transform 0.15s cubic-bezier(0.23, 1, 0.32, 1);
           transform-style: preserve-3d;
+          will-change: transform;
           overflow: hidden;
-          border-radius: 24px; 
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); 
+          border-radius: 32px;
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
           height: 100%;
           cursor: pointer;
+          position: relative;
         }
 
         .card-1 { grid-column: 1 / 2; grid-row: 1 / 3; }
@@ -133,7 +130,7 @@ const ImageTiltGrid: React.FC = () => {
           grid-column: 2 / 3;
           grid-row: 2 / 3;
           display: flex;
-          gap: 20px;
+          gap: 24px;
           height: 100%;
         }
 
@@ -148,51 +145,74 @@ const ImageTiltGrid: React.FC = () => {
 
         .tilt-card-image {
           position: absolute;
-          top: 0;
-          left: 0;
+          inset: 0;
           width: 100%;
           height: 100%;
           object-fit: cover;
-          display: block;
-          transform: translateZ(20px);
+          transition: scale 0.5s ease;
+          transform: translateZ(0); /* Fixes some flickering in Safari */
+        }
+
+        .tilt-card-wrapper:hover .tilt-card-image {
+          scale: 1.05;
         }
 
         .tilt-card-overlay {
           position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.4) 100%);
+          inset: 0;
+          background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%);
           display: flex;
           align-items: flex-end;
-          padding: 20px;
-          z-index: 10;
-          transform: translateZ(30px);
-        }
-
-        .tilt-card-text {
-          color: white;
-          font-family: sans-serif;
-          font-size: 0.9rem;
-          font-weight: 600;
-          margin: 0;
+          padding: 30px;
+          z-index: 2;
           opacity: 0;
           transition: opacity 0.3s ease;
+          transform: translateZ(40px); /* Massive depth effect */
         }
-        
-        .tilt-card-wrapper:hover .tilt-card-text { opacity: 1; }
 
+        .tilt-card-wrapper:hover .tilt-card-overlay { opacity: 1; }
+
+        .tilt-card-text {
+          color: #fff;
+          font-family: inherit;
+          font-size: 1rem;
+          font-weight: 500;
+          text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* MOBILE FIXES: Removing extra padding and spacing */
         @media (max-width: 768px) {
+          .agency-grid-section {
+            padding: 20px 10px; /* Reduced vertical space */
+            min-height: auto;
+          }
           .image-tilt-grid-container {
-            width: 95%;
-            grid-template-columns: 1fr; 
+            width: 100%; /* More edge-to-edge on mobile */
+            grid-template-columns: 1fr;
             grid-template-rows: auto;
             height: auto;
+            gap: 16px; /* Tighter gaps on mobile */
           }
-          .card-1, .card-2 { grid-column: 1 / 2; grid-row: auto; height: 400px; }
-          .bottom-right-wrapper { grid-column: 1 / 2; grid-row: auto; flex-direction: column; height: auto; }
-          .bottom-right-wrapper > .tilt-card-wrapper { height: 300px; }
+          .card-1, .card-2 { 
+            grid-column: 1 / 2; 
+            grid-row: auto; 
+            height: 350px; 
+          }
+          .bottom-right-wrapper { 
+            grid-column: 1 / 2; 
+            grid-row: auto; 
+            flex-direction: column; 
+            height: auto; 
+            gap: 16px;
+          }
+          .bottom-right-wrapper > .tilt-card-wrapper { 
+            height: 300px; 
+          }
+          .tilt-card-overlay {
+            opacity: 1; /* Always show text on mobile since there is no hover */
+            background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 30%);
+            padding: 20px;
+          }
         }
       `}</style>
 
@@ -200,11 +220,11 @@ const ImageTiltGrid: React.FC = () => {
         <TiltCard image={IMAGES_DATA[0]} className="card-1" />
         <TiltCard image={IMAGES_DATA[1]} className="card-2" />
         <div className="bottom-right-wrapper">
-            <TiltCard image={IMAGES_DATA[2]} className="card-3" />
-            <TiltCard image={IMAGES_DATA[3]} className="card-4" />
+          <TiltCard image={IMAGES_DATA[2]} className="card-3" />
+          <TiltCard image={IMAGES_DATA[3]} className="card-4" />
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

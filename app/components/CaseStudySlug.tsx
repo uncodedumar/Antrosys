@@ -12,7 +12,6 @@ interface CaseStudyProps {
     description: string;
     paragraph: string;
     images: string[];
-    externalLink: string;
     testimonial: {
       stars: number;
       text: string;
@@ -24,154 +23,164 @@ interface CaseStudyProps {
 }
 
 const CaseStudySlug: React.FC<CaseStudyProps> = ({ data }) => {
-  // Animation settings for the "slight tilt"
-  const hoverAnimation = {
-    whileHover: { scale: 1.02, rotate: 1, transition: { duration: 0.3 } },
+  if (!data) return null;
+
+  // SEO: Structured Data for Google (Rich Snippets)
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWorkSeries",
+    "name": data.title,
+    "description": data.description,
+    "review": {
+      "@type": "Review",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": data.testimonial.stars,
+        "bestRating": "5"
+      },
+      "author": { "@type": "Person", "name": data.testimonial.author },
+      "reviewBody": data.testimonial.text
+    }
   };
 
-  if (!data) {
-    return null;
-  }
+  const hoverAnimation = {
+    whileHover: { scale: 1.015, rotate: 0.5 },
+    transition: { type: "spring" as const, stiffness: 300, damping: 20 }
+  };
 
   return (
-    <section className="mx-2  flex flex-col items-center font-sans overflow-x-hidden bg-white rounded-[25px] ">
+    <article className="mx-2 flex flex-col items-center  overflow-x-hidden bg-primary ">
+      {/* Schema Injection */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* Header Section */}
-      <div className="max-w-4xl w-full text-center mt-20 mb-16 px-4">
-        <h1 className="text-5xl md:text-7xl font-medium mb-8 text-gray-900">
+      <header className="max-w-4xl w-full text-center mt-20 mb-16 px-4">
+        <h1 className="text-5xl md:text-7xl font-medium mb-8 text-secondary tracking-tight">
           {data.title}
         </h1>
-        <div className="space-y-6 text-lg md:text-xl text-gray-700 leading-relaxed max-w-5xl mx-auto">
-          <p>{data.description}</p>
-          <p>{data.paragraph}</p> {/* Repeated as per reference image 2 */}
+        <div className="space-y-6 text-lg md:text-xl text-accent leading-relaxed max-w-5xl mx-auto">
+          <p className="font-light">{data.description}</p>
+          <p>{data.paragraph}</p>
         </div>
-        
-        
-      </div>
+      </header>
 
       {/* Image Gallery Grid */}
-      <div className="w-full max-w-7xl flex flex-col gap-6 px-4">
-        {/* Pattern: Full, 2-Row (45/45), Full, 2-Row (45/45), Full */}
+      <section className="w-full max-w-7xl flex flex-col gap-6 px-4" aria-label="Project Gallery">
         
-        {/* 1. Full Width */}
-        <motion.div {...hoverAnimation} className="w-full rounded-2xl overflow-hidden shadow-sm relative aspect-video">
+        {/* 1. Full Width - LCP OPTIMIZED */}
+        <motion.div {...hoverAnimation} className="w-full rounded-2xl overflow-hidden shadow-sm relative aspect-video bg-gray-50">
           <Image 
             src={data.images[0]} 
-            alt="Work 1" 
+            alt={`${data.title} main showcase`} 
             fill 
+            priority // First image loads immediately for SEO/Speed
+            sizes="(max-width: 1280px) 100vw, 1280px"
             className="object-cover"
-            unoptimized
           />
         </motion.div>
 
-        {/* 2 & 3. 45% Width Row */}
+        {/* 2 & 3. Row */}
         <div className="flex flex-col md:flex-row justify-between gap-6">
-          <motion.div {...hoverAnimation} className="w-full md:w-[50%] rounded-2xl overflow-hidden shadow-sm relative aspect-video">
-            <Image 
-              src={data.images[1]} 
-              alt="Work 2" 
-              fill 
-              className="object-cover"
-              unoptimized
-            />
-          </motion.div>
-          <motion.div {...hoverAnimation} className="w-full md:w-[50%] rounded-2xl overflow-hidden shadow-sm relative aspect-video">
-            <Image 
-              src={data.images[2]} 
-              alt="Work 3" 
-              fill 
-              className="object-cover"
-              unoptimized
-            />
-          </motion.div>
-        </div>
-
-        {/* 4. Full Width */}
-        <motion.div {...hoverAnimation} className="w-full rounded-2xl overflow-hidden shadow-sm relative aspect-video">
-          <Image 
-            src={data.images[3]} 
-            alt="Work 4" 
-            fill 
-            className="object-cover"
-            unoptimized
-          />
-        </motion.div>
-
-        {/* 5 & 6. 45% Width Row */}
-        <div className="flex flex-col md:flex-row justify-between gap-6">
-          <motion.div {...hoverAnimation} className="w-full md:w-[50%] rounded-2xl overflow-hidden shadow-sm relative aspect-video">
-            <Image 
-              src={data.images[4]} 
-              alt="Work 5" 
-              fill 
-              className="object-cover"
-              unoptimized
-            />
-          </motion.div>
-          <motion.div {...hoverAnimation} className="w-full md:w-[50%] rounded-2xl overflow-hidden shadow-sm relative aspect-video">
-            <Image 
-              src={data.images[5]} 
-              alt="Work 6" 
-              fill 
-              className="object-cover"
-              unoptimized
-            />
-          </motion.div>
-        </div>
-
-        {/* 7. Full Width */}
-        <motion.div {...hoverAnimation} className="w-full rounded-2xl overflow-hidden shadow-sm relative aspect-video">
-          <Image 
-            src={data.images[6]} 
-            alt="Work 7" 
-            fill 
-            className="object-cover"
-            unoptimized
-          />
-        </motion.div>
-      </div>
-      <Link 
-          href={data.externalLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block mt-10 px-8 py-3 bg-black text-white rounded-full font-medium hover:bg-gray-800 transition-colors"
-        >
-          Visit Website
-        </Link>
-      {/* Testimonial Card */}
-      <motion.div 
-        {...hoverAnimation}
-        className="mt-20 w-[95%] md:w-[60%] bg-[#4c1d95] text-white p-8 md:p-12 rounded-[2rem] shadow-xl relative my-10 mx-15"
-      >
-        {/* Star Rating */}
-        <div className="flex gap-1 mb-8">
-          {[...Array(data.testimonial.stars)].map((_, i) => (
-            <Star key={i} size={20} fill="#f97316" color="#f97316" />
+          {[data.images[1], data.images[2]].map((img, idx) => (
+            <motion.div key={idx} {...hoverAnimation} className="w-full md:w-1/2 rounded-2xl overflow-hidden shadow-sm relative aspect-video bg-gray-50">
+              <Image 
+                src={img} 
+                alt={`${data.title} detail ${idx + 2}`} 
+                fill 
+                loading="lazy"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </motion.div>
           ))}
         </div>
 
-        {/* Quote */}
-        <blockquote className="text-xl md:text-2xl font-medium leading-snug mb-10">
-          &ldquo;{data.testimonial.text}&rdquo;
-        </blockquote>
+        {/* 4. Full Width */}
+        <motion.div {...hoverAnimation} className="w-full rounded-2xl overflow-hidden shadow-sm relative aspect-video bg-gray-50">
+          <Image 
+            src={data.images[3]} 
+            alt={`${data.title} feature display`} 
+            fill 
+            loading="lazy"
+            sizes="(max-width: 1280px) 100vw, 1280px"
+            className="object-cover"
+          />
+        </motion.div>
 
-        {/* Author Info */}
-        <div className="flex items-center gap-4">
-          <div className="relative w-14 h-14 rounded-full overflow-hidden bg-gray-300">
-            <Image 
-              src={data.testimonial.image} 
-              alt={data.testimonial.author} 
-              fill 
-              className="object-cover"
-              unoptimized
-            />
-          </div>
-          <div>
-            <p className="font-bold text-lg">{data.testimonial.author}</p>
-            <p className="text-gray-300 text-sm">{data.testimonial.position}</p>
-          </div>
+        {/* 5 & 6. Row */}
+        <div className="flex flex-col md:flex-row justify-between gap-6">
+          {[data.images[4], data.images[5]].map((img, idx) => (
+            <motion.div key={idx} {...hoverAnimation} className="w-full md:w-1/2 rounded-2xl overflow-hidden shadow-sm relative aspect-video bg-gray-50">
+              <Image 
+                src={img} 
+                alt={`${data.title} secondary detail ${idx + 5}`} 
+                fill 
+                loading="lazy"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </motion.div>
+          ))}
         </div>
-      </motion.div>
-    </section>
+
+        {/* 7. Full Width */}
+        <motion.div {...hoverAnimation} className="w-full rounded-2xl overflow-hidden shadow-sm relative aspect-video bg-gray-50">
+          <Image 
+            src={data.images[6]} 
+            alt={`${data.title} final presentation`} 
+            fill 
+            loading="lazy"
+            sizes="(max-width: 1280px) 100vw, 1280px"
+            className="object-cover"
+          />
+        </motion.div>
+      </section>
+
+      <footer className="flex flex-col items-center w-full">
+    
+        {/* Testimonial Card */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-20 w-[95%] md:w-[60%] bg-[#4c1d95] text-white p-8 md:p-12 rounded-[2.5rem] shadow-2xl relative my-10"
+        >
+          {/* Star Rating */}
+          <div className="flex gap-1 mb-8" aria-label={`${data.testimonial.stars} star rating`}>
+            {[...Array(5)].map((_, i) => (
+              <Star 
+                key={i} 
+                size={22} 
+                fill={i < data.testimonial.stars ? "#f97316" : "none"} 
+                color={i < data.testimonial.stars ? "#f97316" : "#7c3aed"} 
+              />
+            ))}
+          </div>
+
+          <blockquote className="text-xl md:text-3xl font-medium italic leading-tight mb-10">
+            &ldquo;{data.testimonial.text}&rdquo;
+          </blockquote>
+
+          <div className="flex items-center gap-4">
+            <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-purple-400">
+              <Image 
+                src={data.testimonial.image} 
+                alt={data.testimonial.author} 
+                fill 
+                className="object-cover"
+              />
+            </div>
+            <div>
+              <p className="font-bold text-xl">{data.testimonial.author}</p>
+              <p className="text-purple-200 text-sm tracking-wide uppercase">{data.testimonial.position}</p>
+            </div>
+          </div>
+        </motion.div>
+      </footer>
+    </article>
   );
 };
 

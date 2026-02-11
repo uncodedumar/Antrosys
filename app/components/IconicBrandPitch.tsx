@@ -1,38 +1,54 @@
 import React, { memo } from 'react';
 
 interface IconicBrandPitchProps {
-  /** The text content to display */
+  /** The high-impact pitch text */
   children: React.ReactNode;
-  /** Tailwind accent color class, e.g., 'hover:text-red-500' */
+  /** Hidden SEO title for crawlers (important for ranking) */
+  seoTitle?: string;
+  /** Tailwind accent color class */
   accentClass?: string;
-  /** Optional additional classes for the container */
+  /** Optional additional classes */
   className?: string;
 }
 
 const IconicBrandPitch: React.FC<IconicBrandPitchProps> = memo(({ 
   children, 
-  accentClass = "hover:text-accent", 
+  seoTitle = "Full-Service Digital Agency: UI/UX, Software Development & AI Solutions",
+  accentClass = "", 
   className = "" 
 }) => {
   return (
-    <div className={`bg-transparent flex min-h-[50vh] w-full items-center justify-center p-2 sm:p-4 lg:p-6 ${className}`}>
-      <div className="max-w-2xl mx-auto text-center font-light">
-        <p className={`
-          text-base sm:text-lg lg:text-xl font-sans 
-          text-gray-300 
-          opacity-30 
-          transition-all duration-700 ease-in-out
-          hover:opacity-100 
+    <section 
+      className={`relative flex flex-col items-center justify-center overflow-hidden py-4 sm:py-8 lg:py-12 ${className}`}
+      aria-labelledby="pitch-heading"
+    >
+      {/* Visually hidden but SEO powerful long-tail keyword header */}
+      <h2 id="pitch-heading" className="sr-only">
+        {seoTitle}
+      </h2>
+
+      <div className="w-full max-w-7xl px-4 md:px-6 mx-auto text-justify">
+        <blockquote className={`
+          /* Performance & Typography */
+          will-change-auto
+          text-[1.1rem] leading-relaxed tracking-tight
+          sm:text-4xl sm:leading-snug 
+          lg:text-5xl lg:leading-normal
+          font-light font-sans antialiased
+          
+          /* Visual State */
+          text-accent cursor-default
+          selection:bg-cyan-500/30
+          
           ${accentClass}
         `}>
           {children}
-        </p>
+        </blockquote>
       </div>
-    </div>
+    </section>
   );
 });
 
-// Setting a display name for easier debugging since we used memo
 IconicBrandPitch.displayName = 'IconicBrandPitch';
 
 export default IconicBrandPitch;

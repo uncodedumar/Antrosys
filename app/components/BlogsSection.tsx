@@ -2,53 +2,79 @@
 import React, { useState, useMemo } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image'; // Optimized Images
 import { motion, AnimatePresence } from 'framer-motion';
 import { Filter } from 'lucide-react';
+import { blogPosts } from '@/lib/data';
 
 // --- Types ---
 interface Blog {
   id: number;
   title: string;
   slug: string;
-  category: 'SEO' | 'Design' | 'Development' | 'AI';
+  category: 'SEO' | 'Design' | 'Development' | 'AI' | 'Healthcare' | 'Smart Cities';
   image: string;
   excerpt: string;
   featured: boolean;
 }
 
-// --- Mock Data ---
-const BLOG_DATA: Blog[] = [
-  { id: 1, title: "Boost Your Rankings with AI", slug: "boost-rankings-ai", category: "AI", image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800", excerpt: "Leverage machine learning to dominate search engine results effortlessly.", featured: true },
-  { id: 2, title: "Modern Design Trends", slug: "modern-design-2024", category: "Design", image: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=800", excerpt: "Explore the shift towards brutalist and minimalist digital aesthetics.", featured: true },
-  { id: 3, title: "Next.js 15 Performance Guide", slug: "nextjs-15-guide", category: "Development", image: "https://images.unsplash.com/photo-1618477247222-acbdb0e159b3?auto=format&fit=crop&q=80&w=800", excerpt: "Optimizing your server components for lightning-fast load times.", featured: true },
-  { id: 4, title: "Technical SEO Checklist", slug: "technical-seo-checklist", category: "SEO", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800", excerpt: "The ultimate guide to site audits and crawlability in 2025.", featured: false },
-  { id: 5, title: "Tailwind CSS Mastery", slug: "tailwind-css-mastery", category: "Design", image: "https://images.unsplash.com/photo-1587620962725-abab7fe55159?auto=format&fit=crop&q=80&w=800", excerpt: "Advanced utility-first patterns for scalable frontend architecture.", featured: false },
-  { id: 6, title: "The Future of Web Dev", slug: "future-web-dev", category: "Development", image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800", excerpt: "Predicting the impact of edge computing on global applications.", featured: false },
-];
+// Helper function to determine category from title/slug
+const getCategoryFromTitle = (title: string, slug: string): Blog['category'] => {
+  const lowerTitle = title.toLowerCase();
+  const lowerSlug = slug.toLowerCase();
+
+  if (lowerTitle.includes("ai") || lowerTitle.includes("machine learning") || lowerTitle.includes("deep learning")) return "AI";
+  if (lowerTitle.includes("healthcare") || lowerTitle.includes("medical") || lowerTitle.includes("cancer") || lowerTitle.includes("tumor") || lowerTitle.includes("elderly")) return "Healthcare";
+  if (lowerTitle.includes("parking") || lowerTitle.includes("traffic") || lowerTitle.includes("smart city")) return "Smart Cities";
+  if (lowerTitle.includes("seo") || lowerTitle.includes("ranking")) return "SEO";
+  if (lowerTitle.includes("design") || lowerTitle.includes("ui") || lowerTitle.includes("ux")) return "Design";
+  if (lowerTitle.includes("development") || lowerTitle.includes("next.js") || lowerTitle.includes("web")) return "Development";
+  
+  return "AI"; // Default category
+};
+
+// Transform blogPosts to Blog format
+const transformBlogPosts = (posts: typeof blogPosts): Blog[] => {
+  return posts.map((post, index) => ({
+    id: index + 1,
+    title: post.title,
+    slug: post.slug,
+    category: getCategoryFromTitle(post.title, post.slug),
+    image: post.image,
+    excerpt: post.abstractContent,
+    featured: index < 3, // First 3 posts are featured
+  }));
+};
+
+// --- Blog Data from lib/data.ts ---
+const BLOG_DATA: Blog[] = transformBlogPosts(blogPosts);
 
 const BlogCard = ({ blog }: { blog: Blog }) => {
   return (
-    <motion.div
+    <motion.article
       layout
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
       whileHover={{ 
-        rotateX: 5, 
-        rotateY: -5, 
+        rotateX: 2, 
+        rotateY: -2, 
         scale: 1.02,
         transition: { duration: 0.2 }
       }}
-      className="group relative overflow-hidden rounded-[25px] bg-primary  shadow-sm "
+      className="group relative overflow-hidden rounded-[25px] bg-primary shadow-sm"
     >
-      <Link href={`/blog/${blog.slug}`} className="block">
+      <Link href={`/blog/${blog.slug}`} className="block focus:outline-none focus:ring-2 focus:ring-orange-600 rounded-[25px]" aria-label={`Read more about ${blog.title}`}>
         <div className="relative aspect-[4/5] w-full overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent z-10 " />
-          <img 
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent z-10" />
+          <Image 
             src={blog.image} 
             alt={blog.title} 
-            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+            fill
+            sizes="(max-width: 768px) 100vw, 33vw"
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
+            priority={blog.featured}
           />
           {blog.featured && (
             <span className="absolute top-4 left-4 z-20 bg-secondary text-accent text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest shadow-lg">
@@ -59,7 +85,7 @@ const BlogCard = ({ blog }: { blog: Blog }) => {
         
         <div className="p-6 text-gray-900">
           <p className="text-secondary text-xs font-bold mb-2 uppercase tracking-tighter">{blog.category}</p>
-          <h3 className="text-xl font-medium  mb-3 leading-tight text-accent">
+          <h3 className="text-xl font-medium mb-3 leading-tight text-accent group-hover:text-orange-600 transition-colors">
             {blog.title}
           </h3>
           <p className="text-accent font-light text-sm line-clamp-2">
@@ -67,13 +93,13 @@ const BlogCard = ({ blog }: { blog: Blog }) => {
           </p>
         </div>
       </Link>
-    </motion.div>
+    </motion.article>
   );
 };
 
 export default function BlogListing() {
   const [filter, setFilter] = useState<string>('All');
-  const categories = ['All', 'SEO', 'Design', 'Development', 'AI'];
+  const categories = ['All', 'AI', 'Healthcare', 'Smart Cities', 'SEO', 'Design', 'Development'];
 
   const filteredBlogs = useMemo(() => {
     return filter === 'All' ? BLOG_DATA : BLOG_DATA.filter(b => b.category === filter);
@@ -81,16 +107,38 @@ export default function BlogListing() {
 
   const bestOfWeek = useMemo(() => BLOG_DATA.filter(b => b.featured).slice(0, 3), []);
 
+  // JSON-LD for Search Engines
+  const jsonLd = {
+    "@context": "https://antrosys.com",
+    "@type": "Blog",
+    "name": "Expert Insights Blog",
+    "description": "High-performance technical articles on SEO, AI, and Next.js Development.",
+    "publisher": { "@type": "Organization", "name": "Your Brand" }
+  };
+
   return (
     <main className="relative min-h-screen bg-primary overflow-x-hidden py-12">
       <Head>
-        <title>Expert Insights | Best of the Week Web Articles</title>
+        <title>Expert Insights | Web Performance & SEO Strategies 2025</title>
+        <meta name="description" content="Discover deep dives into Next.js 15 performance, technical SEO checklists, and AI-driven ranking strategies." />
+        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Head>
 
-      {/* --- Main Section Container --- */}
-      <div className="relative z-10 mx-2 bg-primary rounded-lg shadow-2xl p-6 sm:p-12 md:mx-2 lg:mx-2">
+      {/* --- Top Banner Image (Updated with Dark Cyberpunk Art) --- */}
+      <div className="w-[90%] mx-auto mb-12 overflow-hidden rounded-2xl aspect-[21/9] relative border-b-2 border-orange-600/30">
+         <Image 
+            src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&q=90&w=1600" 
+            alt="Cyberpunk Action Girl Art" 
+            fill
+            className="object-cover brightness-75 contrast-125"
+            priority
+         />
+         {/* Subtle overlay to enhance the "dark action" feel */}
+         <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent" />
+      </div>
+
+      <div className="relative z-10 mx-2 bg-primary rounded-lg shadow-2xl p-6 sm:p-12 md:mx-4 lg:mx-8">
         
-        {/* --- Header Section --- */}
         <motion.header 
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -100,12 +148,11 @@ export default function BlogListing() {
             Best Of The <span className="text-orange-600">Week</span>
           </h1>
           <p className="mt-4 text-accent font-light max-w-2xl text-lg">
-            Our editorial team handpicks the most impactful stories in technology and digital marketing.
+            Curated industry insights on <strong className="font-medium">Technical SEO</strong>, <strong className="font-medium">Next.js Development</strong>, and <strong className="font-medium">AI Strategy</strong>.
           </p>
         </motion.header>
 
-        {/* --- Featured Grid --- */}
-        <section className="mb-24">
+        <section aria-label="Featured Articles" className="mb-24">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {bestOfWeek.map((blog) => (
               <BlogCard key={blog.id} blog={blog} />
@@ -113,22 +160,22 @@ export default function BlogListing() {
           </div>
         </section>
 
-        <hr className="border-gray-200 mb-20" />
+        <hr className="border-gray-200 mb-20" aria-hidden="true" />
 
-        {/* --- Filter Bar --- */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
           <div>
-            <h2 className="text-3xl font-bold text-secondary mb-2">All Blogs & Articles</h2>
-            <p className="text-accent font-light">Discover deep dives into modern technology.</p>
+            <h2 className="text-3xl font-bold text-secondary mb-2">Technical Guides & Articles</h2>
+            <p className="text-accent font-light">Advanced tutorials for modern web architecture.</p>
           </div>
 
-          <div className="flex flex-wrap gap-2 items-center bg-accent p-2 rounded-xl border border-gray-200">
-            <Filter size={18} className="text-orange-600 mx-2" />
+          <nav aria-label="Category Filter" className="flex flex-wrap gap-2 items-center bg-accent p-2 rounded-xl border border-gray-200">
+            <Filter size={18} className="text-orange-600 mx-2" aria-hidden="true" />
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setFilter(cat)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                aria-pressed={filter === cat}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all focus:outline-none focus:ring-2 focus:ring-orange-400 ${
                   filter === cat 
                     ? 'bg-orange-600 text-white shadow-lg' 
                     : 'text-gray-600 hover:text-orange-600 hover:bg-white'
@@ -137,11 +184,10 @@ export default function BlogListing() {
                 {cat}
               </button>
             ))}
-          </div>
+          </nav>
         </div>
 
-        {/* --- Main Grid --- */}
-        <section className="min-h-[400px]">
+        <section className="min-h-[400px]" aria-live="polite">
           <motion.div 
             layout
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
@@ -160,21 +206,18 @@ export default function BlogListing() {
           )}
         </section>
 
-        {/* --- Footer Content --- */}
         <footer className="mt-32 py-16 border-t border-gray-100 text-gray-500 text-sm leading-relaxed">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <div>
-              <h4 className="text-accent font-bold mb-4 uppercase  tracking-widest">Industry Leading Content</h4>
+              <h4 className="text-accent font-bold mb-4 uppercase tracking-widest">Authority Content</h4>
               <p>
-                Our platform serves as a hub for professional developers and digital marketers. Each 
-                article is written by domain experts to ensure technical accuracy and actionable insights.
+              Signals leadership, inevitability, and superiority without shouting.
               </p>
             </div>
             <div>
-              <h4 className="text-accent font-bold mb-4  uppercase tracking-widest">Stay Connected</h4>
+              <h4 className="text-accent font-bold mb-4 uppercase tracking-widest">Performance Driven</h4>
               <p>
-                Explore our comprehensive documentation on Tailwind CSS, Next.js 15, and Framer Motion 
-                animations for higher engagement metrics and higher conversion rates.
+              Implies systems, outcomes, and repeatable success — not luck.
               </p>
             </div>
           </div>
@@ -182,9 +225,8 @@ export default function BlogListing() {
       </div>
 
       <style jsx global>{`
-        .perspective-1000 {
-          perspective: 1000px;
-        }
+        .perspective-1000 { perspective: 1000px; }
+        html { scroll-behavior: smooth; }
       `}</style>
     </main>
   );

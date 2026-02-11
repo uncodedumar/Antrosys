@@ -2,43 +2,60 @@ import React from 'react';
 import Image from 'next/image';
 
 /**
- * Renders a responsive, centered map image component.
- * The image (map.svg from the public directory) takes up 80% of the screen width.
+ * High-Performance SEO-Optimized Global Presence Map
+ * Target Keywords: Custom UI/UX Design Agency, Scalable Software Development, 
+ * AI-Driven Marketing Solutions, Digital Product Illustration.
  */
 const Map: React.FC = () => {
+  // Long-tail SEO description for Accessibility & Google Bots
+  const seoDescription = "Global digital agency network specializing in bespoke UI/UX design, full-stack software development, AI-powered marketing strategies, and custom digital illustrations for high-growth brands.";
+
   return (
-    // Outer container for centering the image horizontally
-    <div 
+    <section 
+      aria-label="Our Global Digital Presence"
+      className="map-container"
       style={{
         display: 'flex',
-        justifyContent: 'center', // Center the content horizontally
-        width: '100%',            // Ensure the container spans the full width
-        padding: '10px 10px',        // Optional: add some vertical padding
+        justifyContent: 'center',
+        width: '100%',
+        padding: '2rem 10px', // Standardized spacing
+        overflow: 'hidden'
       }}
     >
-      {/* Inner container to control the overall width of the image */}
       <div 
+        className="map-wrapper"
         style={{
-          width: '100%',           // Sets the container width to 80% of the screen
-          maxWidth: '1000px',     // Optional: set a maximum width for very large screens
-          height: 'auto',         // Allows the height to adjust based on content
+          width: '100%',
+          maxWidth: '1200px', // Slightly wider for better visual impact
+          position: 'relative',
         }}
       >
-        {/* Next.js Image Component for optimized image loading */}
         <Image
-          src="/CoLogo/map.svg"          // Path to the image in the public directory
-          alt="Responsive Map"    // Descriptive alt text
-          layout="responsive"     // Key for responsiveness: scales with the parent container
-          width={100}             // Required for 'responsive' layout, sets the intrinsic aspect ratio
-          height={100}            // Required for 'responsive' layout, sets the intrinsic aspect ratio
+          src="/CoLogo/map.svg"
+          alt={seoDescription}
+          title="Global Reach: UI/UX & Software Development Agency"
+          // 'priority' ensures this loads immediately (improves LCP)
+          priority 
+          // 'intrinsic' or 'responsive' via style
+          width={1200}
+          height={600}
+          sizes="(max-width: 768px) 100vw, 1200px"
           style={{ 
-            width: '100%',        // Ensures the Image component fills its parent (the 80% div)
-            height: 'auto',       // Maintains the aspect ratio
-            display: 'block',     // Ensures it behaves like a block element
+            width: '100%',
+            height: 'auto',
+            display: 'block',
+            filter: 'drop-shadow(0px 10px 30px rgba(0,0,0,0.05))', // Subtle "sexy" lift
           }}
         />
+        
+        {/* Hidden SEO Keyword Injection for Search Crawlers */}
+        <div style={{ display: 'none' }}>
+          <h2>Leading Digital Agency for Web & App Development</h2>
+          <p>Expertise in Adobe Creative Cloud, React.js, Next.js, and AI-driven art illustrations.</p>
+          <p>Specializing in performance-first ads, marketing automation, and smooth UI transitions.</p>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 

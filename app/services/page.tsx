@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import ServicesHero from '../components/ServicesHero';
-import ServicesSubHero from '../components/ServicesSubHero'
 import AllServicesCards from '../components/AllServicesCards'
 import ServicesCTA from '../components/servicesCTA'
 
@@ -14,9 +13,11 @@ export default function Service() {
   return (
     <>
     <ServicesHero/>
-    <ServicesSubHero/>
+    {/* <ServicesSubHero/> */}
+
     <AllServicesCards/>
-    < ServicesCTA/>
+    <ServicesCTA/>
+
     
     </>
   );

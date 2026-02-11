@@ -2,30 +2,69 @@ import Link from 'next/link';
 import React from 'react';
 import { FaGithub, FaLinkedin, FaInstagram, FaTwitter } from 'react-icons/fa';
 
+/**
+ * TopNavBar Component
+ * Optimized for: Web App UI/UX Design, Software Development, AI Illustrations, & Digital Marketing Ads.
+ */
 const TopNavBar: React.FC = () => {
   return (
-    // Removed 'hidden' and 'md:flex'. Added 'flex' as default.
-    // Height is h-8 on mobile, h-10 on desktop.
-    <nav className="flex items-center justify-between w-full bg-primary text-accent h-8 md:h-10 px-4 sm:px-10 lg:px-20 border-b border-primary/20">
-      
-      {/* Left Side - Text size is smaller on mobile (xs) and grows on desktop (sm) */}
-      <div className="text-[10px] md:text-sm font-light tracking-wider uppercase md:normal-case">
-        Digital the moves Deeper
+    <nav 
+      className=" top-0 z-50 flex items-center justify-between w-full bg-primary text-accent h-6 md:h-6 px-4 sm:px-10 lg:px-20 transition-all duration-300 ease-in-out"
+      aria-label="High-performance Digital Agency Navigation"
+    >
+      {/* 1. Multilingual Dropdown (Left) */}
+      <div className="flex items-center">
+        <label htmlFor="language-select" className="sr-only">Select Language</label>
+        <select 
+          id="language-select"
+          className="bg-transparent text-[10px] md:text-xs uppercase tracking-widest font-medium cursor-pointer focus:outline-none hover:text-secondary transition-colors"
+          defaultValue="en"
+        >
+          <option value="en" className="bg-primary text-white">EN</option>
+          <option value="es" className="bg-primary text-white">ES</option>
+          <option value="fr" className="bg-primary text-white">FR</option>
+        </select>
       </div>
 
-      {/* Right Side - Social Links - Icons are smaller on mobile */}
-      <div className="flex space-x-3 md:space-x-4 text-sm md:text-lg font-extralight">
-        <Link href="https://github.com/uncodedumar" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-          <FaGithub className="hover:text-secondary transition-colors duration-200" />
+    
+
+      {/* 3. Social Links (Right) - High Speed Interactions */}
+      <div className="flex items-center space-x-5 text-sm md:text-base">
+        <Link 
+          href="https://github.com/uncodedumar" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          aria-label="Visit our Github for Custom Software Development"
+          className="hover:scale-110 hover:text-secondary transition-all duration-200"
+        >
+          <FaGithub />
         </Link>
-        <Link href="https://www.linkedin.com/company/antrosys" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-          <FaLinkedin className="hover:text-secondary transition-colors duration-200" />
+        <Link 
+          href="https://www.linkedin.com/company/antrosys" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          aria-label="Connect on LinkedIn for UI/UX Design Trends"
+          className="hover:scale-110 hover:text-secondary transition-all duration-200"
+        >
+          <FaLinkedin />
         </Link>
-        <Link href="https://instagram.com/antrosys" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-          <FaInstagram className="hover:text-secondary transition-colors duration-200" />
+        <Link 
+          href="https://instagram.com/antrosys" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          aria-label="Follow our AI Art and Illustrations on Instagram"
+          className="hover:scale-110 hover:text-secondary transition-all duration-200"
+        >
+          <FaInstagram />
         </Link>
-        <Link href="https://x.com/antrosys" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
-          <FaTwitter className="hover:text-secondary transition-colors duration-200" />
+        <Link 
+          href="https://x.com/antrosys" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          aria-label="Follow us on X for Digital Marketing Ads Strategy"
+          className="hover:scale-110 hover:text-secondary transition-all duration-200"
+        >
+          <FaTwitter />
         </Link>
       </div>
     </nav>

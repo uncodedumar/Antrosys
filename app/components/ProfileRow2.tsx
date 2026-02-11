@@ -1,231 +1,218 @@
-// ProfileRow2.tsx
 'use client';
-import React from 'react';
+import React, { memo } from 'react';
+import Image from 'next/image';
 
-// Using a type definition for the props, though this component is self-contained.
+// --- SEO & TYPES ---
 interface ProfileData {
   name: string;
   title: string;
   mainImage: string;
   avatarImage: string;
+  // Added for SEO keywords without changing UI
+  specialty?: string; 
 }
 
 interface ProfileCardProps {
   data: ProfileData;
 }
 
-// ---------------------------
-// DATA WITH MODAL CONTENT (Extended to 14 cards for the 8 requested rows)
-// ---------------------------
-
 const cardData: ProfileData[] = [
-  
   {
     name: 'Mr. Sam',
     title: 'CMO',
-    mainImage: '/cmo.jpeg',
-    avatarImage: 'https://placehold.co/100x100?text=S',
-  },// Row 1 (2 cards - Right)
+    mainImage: '/AboutImages/team/cmo.webp',
+    avatarImage: '/Avatar/team/sama.webp',
+    specialty: 'Digital Marketing Strategy and AI Growth'
+  },
   {
     name: 'Amy',
     title: 'COO',
-    mainImage: '/coo.png',
-    avatarImage: 'https://placehold.co/100x100?text=L',
+    mainImage: '/AboutImages/team/coo.webp',
+    avatarImage: '/Avatar/team/amya.webp',
+    specialty: 'Operations and Creative Project Management'
   },
   {
     name: 'Kate',
     title: 'UI/UX Designer',
-    mainImage: '/kate.png',
-    avatarImage: 'https://placehold.co/100x100?text=A',
-  }
-  ,
+    mainImage: '/AboutImages/team/kate.webp',
+    avatarImage: '/Avatar/team/katea.webp',
+    specialty: 'User Experience Design and Interactive UI'
+  },
   {
     name: 'Jayden',
     title: 'Software Engineer',
-    mainImage: '/jayden.png',
-    avatarImage: 'https://placehold.co/100x100?text=S',
+    mainImage: '/AboutImages/team/jayden.webp',
+    avatarImage: '/Avatar/team/jaydena.webp',
+    specialty: 'Custom Software Development and System Architecture'
   },
-  // Row 2 (2 cards - Left)
   {
     name: 'Mr. Arman',
     title: 'Full-Stack Developer',
-    mainImage: '/arman.png',
-    avatarImage: 'https://placehold.co/100x100?text=E',
+    mainImage: '/AboutImages/team/arman.webp',
+    avatarImage: '/Avatar/team/armana.webp',
+    specialty: 'Full-Stack Web Development and Scalable Apps'
   },
   {
     name: 'David',
     title: 'Marketing Manager',
-    mainImage: '/david.png',
-    avatarImage: 'https://placehold.co/100x100?text=S',
+    mainImage: '/AboutImages/team/david.webp',
+    avatarImage: '/Avatar/team/davida.webp',
+    specialty: 'Search Engine Optimization and Ads Specialist'
   },
-  // Row 3 (1 card - Right)
   {
     name: 'Chris',
     title: 'Content Strategist',
-    mainImage: '/chris.png',
-    avatarImage: 'https://placehold.co/100x100?text=T',
+    mainImage: '/AboutImages/team/chris.webp',
+    avatarImage: '/Avatar/team/chrisa.webp',
+    specialty: 'Creative Copywriting and Brand Storytelling'
   },
-  // Row 4 (2 cards - Right)
   {
     name: 'Alma',
     title: 'Data Scientist',
-    mainImage: '/alma.png',
-    avatarImage: 'https://placehold.co/100x100?text=U',
+    mainImage: '/AboutImages/team/alma.webp',
+    avatarImage: '/Avatar/team/almaa.webp',
+    specialty: 'AI Models and Big Data Analytics'
   },
   {
     name: 'Cooper',
     title: 'QA Engineer',
-    mainImage: '/Cooper.png',
-    avatarImage: 'https://placehold.co/100x100?text=D',
+    mainImage: '/AboutImages/team/cooper.webp',
+    avatarImage: '/Avatar/team/coopera.webp',
+    specialty: 'Software Quality Assurance and Testing'
   },
-  // Row 5 (2 cards - Left)
   {
-    name: 'fara',
-    title: 'DevOps Engineer',
-    mainImage: '/fara.png',
-    avatarImage: 'https://placehold.co/100x100?text=L',
+    name: 'Fara',
+    title: 'Brand Designer',
+    mainImage: '/AboutImages/team/fara.webp',
+    avatarImage: '/Avatar/team/faraa.webp',
+    specialty: 'Cloud Infrastructure and Deployment Automation'
   },
   {
     name: 'Emma',
     title: 'Mobile App Developer',
-    mainImage: '/emma.png',
-    avatarImage: 'https://placehold.co/100x100?text=M',
+    mainImage: '/AboutImages/team/emma.webp',
+    avatarImage: '/Avatar/team/emmaa.webp',
+    specialty: 'iOS and Android Development Expert'
   },
-
-  
 ];
 
-
-// ---------------------------
-// 2. ProfileCard Component (NO CHANGE - As requested)
-// ---------------------------
-
-/**
- * Renders a single profile card with tilt effect.
- * @param props - ProfileCardProps
- */
-const ProfileCard: React.FC<ProfileCardProps> = ({ data }) => {
+// --- 2. ProfileCard Component (Optimized Performance) ---
+const ProfileCard: React.FC<ProfileCardProps> = memo(({ data }) => {
   const tiltStyle: React.CSSProperties = {
-    transition: 'transform 0.3s ease-in-out',
+    transition: 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)', // Smoother spring feel
+    willChange: 'transform', // Hardware acceleration
   };
 
   return (
-    <div
-      // REMOVED: cursor-pointer class
-      className="relative w-full overflow-hidden rounded-lg shadow-lg  group"
+    <figure
+      className="relative w-full overflow-hidden rounded-lg shadow-lg group bg-neutral-900"
       style={tiltStyle}
       onMouseEnter={(e) => {
-        (e.currentTarget as HTMLElement).style.transform = 'perspective(1000px) rotateX(6deg) rotateY(6deg) scale(1.07)';
+        (e.currentTarget as HTMLElement).style.transform = 'perspective(1000px) rotateX(4deg) rotateY(4deg) scale(1.05)';
       }}
       onMouseLeave={(e) => {
         (e.currentTarget as HTMLElement).style.transform = 'none';
       }}
-      // REMOVED: onClick={() => onClick(data)} 
+      aria-label={`${data.name} - ${data.title} specializing in ${data.specialty}`}
     >
-      {/* Main Image Container - w-full and pt-[100%] creates a perfect square for equal card sizing */}
-      <div className="w-full  pt-[100%] relative">
+      {/* Main Image Container */}
+      <div className="w-full pt-[100%] relative bg-neutral-800">
         <img
           src={data.mainImage}
-          alt={`Profile image of ${data.name}`}
-          className="absolute inset-0 object-cover w-full h-full"
+          alt={`${data.name} | ${data.title} at Digital Agency`}
+          loading="lazy"
+          decoding="async"
+          className="absolute inset-0 object-cover w-full h-full transition-opacity duration-300"
         />
       </div>
 
-      
-      {/* Avatar Square on Bottom Right (Kept as requested) */}
-      <div className="absolute right-3 bottom-3 w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border-2 border-white shadow-md z-10">
+      {/* Avatar Square */}
+      <div className="absolute right-3 bottom-3 w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border-2 border-white shadow-md z-10 bg-neutral-700">
         <img
           src={data.avatarImage}
-          alt="Avatar"
+          alt={`${data.name} avatar`}
+          loading="lazy"
           className="object-cover w-full h-full"
         />
       </div>
 
-      {/* Text Overlay (Bottom Left) (Kept as requested) */}
-      <div className="absolute inset-x-0 bottom-0 p-3 pt-15 text-left bg-gradient-to-t from-black to-transparent">
+      {/* Text Overlay */}
+      <figcaption className="absolute inset-x-0 bottom-0 p-3 pt-15 text-left bg-gradient-to-t from-black/90 via-black/40 to-transparent">
         <h3 className="text-sm font-semibold text-white truncate">
           {data.name}
         </h3>
-        <p className="text-xs text-white opacity-75 uppercase">
+        <p className="text-xs text-white/80 uppercase tracking-wider">
           {data.title}
         </p>
+        {/* Hidden SEO text for Google to crawl long-tail keywords without ruining UI */}
+        <span className="sr-only">{data.specialty}</span>
+      </figcaption>
+    </figure>
+  );
+});
+
+ProfileCard.displayName = 'ProfileCard';
+
+// --- 3. Main Layout Component ---
+const CARD_WRAPPER_CLASSES = "w-full max-w-sm md:w-1/2 lg:w-1/3 p-2";
+
+const renderRow = (rowData: ProfileData[], alignClass: string, startIndex: number) => (
+  <section 
+    className={`flex flex-col items-center md:flex-row ${alignClass} md:space-x-2 space-y-6 md:space-y-0 mt-8 first:mt-0`} 
+    key={`row-${startIndex}`}
+  >
+    {rowData.map((data, index) => (
+      <div key={startIndex + index} className={CARD_WRAPPER_CLASSES}>
+        <ProfileCard data={data} />
       </div>
-    </div>
-  );
-};
-
-
-// ---------------------------
-// 3. Main Layout Component (MODIFIED to implement the 8-row layout)
-// ---------------------------
-
-// Standard card wrapper classes for consistent size and responsiveness
-const CARD_WRAPPER_CLASSES = "w-full max-w-sm md:w-1/2 lg:w-1/3";
-
-/**
- * Helper function to render a row of cards with specified alignment.
- * @param rowData - Array of ProfileData for the row.
- * @param alignClass - Tailwind class for horizontal alignment (e.g., md:justify-end).
- * @param startIndex - Starting index in the cardData array for unique keys.
- */
-const renderRow = (
-  rowData: ProfileData[],
-  alignClass: string,
-  startIndex: number
-) => {
-  // Mobile: flex-col, items-center (stacked, centered)
-  // Desktop: flex-row, alignClass (row, specified alignment)
-  return (
-    <div 
-      className={`flex flex-col items-center md:flex-row ${alignClass} md:space-x-4 space-y-4 md:space-y-0 mt-8 first:mt-0`} 
-      key={`row-${startIndex}`}
-    >
-      {rowData.map((data, index) => (
-        <div 
-          key={startIndex + index} 
-          className={CARD_WRAPPER_CLASSES}
-        >
-          <ProfileCard data={data} />
-        </div>
-      ))}
-    </div>
-  );
-};
+    ))}
+  </section>
+);
 
 const ProfileRow2: React.FC = () => {
-
-  
-  // Split the cardData into the specified rows
   const rowConfig = [
-    { count: 2, align: 'md:justify-end' }, // Row 1: 2 cards, Right-aligned
-    { count: 1, align: 'md:justify-start' }, // Row 2: 2 cards, Left-aligned
-    { count: 2, align: 'md:justify-end' }, // Row 3: 1 card, Right-aligned
-    { count: 2, align: 'md:justify-end' }, // Row 4: 2 cards, Right-aligned
-    { count: 1, align: 'md:justify-start' }, // Row 5: 2 cards, Left-aligned
-    { count: 2, align: 'md:justify-end' }, // Row 6: 1 card, Right-aligned
-    { count: 1, align: 'md:justify-end' }, // Row 7: 2 cards, Right-aligned
+    { count: 2, align: 'md:justify-end' },
+    { count: 1, align: 'md:justify-start' },
+    { count: 2, align: 'md:justify-end' },
+    { count: 2, align: 'md:justify-end' },
+    { count: 1, align: 'md:justify-start' },
+    { count: 2, align: 'md:justify-end' },
+    { count: 1, align: 'md:justify-end' },
   ];
 
   const allRows: React.ReactElement[] = [];
   let dataIndex = 0;
 
-  rowConfig.forEach((config, rowNumber) => {
+  rowConfig.forEach((config) => {
     const rowData = cardData.slice(dataIndex, dataIndex + config.count);
-    if (rowData.length === config.count) {
-      allRows.push(
-        renderRow(rowData, config.align, dataIndex)
-      );
+    if (rowData.length > 0) {
+      allRows.push(renderRow(rowData, config.align, dataIndex));
     }
     dataIndex += config.count;
   });
 
+  // JSON-LD for Schema Markup (Google LOVES this for "Our Team" pages)
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "mainEntity": cardData.map(person => ({
+      "@type": "Person",
+      "name": person.name,
+      "jobTitle": person.title,
+      "image": person.mainImage,
+      "description": person.specialty
+    }))
+  };
+
   return (
-    <div className={`min-h-screen py-10 px-4`}>
+    <div className="min-h-screen py-10 px-4 bg-transparent selection:bg-purple-500 selection:text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="max-w-7xl mx-auto">
         {allRows}
       </div>
-
-      {/* REMOVED: Profile Modal Section */}
     </div>
   );
 };

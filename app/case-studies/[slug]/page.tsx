@@ -4,7 +4,6 @@ import { caseStudies } from '@/lib/data';
 import Image from 'next/image';
 import Link from 'next/link';
 import CaseStudySlug from '@/app/components/CaseStudySlug';
-import FaqSection from "@/app/components/FaqSection";
 
 
 interface CaseStudyPageProps {
@@ -24,7 +23,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
   return (
     <>
       <CaseStudySlug data={study} />
-      <FaqSection />
+    
 
     </>
   );

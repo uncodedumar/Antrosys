@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
 
 const Loader = () => {
@@ -8,115 +8,100 @@ const Loader = () => {
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  
-  const words = ["APP", "WEB DESIGN", "SEO", "MARKETING", "DEVELOPMENT"];
+
+  const words = useMemo(() => [
+    "Custom Web Development",
+    "UI/UX Experience Design",
+    "Mobile App Architecture",
+    "Performance Marketing & Ads",
+    "AI-Powered Software Solutions",
+    "Digital Brand Illustration",
+    "Full-Stack Engineering",
+    "Strategic SEO Growth"
+  ], []);
 
   useEffect(() => {
     setLoading(true);
     setProgress(0);
+    document.documentElement.style.overflow = 'hidden';
 
-    // 1. Progress Logic (No change to your logic, just linked to UI)
+    // Faster progress: Reaches ~98% in about 600-700ms
     const interval = setInterval(() => {
       setProgress((prev) => {
-        if (prev >= 90) {
+        if (prev >= 98) {
           clearInterval(interval);
-          return 90;
+          return 98;
         }
-        return prev + Math.random() * 10;
+        // Aggressive increments to hit the target fast
+        const increment = prev < 70 ? Math.random() * 25 + 10 : Math.random() * 5;
+        return prev + increment;
       });
-    }, 150);
+    }, 60); // Halved interval time
 
-    // 2. Word Cycling Logic (Smoothly cycles keywords)
+    // Rapid word cycling (every 100ms) to show variety in a short window
     const wordInterval = setInterval(() => {
       setCurrentWordIndex((prev) => (prev + 1) % words.length);
-    }, 800);
+    }, 100);
 
-    // 3. Completion Logic
+    // Total duration: 800ms + 200ms exit animation = 1 second total
     const timer = setTimeout(() => {
       setProgress(100);
       setTimeout(() => {
         setLoading(false);
-      }, 500);
-    }, 2500); // Adjusted for visibility of the "Great things" message
+        document.documentElement.style.overflow = '';
+      }, 200); // Quick fade/slide out
+    }, 800);
 
     return () => {
       clearInterval(interval);
       clearInterval(wordInterval);
       clearTimeout(timer);
+      document.documentElement.style.overflow = '';
     };
-  }, [pathname]);
+  }, [pathname, words]);
 
   if (!loading) return null;
 
   return (
-    <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-black transition-opacity duration-500">
-      
-      {/* YOUR ORIGINAL LOADER UI (No Changes) */}
-      <div className="relative mb-24">
-        <div className="absolute animate-spin">
-          {[...Array(3)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute w-16 h-16 border-4 border-secondary rounded-full"
-              style={{
-                animation: `spin ${2 + i * 0.5}s linear infinite`,
-                opacity: 0.7 - i * 0.2,
-                transform: `scale(${1 + i * 0.2})`,
-              }}
-            />
-          ))}
-        </div>
-
-        {[...Array(8)].map((_, i) => (
-          <div
-            key={`sparkle-${i}`}
-            className="absolute w-2 h-2 bg-accent rounded-full"
-            style={{
-              animation: `sparkle 1.5s ease-in-out infinite`,
-              animationDelay: `${i * 0.2}s`,
-              transform: `rotate(${i * 45}deg) translateX(30px)`,
-            }}
-          />
-        ))}
-        <div className="w-4 h-4 bg-accent rounded-full animate-pulse" />
+    <div 
+      role="alert" 
+      aria-live="assertive" 
+      aria-busy="true"
+      className="fixed inset-0 z-[99999] bg-black flex items-center justify-center overflow-hidden touch-none"
+    >
+      <div className="sr-only">
+        <h1>Leading Digital Agency in Web Development, AI Solutions, and Creative UI/UX Design</h1>
+        <p>Specializing in high-performance software engineering, digital marketing ads, and custom illustrations.</p>
       </div>
 
-      {/* TEXT & PERCENTAGE SECTION */}
-      <div className="flex flex-col items-center gap-4 text-center mt-8">
-        <p className="text-secondary text-xs tracking-[0.3em] uppercase font-medium animate-pulse">
-            Great things can take time
-        </p>
-        
-        <div className="h-6 overflow-hidden">
-            <p className="text-accent text-sm tracking-widest uppercase transition-all duration-500">
-                {words[currentWordIndex]}
-            </p>
-        </div>
+      <div 
+        className="absolute inset-0 bg-orange-600 transition-transform duration-300 ease-out origin-left"
+        style={{ transform: `translateX(-${100 - progress}%)` }}
+      />
 
-        <div className="relative w-48 h-[2px] accent mt-2 overflow-hidden">
-             <div 
-                className="absolute h-full bg-accent transition-all duration-300 ease-out"
-                style={{ width: `${progress}%` }}
-             />
-        </div>
-        
-        <span className="text-white font-mono text-lg tabular-nums">
-            {Math.round(progress)}%
+      <div className="relative z-10 flex flex-col items-center gap-4 text-center">
+        <span className="text-white font-mono text-7xl md:text-9xl font-black tabular-nums mix-blend-difference tracking-tighter">
+          {Math.round(progress)}
         </span>
+
+        <div className="h-10 overflow-hidden flex items-center justify-center">
+          <p className="text-white text-xs md:text-sm tracking-[0.6em] uppercase font-bold mix-blend-difference">
+            {words[currentWordIndex]}
+          </p>
+        </div>
+
+        <p className="text-white/50 text-[9px] tracking-[0.4em] uppercase mt-6 mix-blend-difference font-medium">
+          Architecting Digital Excellence
+        </p>
       </div>
 
-      {/* CSS Animations */}
-      <style>{`
-        @keyframes sparkle {
-          0% { transform: rotate(0deg) translateX(30px) scale(1); opacity: 0; }
-          50% { transform: rotate(180deg) translateX(60px) scale(1.5); opacity: 1; }
-          100% { transform: rotate(360deg) translateX(90px) scale(0); opacity: 0; }
-        }
-        @keyframes spin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-      `}</style>
+      <div 
+        className="absolute inset-0 z-20 pointer-events-none opacity-20 mix-blend-overlay" 
+        style={{ 
+          backgroundImage: 'radial-gradient(circle, #fff 0.5px, transparent 0.5px)', 
+          backgroundSize: '24px 24px' 
+        }} 
+      />
     </div>
   );
 };

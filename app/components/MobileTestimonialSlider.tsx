@@ -2,34 +2,25 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Phone } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Phone, Star } from 'lucide-react';
+import Image from 'next/image';
+import { testimonialCards } from './TestimonialSection';
 
-// Data for your 5 cards
-const TESTIMONIALS = [
-  {
-    id: 1,
-    name: "Cooper Williams",
-    role: "CEO At Bricklix",
-    text: "If You Want A Partner Who Actually Cares About Outcomes, This Is Your Team. We’ve Worked With Agencies Before — None Come Close. If You’re Serious About Building Something That Lasts, This Is The Team You Want Beside You.",
-  },
-  {
-    id: 2,
-    name: "Sarah Jenkins",
-    role: "Founder of TechFlow",
-    text: "The level of professionalism and technical expertise is unmatched. They didn't just build a product; they helped us define our future trajectory in the market.",
-  },
-  // ... Add 3 more unique reviews here
-];
+/** * SEO TIP: Use Long-tail keywords in roles and text. 
+ * "Custom Software Development" and "UI/UX Design Agency" help search engines 
+ * understand your niche through client social proof.
+ */
 
 const MobileTestimonialSlider = () => {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0);
 
+  // Faster, smoother physics-based transitions
   const slideVariants = {
     enter: (direction: number) => ({
-      x: direction > 0 ? 300 : -300,
+      x: direction > 0 ? "100%" : "-100%",
       opacity: 0,
-      scale: 0.9,
+      scale: 0.95,
     }),
     center: {
       zIndex: 1,
@@ -37,37 +28,48 @@ const MobileTestimonialSlider = () => {
       opacity: 1,
       scale: 1,
       transition: {
-        duration: 0.4,
-        ease: "easeOut",
+        x: { type: "spring" as const, stiffness: 300, damping: 30 },
+        opacity: { duration: 0.2 }
       }
     },
     exit: (direction: number) => ({
       zIndex: 0,
-      x: direction < 0 ? 300 : -300,
+      x: direction < 0 ? "100%" : "-100%",
       opacity: 0,
-      scale: 0.9,
-      transition: {
-        duration: 0.3,
-      }
+      scale: 0.95,
+      transition: { duration: 0.2 }
     })
   };
 
   const paginate = (newDirection: number) => {
     setDirection(newDirection);
-    setIndex((prev) => (prev + newDirection + TESTIMONIALS.length) % TESTIMONIALS.length);
+    setIndex((prev) => (prev + newDirection + testimonialCards.length) % testimonialCards.length);
   };
 
   return (
-    <section className="block md:hidden bg-[#1a1818] min-h-screen py-12 px-6 font-sans overflow-hidden">
-      <h2 className="text-white text-center text-2xl font-bold uppercase tracking-wider mb-12">
+    <section 
+      className="block md:hidden bg-primary py-16 px-6 font-sans overflow-hidden"
+      aria-labelledby="testimonial-heading"
+    >
+      {/* Hidden SEO Content for Google Bots */}
+      <div className="sr-only">
+        <h2>Expert Web Development, UI/UX Design, and AI Solutions Testimonials</h2>
+        <p>Read why global brands trust our digital agency for software development, marketing ads, and custom illustrations.</p>
+      </div>
+
+      <h2 
+        id="testimonial-heading"
+        className="text-white text-center text-2xl font-black uppercase tracking-tighter mb-12"
+      >
         TRUSTED ACROSS THE GLOBE
       </h2>
 
-      <div className="relative flex items-center justify-center max-w-sm mx-auto h-[500px]">
-        {/* Left Arrow */}
+      <div className="relative flex items-center justify-center max-w-sm mx-auto min-h-[480px]">
+        {/* Navigation - Enhanced Accessibility */}
         <button 
           onClick={() => paginate(-1)}
-          className="absolute left-[-20px] z-10 p-3 rounded-full border border-gray-600 bg-[#2a2626] text-white hover:bg-[#3d3838] transition-colors"
+          aria-label="Previous testimonial"
+          className="absolute left-[-10px] z-20 p-3 rounded-full border border-gray-700 bg-[#2a2626]/40  text-white active:scale-90 transition-transform"
         >
           <ChevronLeft size={24} />
         </button>
@@ -76,52 +78,70 @@ const MobileTestimonialSlider = () => {
           <motion.div
             key={index}
             custom={direction}
-            variants={slideVariants as any}
+            variants={slideVariants}
             initial="enter"
             animate="center"
             exit="exit"
-            className="w-full bg-[#f5eddc] rounded-xl p-8 shadow-2xl flex flex-col justify-between"
+            className="w-full bg-[#f5eddc] rounded-2xl p-8 shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col justify-between will-change-transform"
           >
             {/* Top Row: Stars and Contact */}
-            <div className="flex justify-between items-start mb-8">
-              <div className="flex gap-1">
+            <div className="flex justify-between items-start mb-6">
+              <div className="flex gap-0.5" aria-label="5 star rating">
                 {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-[#e68a5c] text-xl">★</span>
+                  <Star key={i} size={18} fill="#e68a5c" stroke="none" />
                 ))}
               </div>
-              <div className="flex items-center gap-2">
-                <span className="text-[10px] font-bold uppercase tracking-tighter">CONTACT SALES</span>
-                <div className="bg-[#382828] p-1.5 rounded-full">
-                  <Phone size={14} className="text-[#f5eddc]" />
+              <a 
+                href="/Contact" // Add your actual number
+                className="flex items-center gap-2 group"
+              >
+                <span className="text-[10px] font-extrabold uppercase tracking-widest group-hover:underline">CONTACT SALES</span>
+                <div className="bg-[#382828] p-2 rounded-full group-hover:bg-black transition-colors">
+                  <Phone size={12} className="text-[#f5eddc]" />
                 </div>
-              </div>
+              </a>
             </div>
 
-            {/* Quote Body */}
-            <motion.p 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-[#1a1818] text-xl font-medium leading-tight mb-8"
-            >
-              {TESTIMONIALS[index].text}
-            </motion.p>
-
-            {/* Footer: Profile */}
-            <div className="flex items-center gap-4">
-              <div className="w-14 h-14 bg-[#382828] rounded-full" />
-              <div>
-                <h4 className="font-bold text-sm leading-none">{TESTIMONIALS[index].name}</h4>
-                <p className="text-xs opacity-80">{TESTIMONIALS[index].role}</p>
+            {/* Quote Body with Semantic Blockquote */}
+            <figure className="m-0">
+              <blockquote className="text-[#1a1818] text-xl font-bold italic leading-snug mb-8 tracking-tight">
+                "{testimonialCards[index].review}"
+              </blockquote>
+              
+              <div className="flex items-center gap-4">
+                {/* Profile Image with Alt Text for SEO */}
+                <div className="relative w-14 h-14 rounded-full flex-shrink-0 overflow-hidden bg-[#382828]">
+                  <Image
+                    src={testimonialCards[index].src}
+                    alt={`${testimonialCards[index].name} - ${testimonialCards[index].role} at ${testimonialCards[index].company}`}
+                    width={56}
+                    height={56}
+                    className="object-cover w-full h-full"
+                    loading="lazy"
+                    sizes="56px"
+                    onError={(e) => {
+                      // Fallback: hide image on error, background color will show
+                      e.currentTarget.style.display = 'none';
+                    }}
+                  />
+                </div>
+                <figcaption>
+                  <h4 className="font-black text-[15px] leading-none text-[#1a1818]">
+                    {testimonialCards[index].name}
+                  </h4>
+                  <cite className="text-xs font-medium opacity-70 mt-1 block not-italic">
+                    {testimonialCards[index].role} @ {testimonialCards[index].company}
+                  </cite>
+                </figcaption>
               </div>
-            </div>
+            </figure>
           </motion.div>
         </AnimatePresence>
 
-        {/* Right Arrow */}
         <button 
           onClick={() => paginate(1)}
-          className="absolute right-[-20px] z-10 p-3 rounded-full border border-gray-600 bg-[#2a2626] text-white hover:bg-[#3d3838] transition-colors"
+          aria-label="Next testimonial"
+          className="absolute right-[-10px] z-20 p-3 rounded-full border border-gray-700 bg-[#2a2626]/40  text-white active:scale-90 transition-transform"
         >
           <ChevronRight size={24} />
         </button>

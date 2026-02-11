@@ -1,8 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { ServicePageData } from "@/lib/data";
+import { ServicePageData, homePageData } from "@/lib/data";
 import ServiceSlugHero from "@/app/components/ServiceSlugHero";
-import LogoLoopSection from "@/app/components/logoloop";
 import ServiceSuite from "@/app/components/ServiceSuite";
 import TechStack from "@/app/components/TechStack";
 import IndustrySection from "@/app/components/IndustrySection";
@@ -51,14 +50,16 @@ export default async function ServicePage({ params }: ServicePageProps) {
     notFound();
   }
 
+  // Get industries and finalSection from homePageData (same as home page)
+  const homeData = homePageData[0];
+
   return (
     <>
       <ServiceSlugHero slug={slug} />
-      <LogoLoopSection data={service.logoLoop} />
       <ServiceSuite data={service.serviceSuite} />
       <TechStack data={service.techStack} />
-      <IndustrySection data={service.industries} />
-      <FinalSection data={service.finalSection} />
+      <IndustrySection data={homeData.industries} />
+      <FinalSection data={homeData.finalSection} />
       <Agenda1 />
       <FaqSection />
 
