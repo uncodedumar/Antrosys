@@ -1,8 +1,17 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Modern browser targeting - remove unnecessary polyfills
+  // Note: swcMinify is default in Next.js 16, removed to avoid warning
+  
   images: {
     remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'picsum.photos',
+        port: '',
+        pathname: '/**',
+      },
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',
@@ -31,7 +40,11 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     optimizePackageImports: ['framer-motion', 'lucide-react', 'react-icons'],
+    // Modern browser optimizations
+    optimizeCss: true,
   },
+  // Target modern browsers - reduces bundle size significantly
+  transpilePackages: [],
 };
 
 export default nextConfig;

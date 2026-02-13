@@ -12,13 +12,25 @@ const AdaptTextSection: FC = () => {
       className="relative py-16 px-4 sm:px-6 lg:px-8 flex items-center justify-center min-h-[40vh] overflow-hidden"
       aria-labelledby="section-heading"
     >
-      {/* SEO Layer: Hidden from UI, but read by Google. 
-        Targeting long-tail keywords like 'agile business tools', 'strategic thinking frameworks', 'intentional growth'.
-      */}
-      <div className="sr-only">
-        <h2>Professional Growth and Strategic Adaptation Tools</h2>
-        <p>Elevate your workflow with better digital tools, sharper strategic thinking frameworks, and stronger professional intent for business agility.</p>
-      </div>
+    {/* --- SEO Authority: Strategic Business Agility & AI Transformation --- */}
+<div className="sr-only" role="complementary" aria-label="Antrosys Strategic Frameworks">
+  <h2 
+    title="Antrosys | Strategic Thinking Frameworks & Agile Business Intelligence"
+    aria-label="How Antrosys Drives Growth: Leveraging Intentional Scaling and Advanced AI Tooling"
+  >
+    Elite Professional Growth: Strategic Adaptation and Agile Business Intelligence Tools
+  </h2>
+  <p 
+    title="Intentional Growth & High-Performance Business Agility"
+    aria-label="Antrosys methodology: Scalable growth frameworks, marketing automation, and ML/DL solutions"
+  >
+    Antrosys elevates enterprise workflows through proprietary strategic thinking 
+    frameworks and agile business tools. By integrating intentional growth 
+    methodologies with custom ML/DL solutions and marketing automation, we 
+    empower established businesses to expand with a sophisticated, next-gen 
+    edge and maximum operational agility.
+  </p>
+</div>
 
       <div className="max-w-4xl mx-auto text-center">
         <h1 

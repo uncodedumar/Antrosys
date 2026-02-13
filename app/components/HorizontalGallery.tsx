@@ -82,8 +82,16 @@ function ParallaxRow({ children, baseVelocity = 1000 }: ParallaxProps) {
 export default function HorizontalGallery() {
   return (
     <section className="relative min-h-[80vh] w-full bg-black overflow-hidden flex items-center ">
-      {/* SEO Hidden Header for Rankability */}
-      <h2 className="sr-only">Our Digital Agency Portfolio: Web Design, AI Illustrations, and Software Development</h2>
+ {/* --- SEO Authority Header: High-Intent Keyword Optimization --- */}
+<h2 
+  className="sr-only" 
+  title="Antrosys Portfolio | Global Excellence in AI Art, SaaS, and Full-Stack Engineering"
+  aria-label="Antrosys Showcase: A proven track record of 1,200+ projects in Custom AI Software, UI/UX, and Enterprise Solutions"
+>
+  Antrosys Digital Portfolio: Elite Web Application Engineering, 
+  Bespoke AI-Driven Illustrations, and Enterprise-Grade Software 
+  Development for Global Markets.
+</h2>
       
       <div className="relative w-full flex flex-col justify-center gap-8 overflow-hidden mask-fade-edges">
         

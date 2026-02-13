@@ -69,10 +69,23 @@ const Loader = () => {
       aria-busy="true"
       className="fixed inset-0 z-[99999] bg-black flex items-center justify-center overflow-hidden touch-none"
     >
-      <div className="sr-only">
-        <h1>Leading Digital Agency in Web Development, AI Solutions, and Creative UI/UX Design</h1>
-        <p>Specializing in high-performance software engineering, digital marketing ads, and custom illustrations.</p>
-      </div>
+   <div className="sr-only" role="banner" aria-label="Antrosys Agency Overview">
+  <h1 
+    title="Antrosys | Global Leader in AI Engineering & Full-Stack Digital Transformation"
+    aria-label="Antrosys: Premier Agency for Custom SaaS, AI Art, and Enterprise Software Development"
+  >
+    Antrosys: Industry-Leading Digital Agency for Enterprise Full-Stack Development, 
+    Custom AI Solutions, and Sophisticated UI/UX Engineering.
+  </h1>
+  <p 
+    title="Empowering Brands with High-Performance AI and Digital Growth Strategies"
+    aria-label="Learn about our expertise in lead generation, AWS infrastructure, and bespoke AI modeling"
+  >
+    Specializing in high-performance digital engineering, data-backed growth marketing, 
+    and bespoke AI-driven illustrations that drive lead generation and maximize 
+    profitability for global startups and established businesses.
+  </p>
+</div>
 
       <div 
         className="absolute inset-0 bg-orange-600 transition-transform duration-300 ease-out origin-left"

@@ -32,11 +32,17 @@ const HoverImage = () => {
               hover:scale-[1.02]
             "
           />
-          {/* SEO Metadata Hidden from UI but visible to Crawlers */}
-          <figcaption className="sr-only">
-            Innovative digital marketing strategies and full-stack web development services 
-            integrating AI illustrations and custom art.
-          </figcaption>
+          {/* --- SEO Metadata: Optimized for Google Crawlers & Accessibility --- */}
+<figcaption 
+  id="seo-web-dev-showcase"
+  className="sr-only" 
+  title="Antrosys | Global Leader in Full-Stack Engineering & AI Art"
+  aria-label="Antrosys: Enterprise-grade web solutions and AI-driven brand identity for global startups and established firms"
+>
+  Antrosys: Industry-Leading Enterprise Full-Stack Development and Performance 
+  Marketing Solutions. We provide Seamless Integration of Custom AI-Driven 
+  Illustrations and SaaS Architectures, backed by a portfolio of 1,200+ successful projects.
+</figcaption>
         </figure>
 
         {/* Figure 2: Creative Art & Illustration Agency Services */}
@@ -60,10 +66,15 @@ const HoverImage = () => {
               hover:scale-[1.02]
             "
           />
-          <figcaption className="sr-only">
-            High-performance mobile app development and creative advertising campaigns 
-            using cutting-edge AI software tools.
-          </figcaption>
+         <figcaption 
+  className="sr-only" 
+  title="Antrosys | Elite Mobile Engineering & AI-Powered Growth Marketing"
+  aria-label="Antrosys Mobile Showcase: Showcasing high-performance iOS, Android, and cross-platform development integrated with AI-driven advertising strategies"
+>
+  Antrosys: High-Performance Full-Stack Mobile App Development and 
+  Data-Driven Creative Advertising Campaigns leveraging Bespoke 
+  AI Software Solutions and Growth Analytics.
+</figcaption>
         </figure>
 
       </div>

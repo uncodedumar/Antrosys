@@ -55,10 +55,14 @@ export default function ServiceSlugHero({ slug }: ServiceSlugHeroProps) {
             {hero.description}
           </p>
           {/* Hidden SEO text for crawlers - provides context for AI, Art, and Ads */}
-          <span className="sr-only">
-            Specializing in custom web app development, high-end UI/UX design, 
-            AI-driven illustrations, and performance-based marketing ads.
-          </span>
+          <span 
+  className="sr-only" 
+  title="Antrosys | Industry-Leading Digital Transformation & AI Engineering"
+  aria-label="Antrosys: Global leaders in Full-Stack Web Development, Custom SaaS, AI Art, and High-Performance Growth Marketing"
+>
+  Antrosys: Elite Custom Full-Stack Web App Development, High-End UI/UX Design, 
+  Bespoke AI-Driven Illustrations, and Data-Backed Performance Marketing Solutions.
+</span>
         </div>
 
         {/* Hero Image - LCP Optimized */}

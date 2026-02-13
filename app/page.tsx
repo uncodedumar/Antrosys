@@ -1,29 +1,56 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import HeroSection from "./components/HeroSection";
-import VideoPlayer from "./components/VideoPlayer";
-
-import IconicBrandPitch from "./components/IconicBrandPitch";
-import LogoLoopco from "./components/logoloopco";
-import AnimatedTextSection from "./components/AnimatedTextSection";
-import TextLoop from "./components/textloop";
-import LeftAlignedPitch from "./components/LeftAlignedPitch";
-import ServiceCards from "./components/ServiceCards";
-import HeroServicesCards from "./components/HeroServicesCards";
-import StatisticsSection from "./components/StatisticsSection";
-import CallToActionBanner from "./components/CallToActionBanner";
-import AdaptTextSection from "./components/AdaptTextSection";
-import HoverImage from "./components/HoverImage";
-import IndustrySection from "./components/IndustrySection";
-import FinalSection from "./components/finalSection";
-import TestimonialSection from "./components/TestimonialSection";
-import ThreeCardSection from "./components/ThreeCardSection";
-import TypographySection from "./components/TypographySection";
 import { homePageData } from "@/lib/data";
 
-// Dynamic imports for heavy components below the fold
+// Critical above-the-fold components - loaded immediately
+const VideoPlayer = dynamic(() => import("./components/VideoPlayer"), {
+  ssr: true,
+});
+
+// Below-the-fold components - lazy loaded with code splitting
+const TypographySection = dynamic(() => import("./components/TypographySection"), {
+  ssr: true,
+});
+
+const ServiceCards = dynamic(() => import("./components/ServiceCards"), {
+  ssr: true,
+});
+
+const LogoLoopco = dynamic(() => import("./components/logoloopco"), {
+  ssr: true,
+});
+
+const HeroServicesCards = dynamic(() => import("./components/HeroServicesCards"), {
+  ssr: true,
+});
+
+const AnimatedTextSection = dynamic(() => import("./components/AnimatedTextSection"), {
+  ssr: true,
+});
+
+const LeftAlignedPitch = dynamic(() => import("./components/LeftAlignedPitch"), {
+  ssr: true,
+});
+
+const IconicBrandPitch = dynamic(() => import("./components/IconicBrandPitch"), {
+  ssr: true,
+});
+
+const CallToActionBanner = dynamic(() => import("./components/CallToActionBanner"), {
+  ssr: true,
+});
+
+const StatisticsSection = dynamic(() => import("./components/StatisticsSection"), {
+  ssr: true,
+});
+
 const LeftGallerySec = dynamic(() => import("./components/LeftGallerySec"), {
   loading: () => <div className="min-h-screen bg-black" aria-label="Loading gallery" />,
+  ssr: true,
+});
+
+const TextLoop = dynamic(() => import("./components/textloop"), {
   ssr: true,
 });
 
@@ -32,8 +59,32 @@ const HorizontalGallery = dynamic(() => import("./components/HorizontalGallery")
   ssr: true,
 });
 
+const AdaptTextSection = dynamic(() => import("./components/AdaptTextSection"), {
+  ssr: true,
+});
+
+const ThreeCardSection = dynamic(() => import("./components/ThreeCardSection"), {
+  ssr: true,
+});
+
+const HoverImage = dynamic(() => import("./components/HoverImage"), {
+  ssr: true,
+});
+
+const IndustrySection = dynamic(() => import("./components/IndustrySection"), {
+  ssr: true,
+});
+
+const FinalSection = dynamic(() => import("./components/finalSection"), {
+  ssr: true,
+});
+
 const MobileTestimonialSlider = dynamic(() => import("./components/MobileTestimonialSlider"), {
   loading: () => null,
+  ssr: true,
+});
+
+const TestimonialSection = dynamic(() => import("./components/TestimonialSection"), {
   ssr: true,
 });
 
@@ -51,11 +102,37 @@ const MY_WORDS = [
 
 
 export const metadata: Metadata = {
-  title: "Antrosys",
+  title: "Antrosys | Cutting-Edge AI, Full-Stack Dev & Elite BPO Solutions",
   description:
-    "Welcome to Antrosys - Your trusted partner for innovative solutions",
+    "Antrosys empowers startups and enterprises with custom AI integrations, high-performance mobile & web development, and elite BPO outsourcing. Transform your digital presence with bold, trusted engineering.",
+  keywords: [
+    "AI Development Agency",
+    "Custom SaaS Solutions",
+    "Mobile App Development",
+    "BPO Customer Support",
+    "Enterprise AI Integration",
+    "Antrosys",
+    "Muhammad Umar Riaz"
+  ],
+  alternates: {
+    canonical: "https://antrosys.com", // Replace with your live URL
+  },
+  openGraph: {
+    title: "Antrosys | Leading Digital Transformation Agency",
+    description: "Specializing in AI art, custom models, and full-stack development to help businesses scale effortlessly.",
+    url: "https://antrosys.com",
+    siteName: "Antrosys",
+    images: [
+      {
+        url: "/Logo.svg", // Ensure this image exists in your public folder
+        width: 1200,
+        height: 630,
+        alt: "Antrosys - Empowering Brands to Dominate the Digital Landscape",
+      },
+    ],
+    type: "website",
+  },
 };
-
 export default function Home() {
   // Variant 1: "Our Work" section
   const homeData = homePageData[0];
@@ -68,8 +145,9 @@ export default function Home() {
      
       <ServiceCards />
       
-      <LogoLoopco />
+      
       <HeroServicesCards />
+      <LogoLoopco />
       <AnimatedTextSection words={MY_WORDS as any} />
       <LeftAlignedPitch
         text="We engineer digital experiences that shape perception."

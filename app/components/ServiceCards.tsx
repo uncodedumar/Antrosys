@@ -11,7 +11,7 @@ const services = [
     title: "Command Your Market",
     description: "Own the spotlight with undisputed authority.",
     seoDescription: "Full-scale digital marketing, performance ads, and brand authority building for scaling startups.",
-    image: "/lead.avif", 
+    image: "/whatwedo/lead.avif", 
     bgColor: "bg-secondary",
     textColor: "text-accent",
   },
@@ -19,7 +19,7 @@ const services = [
     title: "Uncap Your Potential",
     description: "Scale effortlessly while we handle everything.",
     seoDescription: "Custom software development, enterprise web applications, and scalable SaaS architecture solutions.",
-    image: "/potential.avif",
+    image: "/whatwedo/potential.avif",
     bgColor: "bg-accent",
     textColor: "text-secondary",
   },
@@ -27,7 +27,7 @@ const services = [
     title: "Total Digital Serenity",
     description: "Reliable experts guarding your brand's future.",
     seoDescription: "UI/UX design systems, accessibility-first web design, and continuous technical maintenance.",
-    image: "/Serenity.avif",
+    image: "/whatwedo/Serenity.avif",
     bgColor: "bg-secondary",
     textColor: "text-accent",
   },
@@ -35,7 +35,7 @@ const services = [
     title: "Human-Centric Impact",
     description: "Deeply resonate with your ideal audience",
     seoDescription: "AI-generated illustrations, custom art, and empathetic user-centered design for modern brands.",
-    image: "/human.avif",
+    image: "/whatwedo/human.avif",
     bgColor: "bg-accent",
     textColor: "text-secondary",
   }
@@ -100,7 +100,15 @@ const ServiceSection = () => {
               </p>
 
               {/* Hidden SEO content for Google Crawlers (Zero UI impact) */}
-              <span className="sr-only">
+              <span 
+  className="sr-only" 
+  title={`Antrosys | Industry-Leading & Digital Engineering`}
+  aria-label={`Antrosys Expertise: Global leaders, bespoke AI art, and high-performance full-stack development`}
+>
+  Antrosys: Elite Global Agency Specializing in {service.seoDescription}. 
+  We Synchronize Bespoke Digital Art, Sophisticated Illustration, 
+  and Enterprise-Grade Full-Stack Software Development.
+</span><span className="sr-only">
                 Our agency specializes in {service.seoDescription}. 
                 We combine art, illustration, and cutting-edge software development.
               </span>

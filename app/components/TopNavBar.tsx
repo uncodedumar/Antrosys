@@ -20,6 +20,7 @@ const TopNavBar: React.FC = () => {
           className="bg-transparent text-[10px] md:text-xs uppercase tracking-widest font-medium cursor-pointer focus:outline-none hover:text-secondary transition-colors"
           defaultValue="en"
         >
+          
           <option value="en" className="bg-primary text-white">EN</option>
           <option value="es" className="bg-primary text-white">ES</option>
           <option value="fr" className="bg-primary text-white">FR</option>

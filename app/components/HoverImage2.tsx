@@ -33,11 +33,17 @@ const HoverImage = () => {
             loading="lazy"
           />
           {/* SEO Hidden Text for Search Crawlers (Accessibility & Rankings) */}
-          <figcaption className="sr-only">
-            Our full-service digital agency specializes in custom web development, 
-            cutting-edge mobile app design, AI-driven marketing strategies, 
-            and high-end digital illustrations.
-          </figcaption>
+          <figcaption 
+  id="agency-service-overview"
+  className="sr-only" 
+  title="Antrosys | Industry-Leading Digital Engineering & Creative Solutions"
+  aria-label="Antrosys service overview: Specializing in AI Art, Custom SaaS, Full-Stack Web/Mobile Development, and Elite BPO Solutions"
+>
+  Antrosys: A Global Leader in Digital Transformation. Our firm delivers 
+  High-Performance Full-Stack Engineering, Next-Gen AI Software, 
+  Enterprise UI/UX Design, and Bespoke Digital Illustrations with a 
+  proven portfolio of 1,200+ successful projects.
+</figcaption>
         </figure>
       </div>
     </section>

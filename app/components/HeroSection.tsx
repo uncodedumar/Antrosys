@@ -62,7 +62,7 @@ const HeroSection: React.FC = () => {
   const cardsScale = useTransform(scrollYProgress, [0, 0.4], [0.8, 1]);
 
   return (
-    <div ref={containerRef} className="bg-black min-h-[120vh] relative overflow-hidden mx-2 rounded-b-[40px] selection:bg-orange-500/30">
+    <div ref={containerRef} className="hero-container bg-black min-h-[120vh] relative overflow-hidden mx-2 rounded-b-[40px] selection:bg-orange-500/30">
       
       {/* --- Parallax Background --- */}
       <motion.div 
@@ -77,23 +77,28 @@ const HeroSection: React.FC = () => {
 
       <div className="relative p-6 md:p-12 lg:p-20 z-10">
         <header className="flex justify-center items-center mb-16">
-          <a href="/" className="flex items-center space-x-1 hover:opacity-80 transition-opacity" title="Antrosys Home">
-            <span className="text-2xl font-black text-white tracking-tighter">ANTRO</span>
-            <span className="text-2xl font-black text-orange-500 tracking-tighter">SYS</span>
-          </a>
+        <a 
+  href="/" 
+  className="invisible md:visible flex items-center space-x-1 hover:opacity-80 transition-opacity" 
+  title="Antrosys Home"
+>
+  <span className="text-2xl font-black text-white tracking-tighter">ANTRO</span>
+  <span className="text-2xl font-black text-orange-500 tracking-tighter">SYS</span>
+</a>
         </header>
 
         <section className="text-center mb-20">
-          <motion.h1 
-            style={{ scale: titleScale }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-6xl sm:text-8xl md:text-[10rem] font-black leading-[0.85] text-white tracking-tightest mb-8"
+          <h1 
+            className="hero-h1 text-6xl sm:text-8xl md:text-[10rem] font-black leading-[0.85] text-white tracking-tightest mb-6"
+            style={{ 
+              opacity: 1,
+              visibility: 'visible',
+              transform: 'none'
+            }}
           >
             We Create <br />
             <span className="text-secondary">Feelings.</span>
-          </motion.h1>
+          </h1>
 
           <p className="sr-only">{SEO_KEYWORDS}</p>
 

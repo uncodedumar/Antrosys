@@ -52,12 +52,33 @@ function useElementWidth<T extends HTMLElement>(ref: React.RefObject<T | null>):
     useLayoutEffect(() => {
         function updateWidth() {
             if (ref.current) {
-                setWidth(ref.current.offsetWidth);
+                // Use requestAnimationFrame to batch reads and avoid layout thrashing
+                requestAnimationFrame(() => {
+                    if (ref.current) {
+                        setWidth(ref.current.offsetWidth);
+                    }
+                });
             }
         }
+        // Initial read
         updateWidth();
-        window.addEventListener('resize', updateWidth);
-        return () => window.removeEventListener('resize', updateWidth);
+        
+        // Use ResizeObserver for more efficient resize detection
+        const resizeObserver = new ResizeObserver(() => {
+            updateWidth();
+        });
+        
+        if (ref.current) {
+            resizeObserver.observe(ref.current);
+        }
+        
+        // Fallback for older browsers
+        window.addEventListener('resize', updateWidth, { passive: true });
+        
+        return () => {
+            resizeObserver.disconnect();
+            window.removeEventListener('resize', updateWidth);
+        };
     }, [ref]);
 
     return width;

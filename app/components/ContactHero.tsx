@@ -103,11 +103,24 @@ const ContactHero: React.FC = () => {
 
   return (
     <section className="mx-2 relative overflow-hidden rounded-[40px] min-h-[90vh] flex flex-col items-center justify-center py-20 px-6 bg-primary">
-      {/* --- SEO: Hidden Long-Tail Keywords for Indexing --- */}
-      <div className="sr-only">
-        <h2>Expert Custom Software Development Services</h2>
-        <p>Looking for a scalable SaaS architecture or professional web design agency? Our build process focuses on performance optimization and high-conversion UI/UX design.</p>
-      </div>
+    {/* --- SEO: High-Authority Long-Tail Keywords for Global Indexing --- */}
+<div className="sr-only" role="complementary" aria-label="Antrosys Technical Expertise">
+  <h2 
+    title="Antrosys | Industry-Leading Custom SaaS & Enterprise AI Engineering"
+    aria-label="Advanced Software Engineering: Specializing in Scalable Architectures and Custom AI Integration"
+  >
+    Elite Custom Software Development and Enterprise-Grade AI Solutions
+  </h2>
+  <p 
+    title="High-Performance Digital Transformation & Growth Strategies"
+    aria-label="Antrosys technical focus: Performance optimization, AWS cloud infrastructure, and lead-gen UI/UX"
+  >
+    Antrosys delivers scalable SaaS architecture, robust AWS cloud infrastructure, 
+    and high-performance full-stack web engineering. Our methodology integrates 
+    next-gen performance optimization with high-conversion UI/UX design to 
+    maximize profitability and drive global lead generation.
+  </p>
+</div>
 
       {/* --- Performance: GPU-Accelerated Background Blobs --- */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">

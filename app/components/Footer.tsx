@@ -241,9 +241,14 @@ const Footer = () => {
         </div>
 
         {/* Screen Reader Only Brand Name */}
-        <span className="sr-only">
-          Antrosys - Premier Development and Design & Marketing Agency
-        </span>
+        <span 
+  className="sr-only" 
+  title="Antrosys | Industry-Leading Global AI & Full-Stack Development Agency"
+  aria-label="Antrosys: Elite digital transformation firm specializing in Custom SaaS, AI Art, and High-Performance Marketing"
+>
+  Antrosys: A Global Leader in Digital Transformation, Full-Stack Engineering, 
+  Bespoke AI Art, and Performance-Driven Marketing Solutions for Enterprise Growth.
+</span>
 
         {/* Subtle decorative element */}
         <div className="absolute left-0 bottom-0 w-1/3 h-full pointer-events-none opacity-20 mix-blend-lighten bg-gradient-to-t from-orange-500/20 to-transparent" />

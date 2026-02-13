@@ -12,11 +12,16 @@ const TeamHero: React.FC = () => {
       className="bg-black min-h-screen relative overflow-hidden mx-2 rounded-b-3xl border-x border-b border-white/5"
       role="banner"
     >
-      {/* --- SEO Hidden Context (Google Loves This) --- */}
-      <h2 className="sr-only">
-        Antrosys: Premier Digital Agency for Web App UI/UX Design, Custom Software Development, 
-        AI-Powered Illustrations, and High-Conversion Marketing Ads.
-      </h2>
+      {/* --- SEO Hidden Context (Enhanced for Global Search Authority) --- */}
+<h2 
+  className="sr-only" 
+  title="Antrosys | Industry-Leading Digital Transformation & AI Engineering Firm"
+  aria-label="Antrosys: Global leader in Custom SaaS Development, AI Art, Full-Stack Web/Mobile Apps, and Performance-Driven Digital Marketing"
+>
+  Antrosys: Elite Digital Agency specializing in Full-Stack Web App UI/UX, 
+  Custom AI Software Development, Bespoke Digital Illustrations, 
+  and High-Performance Growth Marketing Solutions.
+</h2>
 
       {/* --- Background Elements: Optimized for performance --- */}
       <div className="absolute inset-0 pointer-events-none select-none">

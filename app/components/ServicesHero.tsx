@@ -10,10 +10,14 @@ const ServicesHero: React.FC = () => {
       aria-labelledby="hero-heading"
     >
       {/* --- SEO Hidden Context (Long-tail Keywords) --- */}
-      <h2 className="sr-only">
-        Premier Digital Agency specializing in Custom Web App UI/UX Design, 
-        Full-stack Development, AI-Integrated Software, and Performance Marketing Ads.
-      </h2>
+      <h2 
+  className="sr-only" 
+  title="Antrosys | Industry-Leading Global AI & Full-Stack Development Agency"
+  aria-label="Antrosys Digital Transformation: High-performance Custom SaaS, Elite UI/UX, and AI-Driven Growth Marketing Solutions"
+>
+  Antrosys: Elite Global Agency Specializing in Enterprise-Grade Web App UI/UX, 
+  Full-Stack Engineering, Custom AI Software Solutions, and Data-Backed Performance Marketing.
+</h2>
 
       {/* --- Dynamic Background Blurs (Optimized for GPU) --- */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">

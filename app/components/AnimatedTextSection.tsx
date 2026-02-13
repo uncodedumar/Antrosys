@@ -29,12 +29,17 @@ const MatterBackground = ({ scrollProgress }: { scrollProgress: MotionValue<numb
     if (!sceneRef.current) return;
 
     const engine = engineRef.current;
+    
+    // Batch DOM reads to avoid layout thrashing
+    const width = sceneRef.current.clientWidth;
+    const height = sceneRef.current.clientHeight;
+    
     const render = Matter.Render.create({
       element: sceneRef.current,
       engine: engine,
       options: {
-        width: sceneRef.current.clientWidth,
-        height: sceneRef.current.clientHeight,
+        width,
+        height,
         wireframes: false,
         background: "transparent",
       },
@@ -42,8 +47,6 @@ const MatterBackground = ({ scrollProgress }: { scrollProgress: MotionValue<numb
 
     // Walls
     const wallOptions = { isStatic: true, render: { visible: false } };
-    const width = sceneRef.current.clientWidth;
-    const height = sceneRef.current.clientHeight;
 
     Matter.Composite.add(engine.world, [
       Matter.Bodies.rectangle(width / 2, -10, width, 20, wallOptions), // Top

@@ -207,7 +207,13 @@ const CaseStudiesGrid: React.FC = () => {
     <section className="bg-black px-6 md:px-12 py-32 selection:bg-white selection:text-black">
       <div className="mx-auto max-w-[1400px]">
         {/* SEO Hidden H1 */}
-        <h1 className="sr-only">Elite Web App Design, UI/UX Development, and AI Marketing Portfolio</h1>
+        <h1 
+  className="sr-only" 
+  title="Antrosys Portfolio | Global Leaders in AI Art, Custom SaaS, and Full-Stack Engineering"
+  aria-label="Antrosys Digital Portfolio: Showcasing 1,200+ Projects in AI Software, UI/UX, and Enterprise Integration"
+>
+  Antrosys Portfolio: Elite Web App Design, Custom UI/UX, and AI-Driven Digital Marketing Solutions
+</h1>
         
         <header className="mb-20">
           <h2 className="text-zinc-500 text-sm font-mono uppercase tracking-[0.5em] mb-4">Featured Work</h2>

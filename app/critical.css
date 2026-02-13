@@ -1,0 +1,63 @@
+/* Critical CSS for Hero Section - Inlined for LCP optimization */
+:root {
+  --primary: #000000;
+  --secondary: #EF571B;
+  --accent: #FAF3E1;
+  --background: #000000;
+  --foreground: #000000;
+}
+
+body {
+  background: #000000;
+  font-family: var(--font-poppins, system-ui, arial), sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Hero Section Critical Styles */
+.bg-black {
+  background-color: #000000;
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+.text-secondary {
+  color: #EF571B;
+}
+
+.font-black {
+  font-weight: 900;
+}
+
+/* Hero H1 - Critical for LCP */
+.hero-h1 {
+  font-size: clamp(3rem, 8vw, 10rem);
+  line-height: 0.85;
+  color: #ffffff;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  margin: 0;
+  padding: 0;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+
+.hero-h1 .text-secondary {
+  color: #EF571B;
+}
+
+/* Ensure hero container is visible */
+.hero-container {
+  min-height: 100vh;
+  position: relative;
+  background-color: #000000;
+}
+
+/* Prevent layout shift */
+.hero-h1,
+.hero-container {
+  contain: layout style paint;
+}

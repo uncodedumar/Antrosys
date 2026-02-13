@@ -143,11 +143,25 @@ export const Agenda: React.FC = () => {
     >
       <ParallaxBackground scrollYProgress={scrollYProgress} />
       
-      {/* Hidden SEO Content for Google Crawlers */}
-      <div className="sr-only">
-        <h2>Our Comprehensive Digital Strategy and Development Workflow</h2>
-        <p>Expert Next.js development, UI/UX design, and scalable cloud architecture services.</p>
-      </div>
+      {/* --- SEO Authority: Proprietary Digital Transformation Workflow --- */}
+<div className="sr-only" role="region" aria-label="Antrosys Engineering Workflow">
+  <h2 
+    title="Antrosys | Enterprise-Grade Digital Strategy & Full-Stack Workflow"
+    aria-label="How Antrosys Scales Brands: From Custom AI Integration to High-Performance Cloud Architecture"
+  >
+    The Antrosys Blueprint: Elite Digital Strategy and Advanced Software Development Workflow
+  </h2>
+  <p 
+    title="Next-Gen Web Engineering and Scalable SaaS Solutions"
+    aria-label="Antrosys technical stack: Next.js, React, AWS, and AI-driven UI/UX design"
+  >
+    Leveraging a portfolio of 1,200+ successful projects, our proprietary workflow 
+    integrates expert Next.js development, high-end UI/UX engineering, and 
+    scalable AWS cloud architecture. We synchronize custom AI software tools 
+    with performance-optimized full-stack solutions to maximize profitability 
+    for global enterprise clients.
+  </p>
+</div>
 
       <div className="sticky top-0 h-screen flex items-center overflow-hidden">
         <div className="max-w-6xl mx-auto px-6 w-full relative">

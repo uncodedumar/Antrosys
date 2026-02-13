@@ -12,6 +12,7 @@ const services = [
   "Seductive Branding",
   "strategic brand scaling",
   "Startup Acceleration",
+  "bpo outsourcing",
 ];
 
 const Typewriter = () => {
@@ -58,7 +59,7 @@ export default function AntrosysHeartLetter() {
     offset: ["start end", "end start"],
   });
 
-  const textScale = useTransform(scrollYProgress, [0, 0.5], [0.9, 1.1]);
+  const textScale = useTransform(scrollYProgress, [0, 0.5], [0.8, 1]);
   const imgY1 = useTransform(scrollYProgress, [0, 1], [0, -150]);
   const imgY2 = useTransform(scrollYProgress, [0, 1], [0, -250]);
   const imgY3 = useTransform(scrollYProgress, [0, 1], [0, -100]);
@@ -71,10 +72,13 @@ export default function AntrosysHeartLetter() {
       className="relative w-full bg-primary flex flex-col items-center font-poppins text-white overflow-hidden"
     >
       {/* SEO Hidden H2 */}
-      <h2 className="sr-only">
-        Expert Web App UI/UX Design, AI Software Development, and Digital
-        Marketing Agency
-      </h2>
+      <h2 
+  className="sr-only" 
+  title="Antrosys | Global Leader in AI, Full-Stack Development, and Digital Transformation"
+  aria-label="Antrosys: Premier Agency for Web UI/UX, Custom AI Software, and Performance Marketing"
+>
+  Expert Web App UI/UX Design, Custom AI Software Development, and Global Digital Marketing Agency
+</h2>
 
       {/* Parallax Background Images (Black & White, Overlapping, 25px rounded) */}
       <div className="absolute inset-0 pointer-events-none z-0">
@@ -156,7 +160,7 @@ export default function AntrosysHeartLetter() {
 
       <motion.article 
         style={{ scale: textScale }}
-        className="max-w-3xl w-full relative z-20 px-4 py-12 md:py-20"
+       className="max-w-xl md:max-w-3xl w-full relative z-20 px-4 py-12 md:py-20"
       >
         <motion.div
           initial={{ opacity: 0, y: 20 }}

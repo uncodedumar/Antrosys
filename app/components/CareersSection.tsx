@@ -32,7 +32,14 @@ const CareersSection: React.FC = () => {
               className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight leading-tight"
             >
               {/* Using a span for a subtle SEO boost without changing the look */}
-              <span className="sr-only">Career Opportunities at </span>
+              <span 
+  className="sr-only" 
+  title="Antrosys Careers | Join a Global Leader in AI & Digital Transformation"
+  aria-label="Explore career opportunities at Antrosys: Join an elite team of AI engineers, designers, and full-stack developers"
+>
+  Career Opportunities at Antrosys: Join an Industry-Leading Team Shaping the 
+  Future of AI Art, Custom SaaS, and Enterprise-Grade Digital Solutions.
+</span>
               Join Our Team
             </h2>
           </div>
@@ -64,13 +71,23 @@ const CareersSection: React.FC = () => {
             </a> */}
 
             {/* Visually hidden long-tail keywords for SEO indexing */}
-            <div className="sr-only">
-              <h3>Creative Jobs and Design Careers</h3>
-              <p>
-                Seeking remote UI/UX designer roles, senior art director positions, 
-                and creative tech opportunities in a high-growth design studio.
-              </p>
-            </div>
+            <div className="sr-only" role="region" aria-label="Antrosys Creative Career Opportunities">
+  <h3 
+    title="Antrosys Careers | Elite Creative & Technical Design Opportunities"
+    aria-label="Join Antrosys: Senior-level roles in AI Art, UI/UX, and Creative Direction"
+  >
+    Elite Creative Engineering and Next-Gen Design Careers at Antrosys
+  </h3>
+  <p 
+    title="Scale Your Career with a Global Leader in AI & Digital Transformation"
+    aria-label="Antrosys is hiring: Remote Senior UI/UX Designers, AI Art Directors, and Full-Stack Creative Technologists"
+  >
+    Antrosys is expanding its elite global team. We are seeking Senior UI/UX 
+    Designers, Bespoke AI Art Directors, and Creative Technologists to 
+    drive digital transformation and high-performance brand identity in a 
+    world-class, innovation-first environment.
+  </p>
+</div>
           </div>
         </div>
       </div>

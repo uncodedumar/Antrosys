@@ -52,10 +52,22 @@ const MobileTestimonialSlider = () => {
       aria-labelledby="testimonial-heading"
     >
       {/* Hidden SEO Content for Google Bots */}
-      <div className="sr-only">
-        <h2>Expert Web Development, UI/UX Design, and AI Solutions Testimonials</h2>
-        <p>Read why global brands trust our digital agency for software development, marketing ads, and custom illustrations.</p>
-      </div>
+      <div className="sr-only" role="region" aria-label="Antrosys Client Success and Testimonials">
+  <h2 
+    title="Antrosys | Industry-Leading Client Success in AI & Full-Stack Development"
+    aria-label="Antrosys: Global proof of excellence in Custom SaaS, AI Art, and Digital Transformation"
+  >
+    Elite Success Stories: Expert Full-Stack Development, UI/UX Engineering, and Custom AI Solutions
+  </h2>
+  <p 
+    title="Trusted by Global Brands for Digital Growth and Profitability"
+    aria-label="Read why enterprise-level partners choose Antrosys for high-performance software and marketing automation"
+  >
+    Discover why global startups and established enterprises partner with Antrosys for 
+    sophisticated digital engineering, high-conversion growth marketing, 
+    and bespoke AI-driven illustrations that maximize profitability.
+  </p>
+</div>
 
       <h2 
         id="testimonial-heading"

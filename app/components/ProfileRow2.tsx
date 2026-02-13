@@ -20,16 +20,24 @@ const cardData: ProfileData[] = [
   {
     name: 'Mr. Sam',
     title: 'CMO',
-    mainImage: '/AboutImages/team/cmo.webp',
+    mainImage: '/AboutImages/Team/cmo.webp',
     avatarImage: '/Avatar/team/sama.webp',
     specialty: 'Digital Marketing Strategy and AI Growth'
   },
   {
     name: 'Amy',
     title: 'COO',
-    mainImage: '/AboutImages/team/coo.webp',
+    mainImage: '/AboutImages/Team/coo.webp',
     avatarImage: '/Avatar/team/amya.webp',
     specialty: 'Operations and Creative Project Management'
+  }
+  ,
+  {
+    name: 'Fara',
+    title: 'Brand Designer',
+    mainImage: '/AboutImages/Team/fara.webp',
+    avatarImage: '/Avatar/team/faraa.webp',
+    specialty: 'Cloud Infrastructure and Deployment Automation'
   },
   {
     name: 'Kate',
@@ -41,56 +49,49 @@ const cardData: ProfileData[] = [
   {
     name: 'Jayden',
     title: 'Software Engineer',
-    mainImage: '/AboutImages/team/jayden.webp',
+    mainImage: '/AboutImages/Team/jayden.webp',
     avatarImage: '/Avatar/team/jaydena.webp',
     specialty: 'Custom Software Development and System Architecture'
   },
   {
     name: 'Mr. Arman',
     title: 'Full-Stack Developer',
-    mainImage: '/AboutImages/team/arman.webp',
+    mainImage: '/AboutImages/Team/arman.webp',
     avatarImage: '/Avatar/team/armana.webp',
     specialty: 'Full-Stack Web Development and Scalable Apps'
   },
   {
     name: 'David',
     title: 'Marketing Manager',
-    mainImage: '/AboutImages/team/david.webp',
+    mainImage: '/AboutImages/Team/david.webp',
     avatarImage: '/Avatar/team/davida.webp',
     specialty: 'Search Engine Optimization and Ads Specialist'
   },
   {
     name: 'Chris',
     title: 'Content Strategist',
-    mainImage: '/AboutImages/team/chris.webp',
+    mainImage: '/AboutImages/Team/chris.webp',
     avatarImage: '/Avatar/team/chrisa.webp',
     specialty: 'Creative Copywriting and Brand Storytelling'
   },
   {
     name: 'Alma',
     title: 'Data Scientist',
-    mainImage: '/AboutImages/team/alma.webp',
+    mainImage: '/AboutImages/Team/alma.webp',
     avatarImage: '/Avatar/team/almaa.webp',
     specialty: 'AI Models and Big Data Analytics'
   },
   {
     name: 'Cooper',
     title: 'QA Engineer',
-    mainImage: '/AboutImages/team/cooper.webp',
+    mainImage: '/AboutImages/Team/cooper.webp',
     avatarImage: '/Avatar/team/coopera.webp',
     specialty: 'Software Quality Assurance and Testing'
   },
   {
-    name: 'Fara',
-    title: 'Brand Designer',
-    mainImage: '/AboutImages/team/fara.webp',
-    avatarImage: '/Avatar/team/faraa.webp',
-    specialty: 'Cloud Infrastructure and Deployment Automation'
-  },
-  {
     name: 'Emma',
     title: 'Mobile App Developer',
-    mainImage: '/AboutImages/team/emma.webp',
+    mainImage: '/AboutImages/Team/emma.webp',
     avatarImage: '/Avatar/team/emmaa.webp',
     specialty: 'iOS and Android Development Expert'
   },

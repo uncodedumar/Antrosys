@@ -500,7 +500,7 @@ export const caseStudies: CaseStudy[] = [
       text: "If You Want A Partner Who Actually Cares About Outcomes, This Is Your Team. We've Worked With Agencies Before — None Come Close. If You're Serious About Building Something That Lasts, This Is The Team You Want Beside You.",
       author: "Anas Shahid",
       position: "Managing Director @Bricklix",
-      image: "/People/a.jpeg",
+      image: "/People/a.avif",
     },
   },
   {

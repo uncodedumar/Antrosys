@@ -11,8 +11,9 @@ interface VideoPlayerProps {
 const VideoPlayer: React.FC<VideoPlayerProps> = ({ 
   videoSource, 
   posterFrame, 
-  title = "Showcase Video", 
-  description = "A visual showcase of our digital portfolio." 
+  title = "Antrosys Portfolio Showcase", 
+  
+  description = "A cinematic walkthrough of our industry-leading AI art, custom software, and digital transformation projects." 
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoWrapperRef = useRef<HTMLDivElement>(null);
@@ -28,29 +29,49 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     if (containerRef.current) observer.observe(containerRef.current);
 
     let requestRef: number;
+    let cachedHeight = 0;
+    let cachedViewportHeight = window.innerHeight;
+    
+    // Cache dimensions on mount/resize to avoid layout thrashing
+    const updateCachedDimensions = () => {
+      if (containerRef.current) {
+        cachedHeight = containerRef.current.offsetHeight;
+        cachedViewportHeight = window.innerHeight;
+      }
+    };
     
     const handleScroll = () => {
       if (!containerRef.current || !videoWrapperRef.current || !isInView) return;
 
+      // Batch DOM reads - only read getBoundingClientRect
       const rect = containerRef.current.getBoundingClientRect();
-      const scrollHeight = containerRef.current.offsetHeight;
-      const viewportHeight = window.innerHeight;
 
-      // Calculate progress (0 to 1) based on section scroll
-      const progress = Math.min(Math.max(-rect.top / (scrollHeight - viewportHeight), 0), 1);
+      // Use cached values to avoid forced reflow
+      const progress = Math.min(Math.max(-rect.top / (cachedHeight - cachedViewportHeight), 0), 1);
 
       // Smooth interpolation
       const scale = 0.4 + (progress * 0.6); 
       const radius = 24 - (progress * 24);
 
-      // Direct DOM manipulation for maximum performance
-      videoWrapperRef.current.style.transform = `scale(${scale})`;
-      videoWrapperRef.current.style.borderRadius = `${radius}px`;
+      // Batch DOM writes - use requestAnimationFrame ensures optimal timing
+      requestAnimationFrame(() => {
+        if (videoWrapperRef.current) {
+          videoWrapperRef.current.style.transform = `scale(${scale})`;
+          videoWrapperRef.current.style.borderRadius = `${radius}px`;
+        }
+      });
     };
 
     const onScroll = () => {
       requestRef = requestAnimationFrame(handleScroll);
     };
+    
+    // Cache dimensions on mount and resize
+    updateCachedDimensions();
+    const resizeObserver = new ResizeObserver(updateCachedDimensions);
+    if (containerRef.current) {
+      resizeObserver.observe(containerRef.current);
+    }
 
     if (isInView) {
       window.addEventListener('scroll', onScroll, { passive: true });
@@ -60,6 +81,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
     return () => {
       observer.disconnect();
+      resizeObserver.disconnect();
       window.removeEventListener('scroll', onScroll);
       cancelAnimationFrame(requestRef);
     };
@@ -96,7 +118,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
             muted
             loop
             playsInline
-            preload="none"
+            preload="auto"
             className="w-full h-full object-cover"
             aria-label={title}
             width={1920}

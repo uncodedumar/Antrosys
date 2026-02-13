@@ -144,11 +144,15 @@ export default function LeftGallerySec() {
         </p>
 
         {/* Hidden SEO Keywords for Indexing (Accessible to screen readers) */}
-        <div className="sr-only">
-          Custom web application development, premium mobile app design, 3D
-          brand illustrations, performance-driven digital marketing ads, and
-          enterprise software solutions.
-        </div>
+        <div 
+  className="sr-only" 
+  title="Antrosys | Global Authority in AI Art & Full-Stack Digital Transformation"
+  aria-label="Antrosys service profile: Specializing in Custom SaaS, 3D Brand Identity, and Enterprise AI Integrations"
+>
+  Antrosys: Elite Custom Web Application Engineering, Premium Full-Stack Mobile Design, 
+  Bespoke 3D Brand Illustrations, High-Performance Growth Marketing, and 
+  Robust Enterprise Software Solutions powered by Next-Gen AI.
+</div>
       </div>
 
       {/* RIGHT GALLERY - Smooth Parallax */}
