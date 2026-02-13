@@ -147,7 +147,7 @@ const ContactHero: React.FC = () => {
       <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start relative z-10">
         
         {/* Left Content Side */}
-        <div className="flex flex-col space-y-6">
+        <div className="flex flex-col space-y-8">
           <motion.h1 
             initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
@@ -157,7 +157,7 @@ const ContactHero: React.FC = () => {
             Every great <br /> build starts <br /> with hello.
           </motion.h1>
           
-          <div className="max-w-lg">
+          <div className="max-w-lg space-y-6">
             <motion.p 
               initial={{ y: 20, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
@@ -169,6 +169,28 @@ const ContactHero: React.FC = () => {
               Whether you&apos;re scaling a startup or optimizing enterprise workflows, 
               stop guessing and start moving with confidence.
             </motion.p>
+
+            {/* Calendly Action Section */}
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="flex flex-col space-y-4 pt-4 border-t border-accent/20"
+            >
+              <p className="text-secondary font-medium">Prefer a direct conversation?</p>
+              <a 
+                href="https://calendly.com/antrosys/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-8 py-4 bg-white text-primary font-bold rounded-xl transition-all hover:bg-secondary hover:scale-[1.02] active:scale-[0.98] w-fit shadow-lg"
+              >
+                Book a Meeting
+                <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </a>
+            </motion.div>
           </div>
         </div>
 
