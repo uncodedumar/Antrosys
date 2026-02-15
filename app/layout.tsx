@@ -7,6 +7,7 @@ import TopNavBar from './components/TopNavBar';
 import Footer from './components/Footer';
 import CursorFollower from './components/CursorFollower'
 import { Analytics } from "@vercel/analytics/next"
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 
 const poppins = Poppins({
@@ -18,6 +19,8 @@ const poppins = Poppins({
   fallback: ["system-ui", "arial"],
   adjustFontFallback: true,
 });
+
+
 
 // ✅ This works because layout.tsx is a Server Component
 export const metadata: Metadata = {
@@ -233,6 +236,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <Analytics />
+        <GoogleAnalytics gaId="G-8Z2YZEJZVP" />
       </body>
     </html>
   );
