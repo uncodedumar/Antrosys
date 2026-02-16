@@ -42,7 +42,7 @@ const cardData: ProfileData[] = [
   {
     name: 'Kate',
     title: 'UI/UX Designer',
-    mainImage: '/AboutImages/team/kate.webp',
+    mainImage: '/AboutImages/Team/kate.webp',
     avatarImage: '/Avatar/team/katea.webp',
     specialty: 'User Experience Design and Interactive UI'
   },
@@ -84,7 +84,7 @@ const cardData: ProfileData[] = [
   {
     name: 'Cooper',
     title: 'QA Engineer',
-    mainImage: '/AboutImages/Team/cooper.webp',
+    mainImage: '/AboutImages/Team/Cooper.webp',
     avatarImage: '/Avatar/team/coopera.webp',
     specialty: 'Software Quality Assurance and Testing'
   },
