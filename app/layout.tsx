@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 import CursorFollower from './components/CursorFollower'
 import { Analytics } from "@vercel/analytics/next"
 import { GoogleAnalytics } from '@next/third-parties/google'
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 
 const poppins = Poppins({
@@ -237,6 +238,7 @@ export default function RootLayout({
         <Footer />
         <Analytics />
         <GoogleAnalytics gaId="G-8Z2YZEJZVP" />
+        <SpeedInsights />
       </body>
     </html>
   );
