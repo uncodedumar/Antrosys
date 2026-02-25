@@ -240,13 +240,13 @@ export default function Navbar() {
                          </p>
                          
                          <div className="space-y-4">
-                            <a href="mailto:sayhi@antrosys.com" className="flex items-center gap-4 group p-4 rounded-2xl bg-white/5 hover:bg-orange-500 transition-all">
+                            <a href="mailto:connect@antrosys.com" className="flex items-center gap-4 group p-4 rounded-2xl bg-white/5 hover:bg-orange-500 transition-all">
                                <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-white/20">
                                   <Mail size={18} />
                                </div>
                                <div>
                                   <p className="text-[10px] uppercase text-gray-500 group-hover:text-white/80">Email Us</p>
-                                  <p className="text-sm font-semibold">sayhi@antrosys.com</p>
+                                  <p className="text-sm font-semibold">connect@antrosys.com</p>
                                </div>
                             </a>
                             <a href="https://calendly.com/antrosys" target="_blank" className="flex items-center gap-4 group p-4 rounded-2xl bg-white/5 hover:bg-white hover:text-black transition-all">
@@ -346,7 +346,7 @@ export default function Navbar() {
                     <AnimatePresence>
                         {link.dropdownType === 'bpo' && mobileBpoOpen && (
                             <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="mt-6 space-y-4 overflow-hidden px-2">
-                                <a href="mailto:sayhi@antrosys.com" className="block text-xl text-white/70">sayhi@antrosys.com</a>
+                                <a href="mailto:connect@antrosys.com" className="block text-xl text-white/70">connect@antrosys.com</a>
                                 <a href="https://calendly.com/antrosys" target="_blank" className="block text-xl text-orange-500 font-bold">Book a Meeting</a>
                                 <Link href="/contact" className="block text-lg text-white/50" onClick={closeMobileMenu}>Go to Contact Page</Link>
                             </motion.div>

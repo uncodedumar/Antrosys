@@ -122,10 +122,10 @@ const Footer = () => {
                 CONTACT
               </h3>
               <a
-                href="mailto:sayhi@antrosys.com"
+                href="mailto:connect@antrosys.com"
                 className="text-gray-300 hover:text-orange-400 transition-colors text-sm font-semibold break-all"
               >
-                sayhi@antrosys.com
+                connect@antrosys.com
               </a>
               <p className="mt-4 text-gray-500 text-xs leading-relaxed italic">
               From design and development to ads, marketing, and AI—we turn ideas into intelligent digital products.

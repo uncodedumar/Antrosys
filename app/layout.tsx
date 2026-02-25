@@ -192,7 +192,7 @@ export default function RootLayout({
     ],
     "contactPoint": {
       "@type": "ContactPoint",
-      "email": "sayhi@antrosys.com",
+      "email": "connect@antrosys.com",
       "contactType": "Customer Service"
     },
     "address": {
