@@ -67,6 +67,14 @@ const cardData: ProfileData[] = [
     avatarImage: '/Avatar/team/davida.webp',
     specialty: 'Search Engine Optimization and Ads Specialist'
   },
+  
+  {
+    name: 'Zoey',
+    title: 'UX Researcher',
+    mainImage: '/AboutImages/Team/Zoya.avif',
+    avatarImage: '/Avatar/team/Zee.avif',
+    specialty: 'UX designing '
+  },
   {
     name: 'Chris',
     title: 'Content Strategist',
