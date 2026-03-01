@@ -186,7 +186,7 @@ const ProfileRow2: React.FC = () => {
     { count: 2, align: 'md:justify-end' },
     { count: 1, align: 'md:justify-start' },
     { count: 2, align: 'md:justify-end' },
-    { count: 1, align: 'md:justify-end' },
+    { count: 2, align: 'md:justify-end' },
   ];
 
   const allRows: React.ReactElement[] = [];
