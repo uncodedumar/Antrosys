@@ -4,6 +4,8 @@ import "./globals.css";
 import LoadingBar from "./components/Loading";
 import Navigation from "./components/Navigation";
 import TopNavBar from './components/TopNavBar';
+import Chatbot from './components/Chatbot';
+
 import Footer from './components/Footer';
 import CursorFollower from './components/CursorFollower'
 import { Analytics } from "@vercel/analytics/next"
@@ -234,6 +236,7 @@ export default function RootLayout({
         <Navigation />
         
         <CursorFollower/>
+        <Chatbot/>
         {children}
         <Footer />
         <Analytics />
