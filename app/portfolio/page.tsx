@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     url: "https://antrosys.com/portfolio",
     images: [
       {
-        url: "/Logo.svg", // Use an image showing a grid of your best work
+        url: "/AboutImages/call.avif", // Use an image showing a grid of your best work
         width: 1200,
         height: 630,
         alt: "Antrosys Portfolio - Showcasing 1,200+ Successful Projects",

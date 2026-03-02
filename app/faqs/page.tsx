@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/Logo.svg",
+        url: "/AboutImages/call.avif",
         width: 1200,
         height: 630,
         alt: "Antrosys Frequently Asked Questions",

@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     url: 'https://antrosys.com/services',
     images: [
       {
-        url: '/Logo.svg', // Recommended: Use a high-quality graphic of your tech stack
+        url: '/AboutImages/call.avif', // Recommended: Use a high-quality graphic of your tech stack
         width: 1200,
         height: 630,
         alt: 'Antrosys Service Suite - AI and Digital Transformation',

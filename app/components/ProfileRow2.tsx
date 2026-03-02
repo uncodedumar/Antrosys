@@ -67,6 +67,14 @@ const cardData: ProfileData[] = [
     avatarImage: '/Avatar/team/davida.webp',
     specialty: 'Search Engine Optimization and Ads Specialist'
   },
+  
+  {
+    name: 'Zoey',
+    title: 'UX Researcher',
+    mainImage: '/AboutImages/Team/Zoya.avif',
+    avatarImage: '/Avatar/team/Zee.avif',
+    specialty: 'UX designing '
+  },
   {
     name: 'Chris',
     title: 'Content Strategist',
@@ -178,7 +186,7 @@ const ProfileRow2: React.FC = () => {
     { count: 2, align: 'md:justify-end' },
     { count: 1, align: 'md:justify-start' },
     { count: 2, align: 'md:justify-end' },
-    { count: 1, align: 'md:justify-end' },
+    { count: 2, align: 'md:justify-end' },
   ];
 
   const allRows: React.ReactElement[] = [];

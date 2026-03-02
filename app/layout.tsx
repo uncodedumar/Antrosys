@@ -138,7 +138,7 @@ export const metadata: Metadata = {
     description: "Transform your digital presence with Antrosys, a global leader in full-stack web and mobile development. Our engineering team excels in building high-performance applications for iOS, Android, and Desktop, utilizing robust AWS cloud infrastructure. Whether you require a headless WordPress architecture, a high-conversion Shopify e-commerce store, or a custom enterprise software suite, Antrosys blends elite UI/UX design with scalable code to drive global profitability.",
     images: [
       {
-        url: "/Logo.svg",
+        url: "/AboutImages/call.avif",
         width: 1200,
         height: 630,
         alt: "Antrosys | System That Survives",
@@ -149,7 +149,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "ANtrosys | Premier destination for Generative AI and custom machine learning solutions.",
     description: "Antrosys is the premier destination for Generative AI and custom machine learning solutions. We specialize in engineering intelligent chatbots and custom AI art models that redefine how brands interact with their audiences. By integrating Deep Learning (DL) and sophisticated ML pipelines into your existing ecosystem, we transform raw data into a competitive powerhouse. From AI-driven SaaS platforms to predictive analytics, Antrosys delivers the technical edge needed to lead the AI revolution.",
-    images: ["/Logo.svg"],
+    images: ["/AboutImages/call.avif"],
     creator: "@antrosys",
   },
   robots: {

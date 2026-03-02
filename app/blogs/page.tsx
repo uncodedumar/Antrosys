@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/Logo.svg", // A branded image representing knowledge/innovation
+        url: "/AboutImages/call.avif", // A branded image representing knowledge/innovation
         width: 1200,
         height: 630,
         alt: "Antrosys Blog - AI and Technology Insights",

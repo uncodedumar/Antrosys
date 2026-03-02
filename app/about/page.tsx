@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     url: "https://antrosys.com/about",
     images: [
       {
-        url: "/logo.svg", // Recommended: A photo of the leadership or team office
+        url: "/AboutImages/call.avif", // Recommended: A photo of the leadership or team office
         width: 1200,
         height: 630,
         alt: "About Antrosys - Led by Muhammad Umar Riaz",

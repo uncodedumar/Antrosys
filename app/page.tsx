@@ -124,7 +124,7 @@ export const metadata: Metadata = {
     siteName: "Antrosys",
     images: [
       {
-        url: "/Logo.svg", // Ensure this image exists in your public folder
+        url: "/AboutImages/call.avif", // Ensure this image exists in your public folder
         width: 1200,
         height: 630,
         alt: "Antrosys - Empowering Brands to Dominate the Digital Landscape",
