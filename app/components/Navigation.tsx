@@ -295,7 +295,7 @@ export default function Navbar() {
               className="fixed inset-0 bg-[#050505] z-[9999] p-8 flex flex-col h-screen w-screen overflow-y-auto"
             >
               <div className="flex justify-between items-center mb-16">
-                <Image src="/logo.svg" alt="Agency Logo" width={48} height={48} className="w-12 h-12" priority />
+                <Image src="/Logow.svg" alt="Agency Logo" width={48} height={48} className="w-12 h-12" priority />
                 <button onClick={closeMobileMenu} aria-label="Close menu" className="p-4 bg-white/5 rounded-full text-white active:rotate-90 transition-transform">
                   <X size={32} aria-hidden="true" />
                 </button>
