@@ -344,7 +344,7 @@ const getImagesFromFolder = (folderName: string, imageFiles: string[]): string[]
 export const caseStudies: CaseStudy[] = [
   {
     slug: "Antrosys",
-    title: "Antrosys : Wellness Studio Platform",
+    title: "Antrosys : Creative AI Agency",
     description:
       "This project was architected with a singular focus: Systemic Excellence. We bypassed the conventional to build a high-performance ecosystem where design intelligence meets raw engineering power. From the initial logic mapping to the final pixel optimization, we’ve developed a solution that doesn’t just run—it dominates. This isn't just a website; it’s a scalable, future-proof framework engineered for those who demand clarity, speed, and undeniable impact.",
     paragraph:

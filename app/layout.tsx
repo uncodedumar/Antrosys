@@ -35,6 +35,11 @@ export const metadata: Metadata = {
   description: "Antrosys is an industry-leading agency specializing in cutting-edge AI art, custom AI models, and intelligent chatbots. As a premier partner for digital transformation, we provide full-stack development (iOS, Android, Desktop), headless WordPress, and Shopify e-commerce solutions powered by AWS cloud infrastructure. With a portfolio of 1,200+ successful projects, our expertise spans ML/DL solutions, UI/UX interface design, and performance marketing. From startups to enterprises, Antrosys empowers brands to dominate the digital landscape through sophisticated marketing automation and elite BPO outsourcing.",
   keywords: [
     // Core Identity & Leadership
+
+    "cretaive ai agency",
+    "ai agency",
+    "design agency",
+    
     "Antrosys",
     "Software",
     "solutions",
