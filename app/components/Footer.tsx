@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import { motion, HTMLMotionProps } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import Link from "next/link"; // Assuming Next.js for better routing performance
+import Link from "next/link"; 
 import Image from "next/image";
 
 const Footer = () => {
@@ -21,23 +21,14 @@ const Footer = () => {
     "GO DEEPER": [
       { name: "About", href: "/About" },
       { name: "Get in Touch", href: "/contact" },
+      { name: "Book a Meeting", href: "https://calendly.com/antrosys" },
     ],
     SOCIALS: [
       { name: "Linkedin", href: "https://www.linkedin.com/company/antrosys" },
       { name: "Instagram", href: "https://www.instagram.com/antrosys/" },
       { name: "Behance", href: "https://behance.net" },
-      { name: "Github", href: "https://github.com/uncodedumar" },
       { name: "X", href: "https://x.com/antrosys" },
     ],
-  };
-
-  // Motion variants for smoother performance (GPU accelerated)
-  const letterVariants = {
-    hover: {
-      y: -20,
-      color: "#f97316",
-      transition: { type: "spring", stiffness: 300, damping: 15 },
-    },
   };
 
   return (
@@ -46,7 +37,7 @@ const Footer = () => {
       role="contentinfo"
     >
       <div className="max-w-5xl mx-auto px-6">
-        {/* Call to Action Card - SEO optimized with H2 and descriptive aria */}
+        {/* Call to Action Card */}
         <section
           aria-label="Contact CTA"
           className="bg-[#f5f1e3] rounded-md p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 mb-24 transition-transform duration-500 hover:scale-[1.01]"
@@ -85,7 +76,7 @@ const Footer = () => {
           </div>
         </section>
 
-        {/* Headline - Long tail keyword injection for SEO */}
+        {/* Headline */}
         <h2 className="text-3xl md:text-5xl font-bold mb-16 tracking-tight max-w-3xl">
           LET&apos;S TURN YOUR{" "}
           <span className="italic text-secondary"> DIGITAL VISION</span> INTO A
@@ -127,73 +118,27 @@ const Footer = () => {
               >
                 connect@antrosys.com
               </a>
+              <p className="mt-2 text-gray-300 text-sm font-medium">
+                +1 350 353 5005
+              </p>
               <p className="mt-4 text-gray-500 text-xs leading-relaxed italic">
-              From design and development to ads, marketing, and AI—we turn ideas into intelligent digital products.
+                1500 N Grant ST# 7997 Denver,CO 80203 
               </p>
             </div>
 
-            {/* Added Countries Section */}
+            {/* Countries Section */}
             <div>
               <h3 className=" text-xs font-bold tracking-widest mb-4 border-b border-gray-800 pb-2 uppercase">
                 Our Presence
               </h3>
               <div className="flex flex-wrap gap-4 items-center ">
-                <Image
-                  src="https://flagcdn.com/us.svg"
-                  alt="USA"
-                  width={24}
-                  height={18}
-                  className="w-6 h-auto"
-                  loading="lazy"
-                />
-                <Image
-                  src="https://flagcdn.com/eu.svg"
-                  alt="Europe"
-                  width={24}
-                  height={18}
-                  className="w-6 h-auto"
-                  loading="lazy"
-                />
-                <Image
-                  src="https://flagcdn.com/ae.svg"
-                  alt="UAE"
-                  width={24}
-                  height={18}
-                  className="w-6 h-auto"
-                  loading="lazy"
-                />
-                <Image
-                  src="https://flagcdn.com/ca.svg"
-                  alt="Canada"
-                  width={24}
-                  height={18}
-                  className="w-6 h-auto"
-                  loading="lazy"
-                />
-                <Image
-                  src="https://flagcdn.com/au.svg"
-                  alt="Australia"
-                  width={24}
-                  height={18}
-                  className="w-6 h-auto"
-                  loading="lazy"
-                />
-                <Image
-                  src="https://flagcdn.com/tr.svg"
-                  alt="Turkey"
-                  width={24}
-                  height={18}
-                  className="w-6 h-auto"
-                  loading="lazy"
-                />
-                <Image
-                  src="https://flagcdn.com/pk.svg"
-                  alt="Pakistan"
-                  width={24}
-                  height={18}
-                  className="w-6 h-auto"
-                  loading="lazy"
-                />
+                <Image src="https://flagcdn.com/us.svg" alt="USA" width={24} height={18} className="w-6 h-auto" loading="lazy" />
+                <Image src="https://flagcdn.com/eu.svg" alt="Europe" width={24} height={18} className="w-6 h-auto" loading="lazy" />
+                <Image src="https://flagcdn.com/ae.svg" alt="UAE" width={24} height={18} className="w-6 h-auto" loading="lazy" />
+                <Image src="https://flagcdn.com/ca.svg" alt="Canada" width={24} height={18} className="w-6 h-auto" loading="lazy" />
+                <Image src="https://flagcdn.com/au.svg" alt="Australia" width={24} height={18} className="w-6 h-auto" loading="lazy" />
+                <Image src="https://flagcdn.com/tr.svg" alt="Turkey" width={24} height={18} className="w-6 h-auto" loading="lazy" />
+                <Image src="https://flagcdn.com/pk.svg" alt="Pakistan" width={24} height={18} className="w-6 h-auto" loading="lazy" />
               </div>
             </div>
           </div>
@@ -202,9 +147,9 @@ const Footer = () => {
         {/* Copyright & SEO Metadata */}
         <div className="border-t border-dotted border-gray-700 pt-8 mb-12 flex flex-col md:flex-row justify-between items-start gap-4">
           <p className="text-gray-500 text-xs leading-relaxed">
-            © {currentYear}{" "}
+            © 2026{" "}
             <span className="font-bold text-gray-200">
-              AntroSys Digital Agency
+              AntroSys LLC
             </span>
             . <br className="hidden md:block" />
             Crafting premium digital experiences. All Rights Reserved.
@@ -215,7 +160,7 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Massive Interactive Branding - Optimized for Layout Stability */}
+      {/* Massive Interactive Branding */}
       <div className="relative w-full select-none overflow-hidden pb-4">
         <div
           className="flex justify-center items-end leading-[0.8] tracking-tighter"
@@ -234,23 +179,16 @@ const Footer = () => {
                 index >= 7 ? "text-[#f97316]" : "text-[#ebebeb]"
               }`}
             >
-           
               {letter}
             </motion.span>
           ))}
         </div>
 
-        {/* Screen Reader Only Brand Name */}
-        <span 
-  className="sr-only" 
-  title="Antrosys | Industry-Leading Global AI & Full-Stack Development Agency"
-  aria-label="Antrosys: Elite digital transformation firm specializing in Custom SaaS, AI Art, and High-Performance Marketing"
->
-  Antrosys: A Global Leader in Digital Transformation, Full-Stack Engineering, 
-  Bespoke AI Art, and Performance-Driven Marketing Solutions for Enterprise Growth.
-</span>
+        <span className="sr-only">
+          Antrosys: A Global Leader in Digital Transformation, Full-Stack Engineering, 
+          Bespoke AI Art, and Performance-Driven Marketing Solutions for Enterprise Growth.
+        </span>
 
-        {/* Subtle decorative element */}
         <div className="absolute left-0 bottom-0 w-1/3 h-full pointer-events-none opacity-20 mix-blend-lighten bg-gradient-to-t from-orange-500/20 to-transparent" />
       </div>
     </footer>

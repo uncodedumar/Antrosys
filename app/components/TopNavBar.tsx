@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import { FaGithub, FaLinkedin, FaInstagram, FaTwitter } from 'react-icons/fa';
+import { FaLinkedin, FaInstagram, FaTwitter } from 'react-icons/fa';
 
 /**
  * TopNavBar Component
@@ -9,37 +9,21 @@ import { FaGithub, FaLinkedin, FaInstagram, FaTwitter } from 'react-icons/fa';
 const TopNavBar: React.FC = () => {
   return (
     <nav 
-      className=" top-0 z-50 flex items-center justify-between w-full bg-primary text-accent h-6 md:h-6 px-4 sm:px-10 lg:px-20 transition-all duration-300 ease-in-out"
+      className="top-0 z-50 flex items-center justify-between w-full bg-primary text-accent h-6 md:h-6 px-4 sm:px-10 lg:px-20 transition-all duration-300 ease-in-out"
       aria-label="High-performance Digital Agency Navigation"
     >
-      {/* 1. Multilingual Dropdown (Left) */}
+      {/* 1. Contact CTA (Left) - Replacing Multilingual with same styling */}
       <div className="flex items-center">
-        <label htmlFor="language-select" className="sr-only">Select Language</label>
-        <select 
-          id="language-select"
+        <Link 
+          href="/contact"
           className="bg-transparent text-[10px] md:text-xs uppercase tracking-widest font-medium cursor-pointer focus:outline-none hover:text-secondary transition-colors"
-          defaultValue="en"
         >
-          
-          <option value="en" className="bg-primary text-white">EN</option>
-          <option value="es" className="bg-primary text-white">ES</option>
-          <option value="fr" className="bg-primary text-white">FR</option>
-        </select>
+          Grow your Business with Us
+        </Link>
       </div>
 
-    
-
-      {/* 3. Social Links (Right) - High Speed Interactions */}
+      {/* 2. Social Links (Right) - High Speed Interactions (GitHub Removed) */}
       <div className="flex items-center space-x-5 text-sm md:text-base">
-        <Link 
-          href="https://github.com/uncodedumar" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          aria-label="Visit our Github for Custom Software Development"
-          className="hover:scale-110 hover:text-secondary transition-all duration-200"
-        >
-          <FaGithub />
-        </Link>
         <Link 
           href="https://www.linkedin.com/company/antrosys" 
           target="_blank" 
