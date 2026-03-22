@@ -9,15 +9,27 @@ const ServicesHero: React.FC = () => {
       className="mx-2 relative overflow-hidden rounded-[40px] min-h-[90vh] flex flex-col items-center justify-center py-20 px-6 bg-black"
       aria-labelledby="hero-heading"
     >
+      {/* --- Background Image Layer --- */}
+      <div 
+        className="absolute inset-0 z-0 " // Adjust opacity to control how much the image shows through
+        style={{
+          backgroundImage: "url('/man.avif')", // Replace with your image path
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+        aria-hidden="true"
+      />
+
       {/* --- SEO Hidden Context (Long-tail Keywords) --- */}
       <h2 
-  className="sr-only" 
-  title="Antrosys | Industry-Leading Global AI & Full-Stack Development Agency"
-  aria-label="Antrosys Digital Transformation: High-performance Custom SaaS, Elite UI/UX, and AI-Driven Growth Marketing Solutions"
->
-  Antrosys: Elite Global Agency Specializing in Enterprise-Grade Web App UI/UX, 
-  Full-Stack Engineering, Custom AI Software Solutions, and Data-Backed Performance Marketing.
-</h2>
+        className="sr-only" 
+        title="Antrosys | Industry-Leading Global AI & Full-Stack Development Agency"
+        aria-label="Antrosys Digital Transformation: High-performance Custom SaaS, Elite UI/UX, and AI-Driven Growth Marketing Solutions"
+      >
+        Antrosys: Elite Global Agency Specializing in Enterprise-Grade Web App UI/UX, 
+        Full-Stack Engineering, Custom AI Software Solutions, and Data-Backed Performance Marketing.
+      </h2>
 
       {/* --- Dynamic Background Blurs (Optimized for GPU) --- */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
@@ -29,12 +41,12 @@ const ServicesHero: React.FC = () => {
         <motion.div 
           animate={{ scale: [1, 1.1, 1] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute left-1/2 -translate-x-1/2 bottom-[-10%] w-[800px] h-[500px] rounded-full bg-[#F5C396] filter blur-[100px] opacity-15" 
+          className="absolute left-1/2 -translate-x-1/2 bottom-[-10%] w-[800px] h-[300px] rounded-full bg-[#F5C396] filter blur-[100px] opacity-15" 
         />
         <motion.div 
           animate={{ x: [20, -20, 20], y: [0, -40, 0] }}
           transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -right-20 top-[45%] w-[450px] h-[700px] rounded-full bg-[#F9A891] filter blur-[100px] opacity-20" 
+          className="absolute -right-20 top-[45%] w-[450px] h-[300px] rounded-full bg-[#F9A891] filter blur-[100px] opacity-20" 
         />
       </div>
 

@@ -7,14 +7,19 @@ import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { ServicePageData } from "@/lib/data";
 import Image from "next/image";
 
-// ... [getCategory and getSpecific functions remain unchanged] ...
+// ... existing imports ...
+
 const getCategory = (slug: string): string => {
   if (["Automated-Chat-Systems", "AI-Solutions"].includes(slug)) return "AI & Machine Learning";
   if (["App-Dev", "Next-Gen-Desktop-Applications"].includes(slug)) return "Mobile & Desktop Apps";
-  if (["Logo-n-Brand-Identity", "Web-n-Application-Design", "Art-n-Illustration", "Print-Design", "Packaging-n-Label-Design", "Social-Media-Graphics"].includes(slug)) return "UI/UX & Creative Design";
-  if (["Marketing-n-Advertising", "Growth-Analytics-n-Marketing-Automation"].includes(slug)) return "Digital Marketing & Ads";
-  if (slug === "QA-QC") return "Software QA Testing";
-  if (slug === "custom-software-development") return "Custom Software Solutions";
+  if (["Logo-n-Brand-Identity", "Web-n-Application-Design", "Art-n-Illustration", "Print-Design", "Packaging-n-Label-Design", ].includes(slug)) return "UI/UX & Creative Design";
+  if (["Marketing-n-Advertising","Social-Media-Graphics", "Growth-Analytics-n-Marketing-Automation"].includes(slug)) return "Digital Marketing & Ads (SMM)";
+  
+  // Updated: AWS Cloud and QA-QC now both map to Custom Software Solutions
+  if (["custom-software-development", "Cloud-Solutions", "QA-QC"].includes(slug)) {
+    return "Custom Software Solutions";
+  }
+
   return "Web Development & Performance";
 };
 
@@ -25,23 +30,23 @@ const getSpecific = (slug: string): string => {
     "App-Dev": "iOS & Android App Dev",
     "Next-Gen-Desktop-Applications": "Cross-Platform Desktop Apps",
     "Logo-n-Brand-Identity": "Brand Identity Design",
-    "Web-n-Application-Design": "UI/UX Interface Design",
+    "Web-n-Application-Design": "UI/UX Interface Design (Web/App)",
     "Art-n-Illustration": "Digital Art & Illustration",
     "Print-Design": "Print & Vector Graphics",
     "Packaging-n-Label-Design": "Product Packaging Design",
-    "Social-Media-Graphics": "Social Media Ad Design",
+    "Social-Media-Graphics": "Social Media Ad Design (SMM)",
     "Marketing-n-Advertising": "Performance Marketing & Ads",
     "Growth-Analytics-n-Marketing-Automation": "Marketing Automation",
-    "QA-QC": "Quality Assurance & QC",
+    "QA-QC": "Quality Assurance & QC", // This remains the display name but will appear under Custom Software
     "custom-software-development": "SaaS Software Development",
     "Front-End-Development": "React & Next.js Front-End",
     "Back-End-Web-Development": "Node & Cloud Back-End",
     "Full-Stack Web Development": "Full-Stack Web Solutions",
-    "Website-Maintenance": "Web Support & Maintenance",
+    "Website-Maintenance": "Web Support & Maintenance (SEO)",
     "No-Code-Easy-to-Manage-Websites": "No-Code Web Solutions",
     "WordPress-Engineered-Websites": "Headless WordPress Dev",
-    "Shopify-Websites": "Shopify E-commerce Stores",
-    "Cloud-Solutions": "Cloud Infrastructure & AWS",
+    "Shopify-Websites": "Shopify & E-commerce Stores",
+    "Cloud-Solutions": "Cloud Infrastructure & AWS", // This remains the display name but will appear under Custom Software
   };
   return mapping[slug] || slug.split("-").join(" ");
 };

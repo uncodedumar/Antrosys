@@ -13,24 +13,34 @@ const TeamHero: React.FC = () => {
       role="banner"
     >
       {/* --- SEO Hidden Context (Enhanced for Global Search Authority) --- */}
-<h2 
-  className="sr-only" 
-  title="Antrosys | Industry-Leading Digital Transformation & AI Engineering Firm"
-  aria-label="Antrosys: Global leader in Custom SaaS Development, AI Art, Full-Stack Web/Mobile Apps, and Performance-Driven Digital Marketing"
->
-  Antrosys: Elite Digital Agency specializing in Full-Stack Web App UI/UX, 
-  Custom AI Software Development, Bespoke Digital Illustrations, 
-  and High-Performance Growth Marketing Solutions.
-</h2>
+      <h2 
+        className="sr-only" 
+        title="Antrosys | Industry-Leading Digital Transformation & AI Engineering Firm"
+        aria-label="Antrosys: Global leader in Custom SaaS Development, AI Art, Full-Stack Web/Mobile Apps, and Performance-Driven Digital Marketing"
+      >
+        Antrosys: Elite Digital Agency specializing in Full-Stack Web App UI/UX, 
+        Custom AI Software Development, Bespoke Digital Illustrations, 
+        and High-Performance Growth Marketing Solutions.
+      </h2>
 
-      {/* --- Background Elements: Optimized for performance --- */}
+      {/* --- Background Elements & Image --- */}
       <div className="absolute inset-0 pointer-events-none select-none">
+        {/* Background Image with Overlay */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="/woman2.avif" 
+            alt="Digital Transformation Background" 
+            className="w-full h-full object-cover opacity-90"
+          />
+          <div className="absolute inset-0 bg-black/60" /> {/* Darkens image for text readability */}
+        </div>
+
         <div 
           className="absolute -left-20 top-[30%] w-[300px] md:w-[600px] h-[600px] rounded-full bg-[#A5A2D9] filter blur-[120px] opacity-20 animate-pulse" 
           aria-hidden="true"
         />
         <div 
-          className="absolute left-1/2 -translate-x-1/2 bottom-[-10%] w-[500px] md:w-[800px] h-[500px] rounded-full bg-[#F5C396] filter blur-[120px] opacity-15" 
+          className="absolute left-1/2 -translate-x-1/2 bottom-[-10%] w-[500px] md:w-[800px] h-[300px] rounded-full bg-[#F5C396] filter blur-[120px] opacity-15" 
           aria-hidden="true"
         />
         <div 
@@ -95,8 +105,6 @@ const TeamHero: React.FC = () => {
           </Link>
         </div>
       </div>
-
-     
     </main>
   );
 };

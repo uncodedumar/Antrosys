@@ -117,7 +117,7 @@ const ServiceCard = ({ card, index }: { card: FinalSectionCard; index: number })
           initial: { x: "100%", y: "100%", opacity: 0 },
           hover: { x: "40%", y: "40%", opacity: 0.8 }
         }}
-        className="absolute bottom-0 right-0 w-32 h-32 bg-orange-500 rounded-full blur-3xl pointer-events-none"
+        className="absolute bottom-0 right-0 w-100 h-100 bg-[#EF571B] rounded-full blur-3xl pointer-events-none"
       />
       
       <div className="relative z-10 flex justify-between items-start mb-8">

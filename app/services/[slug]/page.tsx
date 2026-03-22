@@ -4,7 +4,6 @@ import { ServicePageData, homePageData } from "@/lib/data";
 import ServiceSlugHero from "@/app/components/ServiceSlugHero";
 import ServiceSuite from "@/app/components/ServiceSuite";
 import TechStack from "@/app/components/TechStack";
-import IndustrySection from "@/app/components/IndustrySection";
 import FinalSection from "@/app/components/finalSection";
 import Agenda1 from "@/app/components/Agenda1";
 import FaqSection from "@/app/components/FaqSection";
@@ -58,7 +57,6 @@ export default async function ServicePage({ params }: ServicePageProps) {
       <ServiceSlugHero slug={slug} />
       <ServiceSuite data={service.serviceSuite} />
       <TechStack data={service.techStack} />
-      <IndustrySection data={homeData.industries} />
       <FinalSection data={homeData.finalSection} />
       <Agenda1 />
       <FaqSection />

@@ -102,7 +102,10 @@ const ContactHero: React.FC = () => {
   };
 
   return (
-    <section className="mx-2 relative overflow-hidden rounded-[40px] min-h-[90vh] flex flex-col items-center justify-center py-20 px-6 bg-primary">
+    <section 
+      className="mx-2 relative overflow-hidden rounded-[40px] min-h-[90vh] flex flex-col items-center justify-center py-20 px-6 bg-primary bg-cover bg-center bg-no-repeat before:absolute before:inset-0 before:bg-primary/40 before:z-0"
+      style={{ backgroundImage: "url('/woman.avif')" }} // Replace with your image path
+    >
     {/* --- SEO: High-Authority Long-Tail Keywords for Global Indexing --- */}
 <div className="sr-only" role="complementary" aria-label="Antrosys Technical Expertise">
   <h2 
@@ -123,7 +126,7 @@ const ContactHero: React.FC = () => {
 </div>
 
       {/* --- Performance: GPU-Accelerated Background Blobs --- */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-1" aria-hidden="true">
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.3 }}

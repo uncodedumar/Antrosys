@@ -94,7 +94,7 @@ const Loader = () => {
 
       <div className="relative z-10 flex flex-col items-center gap-4 text-center">
         <span className="text-white font-mono text-7xl md:text-9xl font-black tabular-nums mix-blend-difference tracking-tighter">
-          {Math.round(progress)}
+          {Math.round(progress)}%
         </span>
 
         <div className="h-10 overflow-hidden flex items-center justify-center">
@@ -104,8 +104,7 @@ const Loader = () => {
         </div>
 
         <p className="text-white/50 text-[9px] tracking-[0.4em] uppercase mt-6 mix-blend-difference font-medium">
-          Architecting Digital Excellence
-        </p>
+Great Things Take Time        </p>
       </div>
 
       <div 

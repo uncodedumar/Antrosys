@@ -1,241 +1,126 @@
-
 "use client";
+import React from "react";
+import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 
-import React, { useRef } from "react";
-import Image from "next/image"; // Crucial for Core Web Vitals
-import {
-  motion,
-  useScroll,
-  useSpring,
-  useTransform,
-  useMotionValue,
-  useVelocity,
-  useAnimationFrame,
-} from "framer-motion";
-import { wrap } from "@motionone/utils";
+const cards = [
+  {
+    image: "/face.jpg",
+    isTall: true,
+  },
+  {
+    title: "Explore the world's leading designers",
+    isGradient: true,
+    hasButton: true,
+  },
+  {
+    image: "/face2.avif",
+    isTall: true,
+  },
+];
 
-interface ParallaxProps {
-  children: React.ReactNode;
-  baseVelocity: number;
-}
-
-function ParallaxRow({ children, baseVelocity = 100 }: ParallaxProps) {
-  const baseX = useMotionValue(0);
-  const { scrollY } = useScroll();
-  const scrollVelocity = useVelocity(scrollY);
-  const smoothVelocity = useSpring(scrollVelocity, {
-    damping: 50,
-    stiffness: 400,
-  });
-  const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], {
-    clamp: false,
-  });
-
-  const x = useTransform(baseX, (v) => `${wrap(-20, -45, v)}%`);
-  const directionFactor = useRef<number>(1);
-
-  useAnimationFrame((t, delta) => {
-    let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
-    if (velocityFactor.get() < 0) {
-      directionFactor.current = -1;
-    } else if (velocityFactor.get() > 0) {
-      directionFactor.current = 1;
-    }
-    moveBy += directionFactor.current * moveBy * velocityFactor.get();
-    baseX.set(baseX.get() + moveBy);
-  });
+export default function StatisticsSection() {
+  const bookingUrl = "https://cal.com/antrosys";
 
   return (
-    <div className="flex whitespace-nowrap flex-nowrap overflow-hidden py-2">
-      <motion.div
-        className="flex whitespace-nowrap flex-nowrap gap-4 will-change-transform"
-        style={{ x }}
-      >
-        {children}
-        {children}
-        {children}
-        {children}
-      </motion.div>
-    </div>
-  );
-}
-
-export default function LeftGallerySec() {
-  // Added descriptive ALT texts for SEO Ranking in Image Search
-  const galleryItems = [
-    { src: "/left/art5.avif", alt: "Custom UI UX Design for SaaS Platforms" },
-    { src: "/left/art6.avif", alt: "Full-stack Web Development Portfolio" },
-    {
-      src: "/left/art3.avif",
-      alt: "Djjjjjjjjjjjjustrations",
-    },
-
-    {
-      src: "/left/art8.avif",
-      alt: "Digital Marketing Ads and Brand Illustrations",
-    },
-    {
-      src: "/left/art9.avif",
-      alt: "Digital Marketing Ads and Brand Illustrations",
-    },
-    {
-      src: "/left/art11.avif",
-      alt: "Digital Marketing Ads and Brand Illustrations",
-    },
-    {
-      src: "/left/art1.avif",
-      alt: "Digital Marketing Ads and Brand Illustrations",
-    },
-
-    {
-      src: "/left/art4.avif",
-      alt: "Digital Marketing Ads and Brand Illustrations",
-    },
-
-    { src: "/left/art7.avif", alt: "AI-Powered Software Solutions and Art" },
-    {
-      src: "/left/art12.avif",
-      alt: "Digital Marketing Ads and Brand Illustrations",
-    },
-    {
-      src: "/left/art13.avif",
-      alt: "Digital Marketing Ads and Brand Illustrations",
-    },
-    {
-      src: "/left/art2.avif",
-      alt: "Digital Marketing Ads and Brand Illustrations",
-    },
-
-    {
-      src: "/left/art14.avif",
-      alt: "Digital Marketing Ads and Brand Illustrations",
-    },
-    {
-      src: "/left/art15.avif",
-      alt: "Digital Marketing Ads and Brand Illustrations",
-    },
-    {
-      src: "/left/art16.avif",
-      alt: "Digital Marketing Ads and Brand Illustrations",
-    },
-  ];
-
-  return (
-    <section
-      aria-label="Digital Portfolio Gallery"
-      className="relative min-h-screen w-full bg-black text-secondary overflow-hidden flex flex-col md:flex-row items-center px-6 md:px-12 selection:bg-accent selection:text-black"
-    >
-      {/* LEFT CONTENT - Optimized for Long-Tail SEO */}
-      <div className="z-10 w-full md:w-2/5 mb-12 md:mb-0">
-        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tighter leading-[1.1] mb-6">
-          High-Performance{" "}
-          <span className="text-accent">Digital Experiences</span> that Convert.
-        </h1>
-        <p className="text-zinc-400 font-light text-lg md:text-xl max-w-md mb-8 leading-relaxed">
-          Visuvate is a full-service{" "}
-          <strong className="text-white font-medium">
-            creative digital agency
-          </strong>{" "}
-          specializing in{" "}
-          <span className="text-white">custom software development</span>,
-          immersive <span className="text-white">UI/UX design</span>, and
-          data-driven <span className="text-white">AI art illustrations</span>.
-          We don't just build; we engineer growth.
-        </p>
-
-        {/* Hidden SEO Keywords for Indexing (Accessible to screen readers) */}
-        <div 
-  className="sr-only" 
-  title="Antrosys | Global Authority in AI Art & Full-Stack Digital Transformation"
-  aria-label="Antrosys service profile: Specializing in Custom SaaS, 3D Brand Identity, and Enterprise AI Integrations"
->
-  Antrosys: Elite Custom Web Application Engineering, Premium Full-Stack Mobile Design, 
-  Bespoke 3D Brand Illustrations, High-Performance Growth Marketing, and 
-  Robust Enterprise Software Solutions powered by Next-Gen AI.
-</div>
+    <section className="bg-[#000000] text-[#FAF3E1] py-16 min-h-screen flex flex-col items-center justify-center overflow-hidden font-sans">
+      
+      {/* --- HEADER SECTION --- */}
+      {/* Added 'hidden md:block' to hide on mobile and show on desktop */}
+      <div className="hidden md:block max-w-7xl w-full text-center mb-12 md:mb-16 space-y-4">
+        <h2 className="text-[clamp(2.5rem,8vw,5.5rem)] font-bold tracking-tighter leading-[1.1] uppercase flex flex-wrap justify-center items-center gap-x-3 md:gap-x-4 text-[#EF571B]">
+          <span className="whitespace-nowrap">We turn ideas</span>
+          <div className="inline-flex items-center gap-2">
+            <span>Into Visual</span>
+            <div className="inline-block w-14 h-7 md:w-28 md:h-12 bg-[#EF571B] rounded-full overflow-hidden relative border-2 border-[#EF571B] shrink-0">
+               <img src="/Bike.avif" className="object-cover w-full h-full brightness-90" alt="pill graphic" />
+            </div>
+            <span>Statements</span>
+          </div>
+        </h2>
+        
+        <h2 className="text-[clamp(1.8rem,6vw,4.5rem)] font-light tracking-tighter uppercase text-[#FAF3E1]/70 leading-tight">
+          From Vision to Delivery —
+        </h2>
+        
+        <h2 className="text-[clamp(2.5rem,8vw,5.5rem)] font-bold tracking-tighter uppercase text-[#EF571B] leading-tight">
+          Impact That Lasts
+        </h2>
       </div>
 
-      {/* RIGHT GALLERY - Smooth Parallax */}
-      <div className="relative w-full md:w-3/5 h-[600px] md:h-[800px] flex flex-col justify-center gap-2 overflow-hidden mask-fade-edges">
-        {/* Row 1 - UX/UI focus */}
-        <ParallaxRow baseVelocity={0.8}>
-          {galleryItems.map((item, i) => (
-            <div
-              key={`row1-${i}`}
-              className="relative w-[250px] md:w-[400px] h-[180px] md:h-[240px] bg-zinc-900 rounded-2xl overflow-hidden group"
-            >
-              <Image
-                src={item.src}
-                alt={item.alt}
-                fill
-                sizes="(max-width: 768px) 250px, 400px"
-                loading="lazy"
-                className="object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100"
-              />
-            </div>
-          ))}
-        </ParallaxRow>
+      {/* --- GRID SECTION --- */}
+      {/* Adjusted width to 98% on mobile (w-[98%]) and added auto margins (mx-auto) */}
+      <div className="w-[98%] mx-auto md:w-full max-w-7xl grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+        
+        {/* Left Image Card */}
+        <div className="relative group min-h-[400px] md:h-[550px] overflow-hidden rounded-[30px] md:rounded-[40px] border border-[#FAF3E1]/10">
+          <img 
+            src={cards[0].image} 
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+            alt="Designer" 
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+          
+          <div className="absolute bottom-6 left-6 md:bottom-8 md:left-8 flex items-start gap-4">
+            <div className="text-2xl md:text-3xl text-[#EF571B] font-bold leading-none">★</div>
+            <p className="text-[10px] md:text-[11px] leading-tight text-[#FAF3E1] max-w-[140px] uppercase tracking-wider">
+              We design visual worlds that resonate. From brand core to final detail.
+            </p>
+          </div>
+        </div>
 
-        {/* Row 2 - Software/AI focus */}
-        <ParallaxRow baseVelocity={-0.8}>
-          {galleryItems.map((item, i) => (
-            <div
-              key={`row2-${i}`}
-              className="relative w-[250px] md:w-[400px] h-[180px] md:h-[240px] bg-zinc-900 rounded-2xl overflow-hidden group"
-            >
-              <Image
-                src={item.src}
-                alt={item.alt}
-                fill
-                sizes="(max-width: 768px) 250px, 400px"
-                loading="lazy"
-                className="object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100"
-              />
+        {/* Middle Gradient Card */}
+        <div className="relative min-h-[400px] md:h-auto bg-gradient-to-br from-[#EF571B] via-[#8B2E0B] to-[#000000] rounded-[30px] md:rounded-[40px] p-8 md:p-10 flex flex-col justify-between overflow-hidden">
+            <div className="w-10 h-10 rounded-full bg-[#FAF3E1]/20 backdrop-blur-md flex items-center justify-center text-[#FAF3E1] font-bold">
+                A
             </div>
-          ))}
-        </ParallaxRow>
-
-        {/* Row 3 - Marketing/Ads focus */}
-        <ParallaxRow baseVelocity={1}>
-          {galleryItems.map((item, i) => (
-            <div
-              key={`row3-${i}`}
-              className="relative w-[250px] md:w-[400px] h-[180px] md:h-[240px] bg-zinc-900 rounded-2xl overflow-hidden group"
-            >
-              <Image
-                src={item.src}
-                alt={item.alt}
-                fill
-                sizes="(max-width: 768px) 250px, 400px"
-                loading="lazy"
-                className="object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100"
-              />
+            
+            <div className="space-y-6 z-10">
+                <h3 className="text-3xl md:text-4xl font-medium text-[#FAF3E1] leading-tight tracking-tight max-w-[260px]">
+                    Explore the world's <span className="inline-block w-10 h-5 md:w-12 md:h-6 border border-[#FAF3E1] rounded-full translate-y-1"></span> leading designers <span className="inline-block w-10 h-5 md:w-12 md:h-6 border border-[#FAF3E1] rounded-full translate-y-1"></span>
+                </h3>
+                
+                <motion.a 
+                    href={bookingUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="w-12 h-12 bg-[#FAF3E1] rounded-full flex items-center justify-center text-[#000000] shadow-xl"
+                >
+                    <ArrowUpRight size={24} />
+                </motion.a>
             </div>
-          ))}
-        </ParallaxRow>
 
-        {/* Overlays for depth */}
-        <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-black via-transparent to-black opacity-80" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-white/5 blur-[80px] rounded-full pointer-events-none" />
+        </div>
+
+        {/* Right Image Card & Button */}
+        <div className="flex flex-col gap-6">
+            <div className="relative group h-[350px] md:h-[430px] overflow-hidden rounded-[30px] md:rounded-[40px] border border-[#FAF3E1]/10">
+                <img 
+                    src={cards[2].image} 
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                    alt="Work" 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
+            </div>
+
+            {/* Bottom "Book a Meeting" Pill */}
+            <motion.a 
+                href={bookingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ backgroundColor: "#EF571B", color: "#000000", borderColor: "#EF571B" }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full py-5 md:py-6 px-8 md:px-10 border border-[#FAF3E1] rounded-full text-lg md:text-xl font-medium uppercase flex justify-between items-center transition-colors duration-300 text-[#FAF3E1] cursor-pointer"
+            >
+                <span>Book a meeting</span>
+                <ArrowUpRight size={24} className="shrink-0" />
+            </motion.a>
+        </div>
+
       </div>
-
-      <style jsx>{`
-        .mask-fade-edges {
-          mask-image: linear-gradient(
-            to right,
-            transparent,
-            black 15%,
-            black 85%,
-            transparent
-          );
-          -webkit-mask-image: linear-gradient(
-            to right,
-            transparent,
-            black 15%,
-            black 85%,
-            transparent
-          );
-        }
-      `}</style>
     </section>
   );
 }

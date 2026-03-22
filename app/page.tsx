@@ -3,15 +3,7 @@ import dynamic from "next/dynamic";
 import HeroSection from "./components/HeroSection";
 import { homePageData } from "@/lib/data";
 
-// Critical above-the-fold components - loaded immediately
-const VideoPlayer = dynamic(() => import("./components/VideoPlayer"), {
-  ssr: true,
-});
 
-// Below-the-fold components - lazy loaded with code splitting
-const TypographySection = dynamic(() => import("./components/TypographySection"), {
-  ssr: true,
-});
 
 const ServiceCards = dynamic(() => import("./components/ServiceCards"), {
   ssr: true,
@@ -54,10 +46,7 @@ const TextLoop = dynamic(() => import("./components/textloop"), {
   ssr: true,
 });
 
-const HorizontalGallery = dynamic(() => import("./components/HorizontalGallery"), {
-  loading: () => <div className="min-h-[80vh] bg-black" aria-label="Loading gallery" />,
-  ssr: true,
-});
+
 
 const AdaptTextSection = dynamic(() => import("./components/AdaptTextSection"), {
   ssr: true,
@@ -71,9 +60,7 @@ const HoverImage = dynamic(() => import("./components/HoverImage"), {
   ssr: true,
 });
 
-const IndustrySection = dynamic(() => import("./components/IndustrySection"), {
-  ssr: true,
-});
+
 
 const FinalSection = dynamic(() => import("./components/finalSection"), {
   ssr: true,
@@ -140,8 +127,6 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      <VideoPlayer videoSource="/Hero.mp4" />
-      <TypographySection />
      
       <ServiceCards />
       
@@ -169,12 +154,10 @@ export default function Home() {
           "Future-Proof Architecture Scalability Built-In Transparent Processes Exceptional Performance Security First Results-Driven Partnership Innovation Delivered Custom Solutions",
         ]}
       />
-      <HorizontalGallery />
       <AdaptTextSection />
       <ThreeCardSection />
 
       <HoverImage />
-      <IndustrySection data={homeData.industries} />
       <FinalSection data={homeData.finalSection} />
       < MobileTestimonialSlider/>
       <TestimonialSection />

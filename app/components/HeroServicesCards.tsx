@@ -1,236 +1,135 @@
 "use client";
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Plus, Minus, ArrowUpRight } from 'lucide-react';
+import Link from 'next/link';
 
-import React, { useRef } from "react";
-import Image from "next/image";
-import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
-import { 
-  SiReact, SiNextdotjs, SiAngular, SiVuedotjs, SiDjango, SiPhp, SiLaravel, 
-  SiShopify, SiWordpress, SiOdoo, SiWebflow, SiWix, SiGithub, SiJavascript,
-  SiTailwindcss, SiTypescript, SiFigma, SiFramer, SiNodedotjs,
-  SiOpenai, SiDialogflow, SiRasa, SiAdobexd, SiMiro, SiSketch, SiAdobephotoshop, SiAdobeillustrator, SiAdobeindesign, SiNotion, SiCoreldraw, SiAffinitydesigner,SiMeta, SiInstagram, SiFacebook, SiLinkedin,  SiYoutube, SiTiktok, SiPinterest, SiReddit, SiDiscord, SiTelegram, SiWhatsapp,SiCplusplus,SiDotnet,SiQt, SiAmazonwebservices,SiDocker,SiKubernetes,SiSwift,SiKotlin
-} from "react-icons/si";
-import { FaQuoteLeft, FaRobot, FaEye, FaBrain, FaComments, FaDatabase } from "react-icons/fa6";
+const services = [
+  { 
+    id: "01", 
+    title: "AI & Machine Learning", 
+    subServices: [
+      { name: "Enterprise AI Solutions", href: "/services/AI-Solutions" },
+      { name: "Automated-Chat-Systems", href: "/services/AI Chatbot Development" },
+    ] 
+  },
+  { 
+    id: "02", 
+    title: "Custom Software Solutions", 
+    subServices: [
+      { name: "SaaS Software Development", href: "/services/custom-software-development" },
+      { name: "Quality Assurance & QC", href: "/services/QA-QC" },
+      { name: "Cloud Infrastructure & AWS", href: "/services/Cloud-Solutions" }
+    ] 
+  },
+  { 
+    id: "03", 
+    title: "Digital Marketing & Ads (SMM)", 
+    subServices: [
+      { name: "Performance Marketing & Ads", href: "/services/Marketing-n-Advertising" },
+      { name: "Social Media Marketing (SMM)", href: "/services/Social-Media-Graphics" },
+      { name: "Marketing Automation", href: "/services/Growth-Analytics-n-Marketing-Automation" }
+    ] 
+  },
+  { 
+    id: "04", 
+    title: "Mobile & Desktop Apps", 
+    subServices: [
+      { name: "iOS/Android Development", href: "/services/App-Dev" },
+      { name: "Next Gen Desktop Application", href: "/services/Next-Gen-Desktop-Applications" },
+    ] 
+  },
+  { 
+    id: "05", 
+    title: "UI/UX & Creative Design", 
+    subServices: [
+      { name: "Product Packaging Design", href: "/services/Packaging-n-Label-Design" },
+      { name: "Brand Identity", href: "/services/Logo-n-Brand-Identity" },
+      { name: "UI/UX Interface Design (Web/App)", href: "/services/Web-n-Application-Design" },
+      { name: "Digital Art & Illustration", href: "/services/Art-n-Illustration"},
+      { name: "Print & Vector Graphics", href: "/services/Print-Design" }
 
-// --- Types & Data ---
+    ] 
+  },
+  { 
+    id: "06", 
+    title: "Web Development & SEO", 
+    subServices: [
+      { name: "React & Next.js Front-End", href: "/services/Front-End-Development" },
+      { name: "Node & Cloud Back-End", href: "/services/Back-End-Web-Development" },
+      { name: "Full-Stack Web Solutions", href: "/services/Full-Stack Web Development" },
+      { name: "Web Support & Maintenance (SEO)", href: "/services/Website-Maintenance" },
+      { name: "No-Code Web Solutions", href: "/services/No-Code-Easy-to-Manage-Websites" },
+      { name: "Headless WordPress Dev", href: "/services/WordPress-Engineered-Websites" },
+      { name: "Shopify & E-commerce Stores", href: "/services/Shopify-Websites" },
 
-interface CardData {
-  id: number;
-  slug: string; // Added slug
-  title: string;
-  description: string;
-  testimonial: string;
-  author: string;
-  authorpic: string; // Fixed key
-  role: string;
-  bgColor: string;
-  images: string[];
-  techIcons: any[]; // Specific icons per card
-}
-
-const CARDS: CardData[] = [
-  {
-    id: 1,
-    slug: "AI-Solutions",
-    title: "AI-Powered Business Intelligence Solutions",
-    description: "Our AI solutions help businesses optimize operations, personalize experiences, and scale intelligently using data-driven intelligence.",
-    testimonial: "Working with them completely changed how we make decisions. Our productivity skyrocketed, and the AI solutions feel like they anticipate our needs!",
-    authorpic: "/People/r.avif",
-    author: "Emily Harris",
-    role: "Manager @Imperia Tech",
-    bgColor: "#222222",
-    techIcons: [SiOpenai, FaRobot,FaBrain, FaEye,FaComments,FaDatabase,SiDialogflow,SiRasa,
-    ],
-    images: [
-      "/heroservcards/ai.avif",
-      "/heroservcards/ai2.avif",
-      "/heroservcards/ai3.avif"
-    ]
+    ] 
   },
-  {
-    id: 1,
-    slug: "Logo-n-Brand-Identity",
-    title: "Brand Identities That Stick and Sell",
-    description: "We build high-performance digital experiences where aesthetics meet ROI. We don't just design for the eyes; we design for the click",
-    testimonial: "The transformation was more than aesthetic; it was structural. We saw a 100% increase in user interaction thanks to their high-performance design.",
-    authorpic: "/People/j.avif",
-    author: "Jayden Dave",
-    role: "CTO @dota inc",
-    bgColor: "#3D2FA9",
-    techIcons: [SiFigma,SiAdobephotoshop,SiAdobeillustrator,SiAdobeindesign,SiAdobeindesign,SiNotion ,SiCoreldraw ,SiAffinitydesigner],
-    images: [
-      "/heroservcards/brand3.avif",
-      "/heroservcards/brand.avif",
-      "/heroservcards/brand2.avif"
-    ]
-  },
-  {
-    id: 1,
-    slug: "Marketing-n-Advertising",
-    title: "Brand Growth And Marketing Mastery",
-    description: "We design strategies that amplify your brand's reach and ROI. From AI-driven marketing to growth hacking campaigns, we deliver measurable results.",
-    testimonial: "Their marketing strategies delivered more than we imagined. Leads, conversions, and awareness—all skyrocketed. Real growth partners!.",
-    authorpic: "/People/o.avif",
-    author: "kate .W",
-    role: "CEO @kryptek inc",
-    bgColor: "#FF7722",
-    techIcons: [SiNotion, SiMeta, SiInstagram, SiFacebook, SiLinkedin, SiYoutube, SiTiktok, SiPinterest, SiReddit, SiDiscord, SiTelegram, SiWhatsapp, SiOdoo ],
-    images: [
-      "/heroservcards/marketwoman.avif",
-      "/heroservcards/market.avif",
-      "/heroservcards/market2.avif"
-    ]
-  },
-  {
-    id: 1,
-    slug: "Web-n-Application-Design",
-    title: "Immersive Design And User Experiences",
-    description: "We create design systems, UI/UX flows, animations, and visual storytelling that captivate audiences. Every touchpoint is designed to feel intuitive.",
-    testimonial: "Their design approach is magical. Every interaction feels seamless and premium. Customers notice, and we stand out in the market.",
-    authorpic: "/People/a.avif",
-    author: "Sofia Coleman",
-    role: "CTO @wizards llc",
-    bgColor: "#FF3C34",
-    techIcons: [SiFigma,SiAdobexd, SiMiro, SiSketch, SiFramer, SiTailwindcss, SiTypescript,SiShopify, SiWordpress, SiWix, SiWebflow],
-    images: [
-      "/heroservcards/art3.avif",
-      "/heroservcards/art4.avif",
-      "/heroservcards/art.avif"
-    ]
-  },
-  {
-    id: 1,
-    slug: "custom-software-development",
-    title: "Scalable software Development Excellence",
-    description: "We turn ideas into fully functional, scalable products. From mobile apps to web platforms, our development is fast, secure, and future-proof.",
-    testimonial: "They delivered our product ahead of schedule, with flawless execution. The quality is unmatched, and our users love it.",
-    authorpic: "/People/e.avif",
-    author: "Adrian James",
-    role: "Tech Entrepreneur",
-      bgColor: "#785F47",
-      techIcons: [SiPython, SiNodedotjs, SiPhp, SiLaravel, SiNodedotjs,SiCplusplus,SiDotnet,SiQt, SiAmazonwebservices,SiDocker,SiKubernetes,SiSwift,SiKotlin ],
-    images: [
-      "/heroservcards/st.avif",
-      "/heroservcards/st2.avif",
-      "/heroservcards/st3.avif"
-    ]
-  }
 ];
 
-// Helper to make dummy imports work if you didn't have all icons imported
-function SiPython(props: any) { return <SiDjango {...props} /> }
-
-export default function StackedCards() {
-  const container = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: container,
-    offset: ["start start", "end end"],
-  });
+export default function ExpertiseSection() {
+  const [openIndex, setOpenIndex] = useState<string | null>("01");
 
   return (
-    <main ref={container} className="relative bg-black py-30 px-4 md:px-10">
-      {CARDS.map((card, i) => {
-        const targetScale = 1 - (CARDS.length - i) * 0.05;
-        return (
-          <Card 
-            key={card.id} 
-            i={i} 
-            {...card} 
-            progress={scrollYProgress} 
-            range={[i * 0.25, 1]} 
-            targetScale={targetScale} 
-          />
-        );
-      })}
-    </main>
-  );
-}
+    <section className="bg-black text-white py-20 px-6 font-sans">
+      <div className="max-w-7xl mx-auto">
+        <h2 className="text-4xl md:text-6xl font-bold uppercase mb-16 text-right">
+          Our Services
+        </h2>
 
-interface CardProps extends CardData {
-  i: number;
-  progress: MotionValue<number>;
-  range: [number, number];
-  targetScale: number;
-}
-
-const Card = ({ i, title, description, testimonial, author, authorpic, role, bgColor, images, techIcons, progress, range, targetScale }: CardProps) => {
-  const scale = useTransform(progress, range, [1, targetScale]);
-
-  return (
-    <div className="h-screen flex items-center justify-center sticky top-0 ">
-      <motion.div
-        style={{ scale, backgroundColor: bgColor, top: `calc(-5vh + ${i * 25}px)` }}
-        className="relative w-full max-w-[1100px] h-[650px] md:h-[600px] rounded-[1rem] p-8 md:p-16 text-white overflow-hidden shadow-2xl"
-      >
-        <div className="flex flex-col md:flex-row h-full">
-          
-          {/* Left Content */}
-          <div className="w-full md:w-3/5 flex flex-col justify-between z-10 h-full pb-8 md:pb-0">
-            <div>
-              <h2 className="text-4xl md:text-5xl font-extrabold uppercase leading-[1.1] mb-4 md:mb-6 tracking-tight">
-                {title}
-              </h2>
-              <p className="text-sm md:text-base font-light opacity-90 max-w-lg leading-relaxed lowercase">
-                {description}
-              </p>
-            </div>
-
-            {/* Testimonial Section with fixed spacing */}
-            <div className="mt-auto pt-6">
-              <FaQuoteLeft className="text-3xl mb-3 opacity-100" />
-              <p className="text-base md:text-lg font-light italic max-w-md mb-6 leading-snug ">
-                {testimonial}
-              </p>
-              
-              <div className="flex items-center gap-4">
-                {/* Author Image */}
-                <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-neutral-800 overflow-hidden relative border border-white/10">
-                  <Image 
-                    src={authorpic} 
-                    alt={author} 
-                    fill 
-                    className="object-cover"
-                  />
+        <div className="border-t border-gray-800">
+          {services.map((service) => (
+            <div key={service.id} className="border-b border-gray-800">
+              <div 
+                className="flex items-center justify-between py-10 cursor-pointer group"
+                onClick={() => setOpenIndex(openIndex === service.id ? null : service.id)}
+              >
+                <div className="flex items-center gap-12">
+                  <span className="text-7xl md:text-9xl font-black leading-none opacity-100 transition-opacity">
+                    {service.id}
+                  </span>
+                  <h3 className="text-xl md:text-3xl font-bold uppercase tracking-tight">
+                    {service.title}
+                  </h3>
                 </div>
-                
-                <div className="flex flex-col">
-                  <div className="flex items-center gap-2">
-                    {/* The decorative circle before name */}
-                    
-                    <span className="font-medium text-base md:text-lg uppercase tracking-wider">{author}</span>
-                  </div>
-                  <span className="text-xs md:text-sm opacity-70 font-light ">{role}</span>
+
+                <div className={`p-2 rounded-full border transition-all duration-300 ${openIndex === service.id ? 'bg-white text-black scale-110' : 'border-gray-600 text-orange-500'}`}>
+                  {openIndex === service.id ? <Minus size={24} /> : <Plus size={24} />}
                 </div>
               </div>
-            </div>
-          </div>
 
-          {/* Right Content */}
-          <div className="hidden md:flex w-full md:w-2/5 relative flex-col justify-between pt-4">
-            {/* Unique Icon Grid per card */}
-            <div className="grid grid-cols-4 gap-y-10 gap-x-8 justify-items-end opacity-90 pr-4">
-              {techIcons.map((Icon, idx) => (
-                <Icon key={idx} className="text-3xl" />
-              ))}
+              <AnimatePresence>
+                {openIndex === service.id && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.4, ease: "circOut" }}
+                    className="overflow-hidden"
+                  >
+                    <div className="pb-12 pl-4 md:pl-[240px]">
+                      <ul className="space-y-6">
+                        {service.subServices.map((sub, idx) => (
+                          <li key={idx}>
+                            <Link 
+                              href={sub.href}
+                              className="group/link inline-flex items-center gap-4 text-gray-400 hover:text-orange-500 transition-colors text-lg md:text-xl font-medium"
+                            >
+                              <span className="w-2 h-2 rounded-full bg-orange-500 scale-0 group-hover/link:scale-100 transition-transform duration-300" />
+                              {sub.name}
+                              <ArrowUpRight size={18} className="opacity-0 -translate-y-1 translate-x-1 group-hover/link:opacity-100 group-hover/link:translate-y-0 group-hover/link:translate-x-0 transition-all" />
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
-
-            {/* Floating Image Row */}
-            <div className="absolute -bottom-16 -left-15 flex pointer-events-none py-5">
-              {images.map((img, idx) => (
-                <div 
-                  key={idx} 
-                  className={`w-44 h-44 md:w-56 md:h-56 rounded-xl overflow-hidden border-4 border-white/10 shadow-2xl transition-transform
-                    ${idx === 0 ? "rotate-2" : idx === 1 ? "-rotate-2" : "rotate-6 translate-x-4"}`}
-                >
-                  <img src={img} alt="Work example" className="w-full h-full object-cover" />
-                </div>
-              ))}
-            </div>
-          </div>
-          
+          ))}
         </div>
-      </motion.div>
-      
-    </div>
-    
+      </div>
+    </section>
   );
-};
+}

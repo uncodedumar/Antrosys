@@ -8,7 +8,6 @@ import Image from "next/image";
 
 const Footer = () => {
   const brandName = "ANTROSYS";
-  const currentYear = new Date().getFullYear();
 
   const navLinks = {
     "QUICK LINKS": [
@@ -33,10 +32,10 @@ const Footer = () => {
 
   return (
     <footer
-      className="text-accent pt-20 overflow-hidden font-sans"
+      className="relative text-accent pt-20 overflow-hidden font-sans"
       role="contentinfo"
     >
-      <div className="max-w-5xl mx-auto px-6">
+      <div className="max-w-5xl mx-auto px-6 relative z-10">
         {/* Call to Action Card */}
         <section
           aria-label="Contact CTA"
@@ -159,6 +158,8 @@ const Footer = () => {
           </div>
         </div>
       </div>
+      <div className="absolute -bottom-24 left-1/4 w-[500px] h-[500px] bg-orange-600/30 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute -bottom-24 right-1/4 w-full h-[500px] bg-red-600/20 rounded-full blur-[100px] pointer-events-none" />
 
       {/* Massive Interactive Branding */}
       <div className="relative w-full select-none overflow-hidden pb-4">
@@ -189,7 +190,8 @@ const Footer = () => {
           Bespoke AI Art, and Performance-Driven Marketing Solutions for Enterprise Growth.
         </span>
 
-        <div className="absolute left-0 bottom-0 w-1/3 h-full pointer-events-none opacity-20 mix-blend-lighten bg-gradient-to-t from-orange-500/20 to-transparent" />
+        {/* Blur Shades - Bottom Glow */}
+        
       </div>
     </footer>
   );
