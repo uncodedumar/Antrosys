@@ -37,6 +37,7 @@ const StatisticsSection = dynamic(() => import("./components/StatisticsSection")
   ssr: true,
 });
 
+
 const LeftGallerySec = dynamic(() => import("./components/LeftGallerySec"), {
   loading: () => <div className="min-h-screen bg-black" aria-label="Loading gallery" />,
   ssr: true,
@@ -52,9 +53,7 @@ const AdaptTextSection = dynamic(() => import("./components/AdaptTextSection"), 
   ssr: true,
 });
 
-const ThreeCardSection = dynamic(() => import("./components/ThreeCardSection"), {
-  ssr: true,
-});
+
 
 const HoverImage = dynamic(() => import("./components/HoverImage"), {
   ssr: true,
@@ -62,9 +61,7 @@ const HoverImage = dynamic(() => import("./components/HoverImage"), {
 
 
 
-const FinalSection = dynamic(() => import("./components/finalSection"), {
-  ssr: true,
-});
+
 
 const MobileTestimonialSlider = dynamic(() => import("./components/MobileTestimonialSlider"), {
   loading: () => null,
@@ -155,10 +152,8 @@ export default function Home() {
         ]}
       />
       <AdaptTextSection />
-      <ThreeCardSection />
 
       <HoverImage />
-      <FinalSection data={homeData.finalSection} />
       < MobileTestimonialSlider/>
       <TestimonialSection />
       <Map />

@@ -2,24 +2,18 @@
 
 import Link from "next/link";
 import { useState, useEffect, useCallback } from "react";
+import { usePathname } from "next/navigation"; // Added for route change detection
 import { Menu, X, ChevronDown, MoveRight, Phone, Mail, Calendar } from "lucide-react";
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { ServicePageData } from "@/lib/data";
 import Image from "next/image";
-
-// ... existing imports ...
 
 const getCategory = (slug: string): string => {
   if (["Automated-Chat-Systems", "AI-Solutions"].includes(slug)) return "AI & Machine Learning";
   if (["App-Dev", "Next-Gen-Desktop-Applications"].includes(slug)) return "Mobile & Desktop Apps";
   if (["Logo-n-Brand-Identity", "Web-n-Application-Design", "Art-n-Illustration", "Print-Design", "Packaging-n-Label-Design", ].includes(slug)) return "UI/UX & Creative Design";
   if (["Marketing-n-Advertising","Social-Media-Graphics", "Growth-Analytics-n-Marketing-Automation"].includes(slug)) return "Digital Marketing & Ads (SMM)";
-  
-  // Updated: AWS Cloud and QA-QC now both map to Custom Software Solutions
-  if (["custom-software-development", "Cloud-Solutions", "QA-QC"].includes(slug)) {
-    return "Custom Software Solutions";
-  }
-
+  if (["custom-software-development", "Cloud-Solutions", "QA-QC"].includes(slug)) return "Custom Software Solutions";
   return "Web Development & Performance";
 };
 
@@ -37,7 +31,7 @@ const getSpecific = (slug: string): string => {
     "Social-Media-Graphics": "Social Media Ad Design (SMM)",
     "Marketing-n-Advertising": "Performance Marketing & Ads",
     "Growth-Analytics-n-Marketing-Automation": "Marketing Automation",
-    "QA-QC": "Quality Assurance & QC", // This remains the display name but will appear under Custom Software
+    "QA-QC": "Quality Assurance & QC",
     "custom-software-development": "SaaS Software Development",
     "Front-End-Development": "React & Next.js Front-End",
     "Back-End-Web-Development": "Node & Cloud Back-End",
@@ -46,7 +40,7 @@ const getSpecific = (slug: string): string => {
     "No-Code-Easy-to-Manage-Websites": "No-Code Web Solutions",
     "WordPress-Engineered-Websites": "Headless WordPress Dev",
     "Shopify-Websites": "Shopify & E-commerce Stores",
-    "Cloud-Solutions": "Cloud Infrastructure & AWS", // This remains the display name but will appear under Custom Software
+    "Cloud-Solutions": "Cloud Infrastructure & AWS",
   };
   return mapping[slug] || slug.split("-").join(" ");
 };
@@ -69,46 +63,12 @@ const generateServicesData = () => {
 const servicesData = generateServicesData();
 
 const navLinks = [
-  { 
-    name: "Home", 
-    href: "/", 
-    title: "Antrosys | Industry-Leading AI & Development Agency", 
-    ariaLabel: "Navigate to Antrosys home page" 
-  },
-  { 
-    name: "Services", 
-    href: "/services", 
-    hasDropdown: true, 
-    dropdownType: "services", 
-    title: "Comprehensive AI, Web & Mobile Development Services", 
-    ariaLabel: "Explore our digital transformation and engineering services" 
-  },
-  { 
-    name: "BPO", 
-    href: "#", 
-    hasDropdown: true, 
-    dropdownType: "bpo", 
-    title: "Elite BPO & Scalable Outsourcing Solutions", 
-    ariaLabel: "View our business process outsourcing and customer support solutions" 
-  },
-  { 
-    name: "Portfolio", 
-    href: "/portfolio", 
-    title: "Our Portfolio | 1,200+ Successfully Completed Projects", 
-    ariaLabel: "View our gallery of successful digital and AI projects" 
-  },
-  { 
-    name: "Blogs", 
-    href: "/blogs", 
-    title: "Insights on AI, Machine Learning & Digital Growth", 
-    ariaLabel: "Read the latest tech insights and agency news" 
-  },
-  { 
-    name: "About", 
-    href: "/about", 
-    title: "About Antrosys | Led by Muhammad Umar Riaz", 
-    ariaLabel: "Learn more about our agency's mission and leadership" 
-  },
+  { name: "Home", href: "/", title: "Antrosys | Industry-Leading AI & Development Agency", ariaLabel: "Navigate to Antrosys home page" },
+  { name: "Services", href: "/services", hasDropdown: true, dropdownType: "services", title: "Comprehensive AI, Web & Mobile Development Services", ariaLabel: "Explore our digital transformation and engineering services" },
+  { name: "BPO", href: "/bpo", hasDropdown: true, dropdownType: "bpo", title: "Elite BPO & Scalable Outsourcing Solutions", ariaLabel: "View our business process outsourcing and customer support solutions" },
+  { name: "Portfolio", href: "/portfolio", title: "Our Portfolio | 1,200+ Successfully Completed Projects", ariaLabel: "View our gallery of successful digital and AI projects" },
+  { name: "Blogs", href: "/blogs", title: "Insights on AI, Machine Learning & Digital Growth", ariaLabel: "Read the latest tech insights and agency news" },
+  { name: "About", href: "/about", title: "About Antrosys | Led by Muhammad Umar Riaz", ariaLabel: "Learn more about our agency's mission and leadership" },
 ];
 
 const BouncingLink = ({ name, href, isDropdown = false }: { name: string; href: string; isDropdown?: boolean }) => (
@@ -122,7 +82,9 @@ const BouncingLink = ({ name, href, isDropdown = false }: { name: string; href: 
 );
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState(servicesData[0]?.category || "");
@@ -130,30 +92,55 @@ export default function Navbar() {
   const [mobileBpoOpen, setMobileBpoOpen] = useState(false);
   const [mobileActiveCategory, setMobileActiveCategory] = useState<string | null>(null);
 
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   const closeMobileMenu = useCallback(() => {
     setIsMenuOpen(false);
     setMobileServicesOpen(false);
     setMobileBpoOpen(false);
+    document.body.style.overflow = "unset";
   }, []);
 
+  // Close menu when route changes
+  useEffect(() => {
+    closeMobileMenu();
+  }, [pathname, closeMobileMenu]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [isMenuOpen]);
+
   return (
-    <div className={`fixed left-0 right-0 z-[9999] transition-all duration-500 pointer-events-none top-6 px-4 md:px-0`}>
+    <div 
+      className="fixed left-0 right-0 z-[9999] transition-all duration-300 pointer-events-none px-4 md:px-0"
+      style={{ 
+        // On mobile (less than 768px), we offset the top based on scroll so it moves off-screen
+        top: typeof window !== 'undefined' && window.innerWidth < 768 
+             ? Math.max(24 - scrollY, -100) 
+             : "24px" 
+      }}
+    >
       <header
         className={`
           mx-auto transition-all duration-700 cubic-bezier(0.4, 0, 0.2, 1) pointer-events-auto
-            backdrop-blur-2xl 
+          backdrop-blur-2xl 
           ${
             isScrolled
               ? "max-w-[92%] md:max-w-[85%] rounded-[24px] md:rounded-full bg-neutral-950/80 shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
               : "max-w-full rounded-[24px] md:rounded-[30px]"
           }
-            overflow-visible w-full
+          overflow-visible w-full
         `}
       >
         <nav className="flex justify-between items-center h-20 px-6 lg:px-12 max-w-screen-2xl mx-auto relative" aria-label="Main Navigation">
@@ -181,7 +168,6 @@ export default function Navbar() {
                   </div>
 
                   <AnimatePresence>
-                    {/* SERVICES DROPDOWN */}
                     {link.dropdownType === "services" && activeDropdown === "services" && (
                       <motion.div
                         initial={{ opacity: 0, y: 20, scale: 0.95 }}
@@ -197,11 +183,9 @@ export default function Navbar() {
                               <button
                                 key={item.category}
                                 onMouseEnter={() => setActiveCategory(item.category)}
-                                onFocus={() => setActiveCategory(item.category)}
                                 className={`group flex items-center justify-between w-full text-lg font-semibold text-left transition-all ${
                                   activeCategory === item.category ? "text-orange-500 translate-x-2" : "text-white/60 hover:text-white"
                                 }`}
-                                aria-label={`View ${item.category} services`}
                               >
                                 <span>{item.category}</span>
                                 <MoveRight size={16} className={`transition-opacity ${activeCategory === item.category ? "opacity-100" : "opacity-0"}`} />
@@ -229,7 +213,6 @@ export default function Navbar() {
                       </motion.div>
                     )}
 
-                    {/* BPO DROPDOWN */}
                     {link.dropdownType === "bpo" && activeDropdown === "bpo" && (
                       <motion.div
                         initial={{ opacity: 0, y: 20, scale: 0.95 }}
@@ -254,7 +237,7 @@ export default function Navbar() {
                                   <p className="text-sm font-semibold">connect@antrosys.com</p>
                                </div>
                             </a>
-                            <a href="https://calendly.com/antrosys" target="_blank" className="flex items-center gap-4 group p-4 rounded-2xl bg-white/5 hover:bg-white hover:text-black transition-all">
+                            <a href="https://cal.com/antrosys" target="_blank" className="flex items-center gap-4 group p-4 rounded-2xl bg-white/5 hover:bg-white hover:text-black transition-all">
                                <div className="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center">
                                   <Calendar size={18} className="text-white" />
                                </div>
@@ -283,7 +266,7 @@ export default function Navbar() {
           </div>
 
           <div className="md:hidden">
-            <button className="p-3 bg-white/5 rounded-xl text-white active:scale-90 transition-transform" onClick={() => setIsMenuOpen(true)} aria-label="Open menu">
+            <button className="p-3 bg-white/5 rounded-xl text-white active:scale-90 transition-transform pointer-events-auto" onClick={() => setIsMenuOpen(true)} aria-label="Open menu">
               <Menu size={28} aria-hidden="true" />
             </button>
           </div>
@@ -297,7 +280,7 @@ export default function Navbar() {
               animate={{ opacity: 1, clipPath: "circle(150% at 90% 10%)" }}
               exit={{ opacity: 0, clipPath: "circle(0% at 90% 10%)" }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="fixed inset-0 bg-[#050505] z-[9999] p-8 flex flex-col h-screen w-screen overflow-y-auto"
+              className="fixed inset-0 bg-[#050505] z-[10000] p-8 flex flex-col h-screen w-screen overflow-y-auto"
             >
               <div className="flex justify-between items-center mb-16">
                 <Image src="/Logow.svg" alt="Agency Logo" width={48} height={48} className="w-12 h-12" priority />
@@ -309,7 +292,7 @@ export default function Navbar() {
                 {navLinks.map((link, idx) => (
                   <motion.div key={link.name} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: idx * 0.1 }} className="border-b border-white/5 pb-8">
                     <div className="flex justify-between items-center">
-                      <Link href={link.href} className="text-4xl font-bold text-white tracking-tighter" onClick={() => !link.hasDropdown && closeMobileMenu()}>
+                      <Link href={link.href} className="text-4xl font-bold text-white tracking-tighter">
                         {link.name}
                       </Link>
                       {link.hasDropdown && (
@@ -322,7 +305,6 @@ export default function Navbar() {
                       )}
                     </div>
                     
-                    {/* Mobile Services Submenu */}
                     <AnimatePresence>
                       {link.dropdownType === 'services' && mobileServicesOpen && (
                         <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="mt-8 space-y-8 overflow-hidden">
@@ -336,7 +318,7 @@ export default function Navbar() {
                                 {mobileActiveCategory === cat.category && (
                                   <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-1 gap-4 ml-2 border-l-2 border-orange-500/20 pl-6">
                                     {cat.subcategories.map((sub) => (
-                                      <Link key={sub.slug} href={sub.slug} className="text-xl font-medium text-white/80" onClick={closeMobileMenu}>{sub.name}</Link>
+                                      <Link key={sub.slug} href={sub.slug} className="text-xl font-medium text-white/80">{sub.name}</Link>
                                     ))}
                                   </motion.div>
                                 )}
@@ -347,13 +329,12 @@ export default function Navbar() {
                       )}
                     </AnimatePresence>
 
-                    {/* Mobile BPO Submenu */}
                     <AnimatePresence>
                         {link.dropdownType === 'bpo' && mobileBpoOpen && (
                             <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="mt-6 space-y-4 overflow-hidden px-2">
                                 <a href="mailto:connect@antrosys.com" className="block text-xl text-white/70">connect@antrosys.com</a>
-                                <a href="https://calendly.com/antrosys" target="_blank" className="block text-xl text-orange-500 font-bold">Book a Meeting</a>
-                                <Link href="/contact" className="block text-lg text-white/50" onClick={closeMobileMenu}>Go to Contact Page</Link>
+                                <a href="https://cal.com/antrosys" target="_blank" className="block text-xl text-orange-500 font-bold">Book a Meeting</a>
+                                <Link href="/contact" className="block text-lg text-white/50">Go to Contact Page</Link>
                             </motion.div>
                         )}
                     </AnimatePresence>

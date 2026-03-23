@@ -1,11 +1,14 @@
 import type { Metadata } from 'next';
-import ServicesHero from '../components/ServicesHero';
-import AllServicesCards from '../components/AllServicesCards'
-import ServicesCTA from '../components/servicesCTA'
+import BPOHero from '../components/Bpohero';
+
+import IconicBrandPitch from "../components/IconicBrandPitch";
+import BpoReviews from "../components/BpoReviews";
+import BpoRpoSection from "../components/BpoRpoSection";
+import BpoServices from "../components/BpoServices";
 
 
 export const metadata: Metadata = {
-  title: 'Services | AI, Full-Stack Development & BPO - Antrosys',
+  title: 'BPO & RPO | Antrosys',
   description: 
     'Explore Antrosys’ elite services: from custom AI models and SaaS development to mobile apps (iOS/Android) and professional BPO solutions for global scaling.',
   keywords: [
@@ -36,10 +39,14 @@ export const metadata: Metadata = {
 export default function Service() {
   return (
     <>
-    <ServicesHero/>
-
-    <AllServicesCards/>
-    <ServicesCTA/>
+    <BPOHero/>
+    <IconicBrandPitch >
+    Our RPO and BPO services strip away the bloat of legacy outsourcing, replacing script-reading with strategic problem-solving and slow recruitment with precision-engineered talent acquisition. We provide the high-performance infrastructure and the sophisticated human intelligence required to dominate your market, ensuring your operations aren't just running—they're evolving.
+      </IconicBrandPitch>
+      <BpoRpoSection />
+      <BpoServices />
+      <BpoReviews />
+    
 
     
     </>

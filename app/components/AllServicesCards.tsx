@@ -4,7 +4,7 @@ import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence, LayoutGroup } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Calendar, Phone, ArrowUpRight } from 'lucide-react';
 import { ServicePageData } from '@/lib/data';
 
 // --- Types ---
@@ -15,29 +15,7 @@ type ServiceCardData = {
   slug: string;
   title: string;
   description: string;
-  metrics: { label: string; value: string }[];
   images: string[];
-};
-
-// --- SEO Schema Component ---
-// This tells Google exactly what your services are without visual changes
-const ServiceSchema = ({ services }: { services: ServiceCardData[] }) => {
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "itemListElement": services.map((s, i) => ({
-      "@type": "ListItem",
-      "position": i + 1,
-      "item": {
-        "@type": "Service",
-        "name": s.title,
-        "description": s.description,
-        "url": `https://antrosys.com/services/${s.slug}`, // Update with your domain
-        "provider": { "@type": "Digital Agency", "name": "Antrosys" }
-      }
-    }))
-  };
-  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />;
 };
 
 const getCategory = (slug: string): string => {
@@ -86,12 +64,6 @@ const transformServiceData = (services: ServicePageData[]): ServiceCardData[] =>
     slug: service.slug,
     title: service.hero.title,
     description: service.hero.description,
-    metrics: [
-      { label: 'Client Satisfaction', value: '95%' },
-      { label: 'Project Success', value: '100%' },
-      { label: 'On-Time Delivery', value: '98%' },
-      { label: 'Quality Score', value: 'A+' },
-    ],
     images: service.hero.imageUrl ? [service.hero.imageUrl] : ['/a.webp'],
   }));
 };
@@ -110,168 +82,156 @@ const AllServicesCards = () => {
     return ['All', ...Array.from(new Set(base)).sort()];
   }, [filter.cat]);
 
-  useEffect(() => {
-    if (filter.cat !== 'All' && !specifics.includes(filter.spec)) {
-      setFilter(prev => ({ ...prev, spec: 'All' }));
-    }
-  }, [filter.cat, specifics, filter.spec]);
-
   const filteredServices = useMemo(() => {
     return SERVICES_DATA
-      .filter(s => (filter.cat === 'All' || s.category === filter.cat) && (filter.spec === 'All' || s.specific === filter.spec))
-      .sort((a, b) => a.category.localeCompare(b.category));
+      .filter(s => (filter.cat === 'All' || s.category === filter.cat) && (filter.spec === 'All' || s.specific === filter.spec));
   }, [filter]);
 
   return (
-    <section className="min-h-screen py-10 bg-primary text-accent selection:bg-secondary selection:text-secondary">
-      <ServiceSchema services={filteredServices} />
+    <section className="py-24 bg-primary text-accent">
       <div className="max-w-[1400px] mx-auto px-6">
         
-        <nav className="flex flex-wrap gap-4 mb-16 justify-center" aria-label="Service Category Filters">
+        {/* Navigation / Filters */}
+        <nav className="flex flex-wrap gap-4 mb-24 justify-center">
           <Dropdown num="1" options={allCategories} value={filter.cat} onChange={(val) => setFilter(f => ({ ...f, cat: val }))} />
           <Dropdown num="2" options={specifics} value={filter.spec} onChange={(val) => setFilter(f => ({ ...f, spec: val }))} />
         </nav>
 
         <LayoutGroup>
-          <motion.div layout className="space-y-12">
+          <motion.div layout className="flex flex-col gap-32">
             <AnimatePresence mode="popLayout">
-              {filteredServices.map((service) => (
-                <ServiceGroup key={service.id} service={service} />
+              {filteredServices.map((service, index) => (
+                <ServiceRow key={service.id} service={service} index={index} />
               ))}
             </AnimatePresence>
           </motion.div>
         </LayoutGroup>
 
         {filteredServices.length === 0 && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center text-gray-400 py-20">
-            <p>No services found matching your criteria.</p>
-          </motion.div>
+          <div className="text-center text-gray-400 py-20">
+            <p className="text-xl font-light">No services found matching your criteria.</p>
+          </div>
         )}
       </div>
     </section>
   );
 };
 
-const ServiceGroup = ({ service }: { service: ServiceCardData }) => {
+const ServiceRow = ({ service, index }: { service: ServiceCardData; index: number }) => {
+  const isEven = index % 2 === 0;
+
   return (
     <motion.article 
       layout
-      initial={{ opacity: 0, scale: 0.98 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.98 }}
-      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      className="grid grid-cols-1 md:grid-cols-12 gap-4 h-auto md:h-[600px]"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className={`grid grid-cols-1 lg:grid-cols-12 gap-12 items-center`}
     >
-      <div className="md:col-span-4 bg-primary border border-secondary rounded-[30px] md:rounded-[40px] p-8 md:p-10 flex flex-col justify-between ">
-      <Link 
-          href={`/services/${service.slug}`} 
-          
-          aria-label={` ${service.title}`}
-        >
-
-       
-        <div>
-          <h3 className="text-3xl text-accent font-medium mb-4 tracking-tight">{service.title}</h3>
-          <p className="text-gray-500 text-sm leading-relaxed mb-10 max-w-sm">
-            {service.description}
-          </p>
-
-          <div className="grid grid-cols-2 gap-y-8 gap-x-4">
-            {service.metrics.map((m, i) => (
-              <div key={i} className="flex flex-col">
-                <span className="text-2xl font-semibold mb-1 tabular-nums">{m.value}</span>
-                <span className="text-[10px] uppercase tracking-[0.1em] text-gray-500 font-bold">
-                  {m.label}
-                </span>
-              </div>
-            ))}
-          </div>
+      {/* Text Content */}
+      <div className={`lg:col-span-5 flex flex-col justify-center ${isEven ? 'lg:order-1' : 'lg:order-2'}`}>
+        <div className="mb-6">
+            <span className="text-xs font-mono tracking-widest text-secondary uppercase border border-secondary/30 px-3 py-1 rounded-full">
+                {service.category}
+            </span>
         </div>
-   
-        </Link>
-        <Link 
-          href={`/services/${service.slug}`} 
-          className="group inline-flex items-center gap-2 bg-gray-900  rounded-full px-4 py-2 text-sm mt-10 w-fit transition-all hover:text-white text-gray-400"
-          aria-label={`Learn more about ${service.title}`}
-        >
-          Explore <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
+        
+        <h3 className="text-5xl md:text-6xl font-medium mb-6 tracking-tight leading-[1.1]">
+            {service.title}
+        </h3>
+        
+        <p className="text-lg text-gray-400 leading-relaxed mb-10 max-w-lg">
+          {service.description}
+        </p>
+
+        {/* Dynamic CTA Dock */}
+        <div className="flex flex-wrap gap-4 items-center">
+          <Link 
+            href="https://cal.com/antrosys" 
+            target="_blank"
+            className="flex items-center gap-3 bg-accent text-primary px-8 py-4 rounded-full font-semibold hover:scale-105 transition-transform duration-300 shadow-xl shadow-accent/10"
+          >
+            <Calendar className="w-5 h-5" />
+            Book a Meeting
+          </Link>
           
-        </Link>
+          <Link 
+            href="tel:+1234567890" // Replace with your actual number
+            className="flex items-center gap-3 bg-secondary/10 border border-secondary/20 text-accent px-8 py-4 rounded-full font-semibold hover:bg-secondary/20 transition-all duration-300"
+          >
+            <Phone className="w-5 h-5" />
+            Call Us
+          </Link>
+
+          <Link 
+            href={`/services/${service.slug}`}
+            className="group flex items-center gap-2 text-gray-500 hover:text-accent ml-2 transition-colors duration-300"
+          >
+            Case Studies <ArrowUpRight className="w-4 h-4 group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </div>
       </div>
 
-      <div className="md:col-span-8 relative rounded-[25px] overflow-hidden group min-h-[300px] bg-neutral-900">
-      <Link 
-          href={`/services/${service.slug}`} 
-      
-          aria-label={`${service.title}`}
-        >  
-      
-        <Image 
-          src={service.images[0]} 
-          alt={`${service.title} - High Performance ${service.category}`}
-          fill
-          sizes="(max-width: 768px) 100vw, 66vw"
-          className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
-          priority={service.id === '1'}
-          loading={service.id === '1' ? 'eager' : 'lazy'}
-        />
+      {/* Image Content */}
+      <div className={`lg:col-span-7 ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
+        <Link href={`/services/${service.slug}`} className="block relative aspect-[16/10] overflow-hidden rounded-[40px] group border border-white/5">
+          <Image 
+            src={service.images[0]} 
+            alt={service.title}
+            fill
+            className="object-cover transition-transform duration-1000 ease-out group-hover:scale-110"
+          />
+          <div className="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         </Link>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
       </div>
     </motion.article>
   );
 };
 
+// ... Dropdown component remains similar but styled more sleekly ...
 const Dropdown = ({ num, value, options, onChange }: { num: string, value: string, options: string[], onChange: (v: string) => void }) => {
-  const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+    const handleClose = useCallback(() => setIsOpen(false), []);
   
-  const handleClose = useCallback(() => setIsOpen(false), []);
-
-  return (
-    <div className="relative min-w-[240px]">
-      <button 
-        onClick={() => setIsOpen(!isOpen)}
-        onKeyDown={(e) => e.key === 'Escape' && handleClose()}
-        aria-haspopup="listbox"
-        aria-expanded={isOpen}
-        className="w-full bg-[#1a1a1a] border border-white/10 text-white px-6 py-3 rounded-full flex items-center justify-between cursor-pointer hover:border-white/30 hover:bg-[#222] transition-all focus:outline-none focus:ring-2 focus:ring-white/20"
-      >
-        <div className="flex items-center gap-3 pointer-events-none">
-          <span className="text-gray-500 font-mono text-xs" aria-hidden="true">{num.padStart(2, '0')}</span>
-          <span className="text-sm font-medium">{value}</span>
-        </div>
-        <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
-      </button>
-      
-      <AnimatePresence>
-        {isOpen && (
-          <>
-            <div className="fixed inset-0 z-40" onClick={handleClose} />
-            <motion.ul 
-              initial={{ opacity: 0, y: 10, scale: 0.95 }}
-              animate={{ opacity: 1, y: 5, scale: 1 }}
-              exit={{ opacity: 0, y: 10, scale: 0.95 }}
-              transition={{ duration: 0.2 }}
-              className="absolute z-50 w-full bg-[#141414] border border-white/10 rounded-2xl shadow-2xl overflow-hidden mt-2 max-h-[300px] overflow-y-auto custom-scrollbar"
-              role="listbox"
-            >
-              {options.map((opt) => (
-                <li 
-                  key={opt}
-                  role="option"
-                  aria-selected={value === opt}
-                  onClick={() => { onChange(opt); handleClose(); }}
-                  className={`px-6 py-3 cursor-pointer text-sm transition-colors ${value === opt ? 'bg-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-gray-200'}`}
-                >
-                  {opt}
-                </li>
-              ))}
-            </motion.ul>
-          </>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-};
+    return (
+      <div className="relative min-w-[260px]">
+        <button 
+          onClick={() => setIsOpen(!isOpen)}
+          className="w-full bg-secondary/5 border border-white/10 text-white px-8 py-4 rounded-full flex items-center justify-between hover:border-accent/40 transition-all"
+        >
+          <div className="flex items-center gap-3">
+            <span className="text-secondary font-mono text-xs">{num.padStart(2, '0')}</span>
+            <span className="text-sm font-medium tracking-wide">{value}</span>
+          </div>
+          <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        </button>
+        
+        <AnimatePresence>
+          {isOpen && (
+            <>
+              <div className="fixed inset-0 z-40" onClick={handleClose} />
+              <motion.ul 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 5 }}
+                exit={{ opacity: 0, y: 10 }}
+                className="absolute z-50 w-full bg-[#0a0a0a] border border-white/10 rounded-3xl shadow-2xl overflow-hidden mt-2 max-h-[300px] overflow-y-auto"
+              >
+                {options.map((opt) => (
+                  <li 
+                    key={opt}
+                    onClick={() => { onChange(opt); handleClose(); }}
+                    className={`px-8 py-4 cursor-pointer text-sm transition-colors ${value === opt ? 'bg-accent text-primary font-bold' : 'text-gray-400 hover:bg-white/5 hover:text-white'}`}
+                  >
+                    {opt}
+                  </li>
+                ))}
+              </motion.ul>
+            </>
+          )}
+        </AnimatePresence>
+      </div>
+    );
+  };
 
 export default AllServicesCards;

@@ -33,17 +33,22 @@ export default function CallToActionBanner() {
           
           <div className="flex flex-col md:flex-row justify-between items-center gap-8 relative z-10">
             
-            <h2 
-              id="cta-heading"
-              className="text-3xl sm:text-4xl lg:text-5xl font-black text-secondary leading-[1.1] tracking-tight text-left flex-[1.5]"
-            >
-              {/* Splitting text slightly helps screen readers and crawlers parse "Business" as a keyword */}
-              READY TO SEE EVERYTHING WE CAN DO FOR YOUR <span className="block sm:inline text-orange-500">BUSINESS?</span>
-            </h2>
+          <h2 
+  id="cta-heading"
+  className="text-5xl sm:text-7xl lg:text-8xl font-[1000] text-secondary leading-[0.85] tracking-tighter text-left flex-[1.5] uppercase italic"
+>
+  LET'S CUT
+  THE <span className="relative inline-block text-orange-500 not-italic">
+    _BS. 
+    <span className="absolute -top-4 -right-8 sm:-top-6 sm:-right-12 text-4xl sm:text-6xl  transform rotate-12">
+      💩
+    </span>
+  </span>
+</h2>
 
             <div className="flex-shrink-0">
               <Link
-                href="/services"
+                href="/contact"
                 title="Explore our full suite of professional business services"
                 aria-label="Unlock Our Expertise and see our services"
                 className="
@@ -76,7 +81,7 @@ export default function CallToActionBanner() {
                 <span className="absolute inset-0 w-0 h-full transition-all duration-500 ease-out bg-gradient-to-r from-orange-600 to-indigo-700 group-hover:w-full will-change-[width]"></span>
                 
                 <span className="relative flex items-center gap-2">
-                  Unlock Our Expertise
+                  Get A Custom Quote
                   <svg 
                     className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1.5" 
                     fill="none" 
