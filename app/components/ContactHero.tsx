@@ -183,7 +183,7 @@ const ContactHero: React.FC = () => {
             >
               <p className="text-secondary font-medium">Prefer a direct conversation?</p>
               <a 
-                href="https://calendly.com/antrosys/"
+                href="https://cal.com/antrosys/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-8 py-4 bg-white text-primary font-bold rounded-xl transition-all hover:bg-secondary hover:scale-[1.02] active:scale-[0.98] w-fit shadow-lg"
