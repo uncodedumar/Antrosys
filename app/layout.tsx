@@ -173,9 +173,6 @@ export const metadata: Metadata = {
   verification: {
 
   },
-  alternates: {
-    canonical: "https://www.antrosys.com",
-  },
 };
 
 
