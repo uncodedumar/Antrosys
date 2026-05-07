@@ -99,7 +99,7 @@ export const metadata: Metadata = {
     "Muhammad Umar Riaz"
   ],
   alternates: {
-    canonical: "https://antrosys.com", // Replace with your live URL
+    canonical: "https://www.antrosys.com", // Replace with your live URL
   },
   openGraph: {
     title: "Antrosys | Leading Digital Transformation Agency",
