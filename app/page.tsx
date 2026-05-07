@@ -104,7 +104,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Antrosys | Leading Digital Transformation Agency",
     description: "Specializing in AI art, custom models, and full-stack development to help businesses scale effortlessly.",
-    url: "https://antrosys.com",
+    url: "https://www.antrosys.com",
     siteName: "Antrosys",
     images: [
       {
