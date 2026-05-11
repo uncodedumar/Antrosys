@@ -11,23 +11,6 @@ interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateMetadata(
-  { params }: BlogPostPageProps
-): Promise<Metadata> {
-  const { slug } = await params;
-  const post = blogPosts.find((p) => p.slug === slug);
-
-  if (!post) return {};
-
-  return {
-    title: post.title,
-    description: post.abstractContent,
-    alternates: {
-      canonical: `https://www.antrosys.com/blog/${post.slug}`,
-    },
-  };
-}
-
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
