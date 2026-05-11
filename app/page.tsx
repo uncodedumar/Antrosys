@@ -98,9 +98,7 @@ export const metadata: Metadata = {
     "Antrosys",
     "Muhammad Umar Riaz"
   ],
-  alternates: {
-    canonical: "https://www.antrosys.com", // Replace with your live URL
-  },
+  
   openGraph: {
     title: "Antrosys | Leading Digital Transformation Agency",
     description: "Specializing in AI art, custom models, and full-stack development to help businesses scale effortlessly.",
