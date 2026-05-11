@@ -10,20 +10,6 @@ interface CaseStudyPageProps {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateMetadata({ params }: CaseStudyPageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const study = caseStudies.find((s) => s.slug === slug);
-
-  if (!study) return {};
-
-  return {
-    title: study.title,
-    description: study.description,
-    alternates: {
-      canonical: `https://www.antrosys.com/case-studies/${study.slug}`,
-    },
-  };
-}
 
 export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
   const { slug } = await params;
