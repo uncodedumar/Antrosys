@@ -1,6 +1,5 @@
 import React from 'react';
 import { FiUpload } from 'react-icons/fi';
-import Script from "next/script";
 
 const CareersSection: React.FC = () => {
   // SEO Content Constants
@@ -14,20 +13,19 @@ const CareersSection: React.FC = () => {
     >
 
 
-      <Script
-        id="careers-schema"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            "name": "Your Agency Name",
-            "description":
-              "Looking for talented UI/UX designers, creative directors, and digital strategists.",
-            "jobTitle": "Creative Talent Pool"
-          }),
-        }}
-      />
+      <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "Your Agency Name",
+          "description":
+            "Looking for talented UI/UX designers, creative directors, and digital strategists.",
+          "jobTitle": "Creative Talent Pool"
+        }),
+      }}
+    />
 
 
 
