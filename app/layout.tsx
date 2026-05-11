@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import LoadingBar from "./components/Loading";
 import Navigation from "./components/Navigation";
@@ -204,34 +205,20 @@ export default function RootLayout({
       "addressCountry": ["US", "EU", "AE", "CA", "AU", "TR", "PK"]
     }
   };
-
-  // Critical CSS for hero section - inlined for LCP optimization
-  // Minified and optimized for immediate render
-  const criticalCSS = `:root{--primary:#000;--secondary:#EF571B;--accent:#FAF3E1;--background:#000;--foreground:#000}body{background:#000;font-family:var(--font-poppins,system-ui,arial),sans-serif;margin:0;padding:0}.bg-black{background-color:#000}.text-white{color:#fff}.text-secondary{color:#EF571B}.font-black{font-weight:900}.hero-h1{font-size:clamp(3rem,8vw,10rem);line-height:0.85;color:#fff;font-weight:900;letter-spacing:-0.05em;margin:0;padding:0;opacity:1!important;visibility:visible!important;transform:none!important}.hero-h1 .text-secondary{color:#EF571B}.hero-container{min-height:100vh;position:relative;background-color:#000}.hero-h1,.hero-container{contain:layout style paint}`;
-
+  
   return (
     <html lang="en">
-      <head>
-        {/* Manifest - Icons are handled by Next.js metadata API */}
-        <link rel="manifest" href="/site.webmanifest" />
-        
-        {/* Preconnect to critical origins */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-        
-        {/* Inline Critical CSS for immediate render - ensures H1 is visible without waiting for CSS */}
-        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
-        
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-        />
-      </head>
       <body
         className={`${poppins.variable} antialiased`}
       >
+
+        <Script
+          id="organization-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationSchema),
+          }}
+        />
         <LoadingBar />
         <TopNavBar />
 
