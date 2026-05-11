@@ -1,6 +1,7 @@
 // components/CallToActionBanner.tsx
 import Link from 'next/link';
 
+
 /**
  * HIGH-PERFORMANCE RSC (React Server Component)
  * - SEO: Structured Data (JSON-LD) for better SERP visibility.
@@ -22,10 +23,11 @@ export default function CallToActionBanner() {
       className="bg-primary py-12 sm:py-20 overflow-hidden" 
       aria-labelledby="cta-heading"
     >
-      {/* Schema.org for SEO - Invisible but powerful for Google Indexing */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd),
+        }}
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

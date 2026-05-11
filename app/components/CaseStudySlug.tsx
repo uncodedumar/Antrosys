@@ -1,6 +1,5 @@
 "use client";
 
-import Script from "next/script";
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -52,8 +51,7 @@ const CaseStudySlug: React.FC<CaseStudyProps> = ({ data }) => {
   return (
     <article className="mx-2 flex flex-col items-center  overflow-x-hidden bg-primary ">
       {/* Schema Injection */}
-      <Script
-        id={`case-study-schema-${data.title}`}
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(jsonLd),

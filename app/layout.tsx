@@ -212,13 +212,12 @@ export default function RootLayout({
         className={`${poppins.variable} antialiased`}
       >
 
-        <Script
-          id="organization-schema"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationSchema),
-          }}
-        />
+        <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(organizationSchema),
+        }}
+      />
         <LoadingBar />
         <TopNavBar />
 

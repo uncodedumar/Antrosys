@@ -1,11 +1,11 @@
 'use client'
 import React, { useState, useMemo } from 'react';
-import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image'; // Optimized Images
 import { motion, AnimatePresence } from 'framer-motion';
 import { Filter } from 'lucide-react';
 import { blogPosts } from '@/lib/data';
+
 
 // --- Types ---
 interface Blog {
@@ -118,11 +118,13 @@ export default function BlogListing() {
 
   return (
     <main className="relative min-h-screen bg-primary overflow-x-hidden py-12">
-      <Head>
-        <title>Expert Insights | Web Performance & SEO Strategies 2025</title>
-        <meta name="description" content="Discover deep dives into Next.js 15 performance, technical SEO checklists, and AI-driven ranking strategies." />
-        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
-      </Head>
+      
+        <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd),
+        }}
+      />
 
       {/* --- Top Banner Image (Updated with Dark Cyberpunk Art) --- */}
       <div className="w-[90%] mx-auto mb-12 overflow-hidden rounded-2xl aspect-[21/9] relative border-b-2 border-orange-600/30">

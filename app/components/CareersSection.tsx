@@ -1,5 +1,6 @@
 import React from 'react';
 import { FiUpload } from 'react-icons/fi';
+import Script from "next/script";
 
 const CareersSection: React.FC = () => {
   // SEO Content Constants
@@ -11,16 +12,24 @@ const CareersSection: React.FC = () => {
       className="py-16 md:py-24 lg:py-32 text-accent bg-transparent transition-colors duration-500 ease-in-out"
       aria-labelledby="careers-heading"
     >
-      {/* Schema.org JSON-LD for Job Openings (Speculative/General) */}
-      <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          "name": "Your Agency Name",
-          "description": "Looking for talented UI/UX designers, creative directors, and digital strategists.",
-          "jobTitle": "Creative Talent Pool"
-        })}
-      </script>
+
+
+      <Script
+        id="careers-schema"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Your Agency Name",
+            "description":
+              "Looking for talented UI/UX designers, creative directors, and digital strategists.",
+            "jobTitle": "Creative Talent Pool"
+          }),
+        }}
+      />
+
+
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between md:space-x-12">
