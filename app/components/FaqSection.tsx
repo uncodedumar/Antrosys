@@ -35,28 +35,11 @@ const faqData: FAQItem[] = [
 
 export default function FAQSection() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-
-  // Inject JSON-LD for Google Rich Snippets (SEO Magic)
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": faqData.map((item) => ({
-      "@type": "Question",
-      "name": item.question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": item.answer,
-      },
-    })),
-  };
+  
 
   return (
     <section className="min-h-screen text-[#f5f5dc] py-16 px-6 md:px-12 lg:px-24 flex flex-col lg:flex-row gap-12 items-start font-sans">
       {/* Schema.org injection */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
 
       {/* Header Section */}
       <div className="lg:w-1/3 w-full lg:sticky lg:top-16">
