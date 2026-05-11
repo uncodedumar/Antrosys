@@ -159,17 +159,7 @@ export const metadata: Metadata = {
     images: ["/AboutImages/call.avif"],
     creator: "@antrosys",
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
+  
   verification: {
 
   },
