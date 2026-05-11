@@ -130,7 +130,6 @@ export default function ExpertiseSection() {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 md:mb-16 gap-6">
           <div className="flex gap-3 md:gap-4 order-2 md:order-1">
              <PulsingIcon icon={Calendar} href="https://cal.com/antrosys" />
-             <PulsingIcon icon={Phone} href="tel:#" />
              <PulsingIcon icon={Mail} href="/contact" />
           </div>
           <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold uppercase text-left md:text-right order-1 md:order-2 leading-tight">

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "The Antrosys Blog | Mastering Digital Transformation",
     description: "Deep dives into AI, full-stack engineering, and business scaling strategies from the experts at Antrosys.",
-    url: "https://antrosys.com/blog",
+    url: "https://antrosys.com/blogs",
     type: "website",
     images: [
       {

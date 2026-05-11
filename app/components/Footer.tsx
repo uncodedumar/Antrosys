@@ -14,11 +14,11 @@ const Footer = () => {
       { name: "Home", href: "/" },
       { name: "Services", href: "/services" },
       { name: "Portfolio", href: "/portfolio" },
-      { name: "Blogs", href: "/blog" },
+      { name: "Blogs", href: "/blogs" },
       { name: "Contact", href: "/contact" },
     ],
     "GO DEEPER": [
-      { name: "About", href: "/About" },
+      { name: "About", href: "/about" }
       { name: "Get in Touch", href: "/contact" },
       { name: "Book a Meeting", href: "https:/cal.com/antrosys" },
     ],

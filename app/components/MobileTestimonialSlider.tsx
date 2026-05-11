@@ -104,7 +104,7 @@ const MobileTestimonialSlider = () => {
                 ))}
               </div>
               <a 
-                href="/Contact" // Add your actual number
+                href="/contact" // Add your actual number
                 className="flex items-center gap-2 group"
               >
                 <span className="text-[10px] font-extrabold uppercase tracking-widest group-hover:underline">CONTACT SALES</span>
