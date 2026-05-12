@@ -17,8 +17,8 @@ const Footer = () => {
       { name: "Blogs", href: "/blogs" },
       { name: "Contact", href: "/contact" },
     ],
-    "GO DEEPER": [
-      { name: "About", href: "/about" }
+   "GO DEEPER": [
+      { name: "About", href: "/about" },
       { name: "Get in Touch", href: "/contact" },
       { name: "Book a Meeting", href: "https://cal.com/antrosys" },
     ],
