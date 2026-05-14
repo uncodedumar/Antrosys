@@ -17,7 +17,6 @@ import {
   SiArduino,         // Arduino
   SiGooglescholar,   // Google Scholar
   SiJupyter,         // Jupyter
-  SiAmazon,          // AWS
   SiDocker,          // Docker
   SiGithub,          // Github
   SiVercel,          // Vercel
@@ -127,12 +126,7 @@ const logoData: Logo[] = [ // Use the Logo interface for the array type
     color: "text-orange-500",
     hoverColor: "hover:text-orange-600",
   },
-  {
-    icon: SiAmazon,
-    name: "AWS",
-    color: "text-orange-500",
-    hoverColor: "hover:text-orange-600",
-  },
+  
   {
     icon: SiDocker,
     name: "Docker",
