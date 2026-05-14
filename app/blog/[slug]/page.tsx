@@ -29,11 +29,19 @@ export async function generateMetadata(
 
   return {
     title: post.title,
+<<<<<<< HEAD
     description,
 
     openGraph: {
       title: post.title,
       description,
+=======
+    description: post.abstractContent,
+
+    openGraph: {
+      title: post.title,
+      description: post.abstractContent,
+>>>>>>> 58b8eb1634e9b201d8bd4da7ab1d9c21ff8f0ede
       type: "article",
       url: `https://www.antrosys.com/blog/${post.slug}`,
       images: [
@@ -49,7 +57,11 @@ export async function generateMetadata(
     twitter: {
       card: "summary_large_image",
       title: post.title,
+<<<<<<< HEAD
       description,
+=======
+      description: post.abstractContent,
+>>>>>>> 58b8eb1634e9b201d8bd4da7ab1d9c21ff8f0ede
       images: [post.image],
     },
   };
