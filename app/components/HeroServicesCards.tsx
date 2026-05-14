@@ -14,7 +14,7 @@ const services = [
     icon: Cpu,
     subServices: [
       { name: "Enterprise AI Solutions", href: "/services/AI-Solutions" },
-      { name: "Automated-Chat-Systems", href: "/services/AI Chatbot Development" },
+      { name: "Automated-Chat-Systems", href: "/services/Automated-Chat-Systems" },
     ] 
   },
   { 
@@ -65,7 +65,7 @@ const services = [
     subServices: [
       { name: "React & Next.js Front-End", href: "/services/Front-End-Development" },
       { name: "Node & Cloud Back-End", href: "/services/Back-End-Web-Development" },
-      { name: "Full-Stack Web Solutions", href: "/services/Full-Stack Web Development" },
+      { name: "Full-Stack Web Solutions", href: "/services/Full-Stack-Web-Development" },
       { name: "Web Support & Maintenance (SEO)", href: "/services/Website-Maintenance" },
       { name: "No-Code Web Solutions", href: "/services/No-Code-Easy-to-Manage-Websites" },
       { name: "Headless WordPress Dev", href: "/services/WordPress-Engineered-Websites" },

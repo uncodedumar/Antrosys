@@ -73,8 +73,11 @@ const TechStack: React.FC<TechStackProps> = ({ data }) => {
         <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 border-l border-gray-800">
           {data.items.map((item, index) => {
             const IconComponent = renderedIcons[item.logoUrl];
-            const isImageUrl = item.logoUrl.startsWith('/') || item.logoUrl.startsWith('http');
-            
+            const isImageSrc =
+              item.logoUrl.startsWith('/') ||
+              item.logoUrl.startsWith('http') ||
+              item.logoUrl.startsWith('data:');
+
             return (
               <article
                 key={index}
@@ -83,12 +86,7 @@ const TechStack: React.FC<TechStackProps> = ({ data }) => {
                 }`}
               >
                 <div className="flex-shrink-0 mt-1" aria-hidden="true">
-                  {!isImageUrl && IconComponent ? (
-                    React.createElement(IconComponent, {
-                      className: "w-10 h-10 text-white opacity-90",
-                      size: 40
-                    })
-                  ) : (
+                  {isImageSrc ? (
                     <Image
                       src={item.logoUrl}
                       alt={`${item.heading} technology logo`}
@@ -97,6 +95,18 @@ const TechStack: React.FC<TechStackProps> = ({ data }) => {
                       loading="lazy"
                       className="opacity-90 object-contain"
                     />
+                  ) : IconComponent ? (
+                    React.createElement(IconComponent, {
+                      className: "w-10 h-10 text-white opacity-90",
+                      size: 40,
+                    })
+                  ) : (
+                    <span
+                      className="flex h-10 w-10 items-center justify-center rounded border border-white/20 text-[10px] font-semibold uppercase text-white/60"
+                      title={`Missing icon key: ${item.logoUrl}`}
+                    >
+                      —
+                    </span>
                   )}
                 </div>
 

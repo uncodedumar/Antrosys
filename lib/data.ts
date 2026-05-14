@@ -1154,19 +1154,19 @@ export const ServicePageData: ServicePageData[] = [
       asideText: "Where neuroscience meets design precision.",
       items: [
         {
-          logoUrl: "SiAdobephotoshop",
+          logoUrl: "SiAffinityphoto",
           heading: "Adobe Photoshop",
           text: "Hyper-Real Visual Engineering",
         },
 
         {
-          logoUrl: "SiAdobeillustrator",
+          logoUrl: "SiInkscape",
           heading: "Adobe Illustrator",
           text: "Scalable Identity Architecture",
         },
 
         {
-          logoUrl: "SiAdobeindesign",
+          logoUrl: "SiAffinitypublisher",
           heading: "Adobe InDesign",
           text: "Brand System Orchestration",
         },
@@ -1184,13 +1184,13 @@ export const ServicePageData: ServicePageData[] = [
         },
 
         {
-          logoUrl: "SiAdobe",
+          logoUrl: "SiOpenai",
           heading: "Midjourney v7",
           text: "Concept Acceleration Engine",
         },
 
         {
-          logoUrl: "SiAdobe",
+          logoUrl: "SiReplicate",
           heading: "Adobe Firefly Studio",
           text: "Ethical AI Brand Augmentation",
         },
@@ -1325,7 +1325,7 @@ export const ServicePageData: ServicePageData[] = [
         },
 
         {
-          logoUrl: "SiAdobexd",
+          logoUrl: "SiPenpot",
           heading: "Adobe XD",
           text: "Experience Prototyping Engine",
         },
@@ -1433,13 +1433,13 @@ export const ServicePageData: ServicePageData[] = [
         "Digital experiences are remembered for how they feel, not just how they look.",
       items: [
         {
-          logoUrl: "SiAdobephotoshop",
+          logoUrl: "SiAffinityphoto",
           heading: "Adobe Photoshop",
           text: "Digital Canvas Mastery",
         },
 
         {
-          logoUrl: "SiAdobeillustrator",
+          logoUrl: "SiInkscape",
           heading: "Adobe Illustrator",
           text: "Vector Art Excellence",
         },
@@ -1545,13 +1545,13 @@ export const ServicePageData: ServicePageData[] = [
       asideText: "Print isn't dead — it's a powerful tactile experience.",
       items: [
         {
-          logoUrl: "SiAdobeindesign",
+          logoUrl: "SiAffinitypublisher",
           heading: "Adobe InDesign",
           text: "Layouts That Speak Volumes",
         },
 
         {
-          logoUrl: "SiAdobeillustrator",
+          logoUrl: "SiInkscape",
           heading: "Adobe Illustrator",
           text: "Vector Excellence for Print",
         },
@@ -1652,13 +1652,13 @@ export const ServicePageData: ServicePageData[] = [
       asideText: "Packaging is the first handshake with your customer.",
       items: [
         {
-          logoUrl: "SiAdobeillustrator",
+          logoUrl: "SiInkscape",
           heading: "Adobe Illustrator",
           text: "Vector Precision for Every Surface",
         },
 
         {
-          logoUrl: "SiAdobephotoshop",
+          logoUrl: "SiAffinityphoto",
           heading: "Adobe Photoshop",
           text: "Product Mockups & Realistic Previews"},
 
@@ -1777,13 +1777,13 @@ export const ServicePageData: ServicePageData[] = [
         "In the digital world, first impressions happen in milliseconds.",
       items: [
         {
-          logoUrl: "SiAdobeillustrator",
+          logoUrl: "SiInkscape",
           heading: "Adobe Illustrator",
           text: "Iconography & Vector Graphics",
         },
 
         {
-          logoUrl: "SiAdobephotoshop",
+          logoUrl: "SiAffinityphoto",
           heading: "Adobe Photoshop",
           text: "Pixel-Perfect Image Creation",
         },
@@ -1897,13 +1897,13 @@ export const ServicePageData: ServicePageData[] = [
 
       items: [
         {
-          logoUrl: "SiAdobeillustrator",
+          logoUrl: "SiInkscape",
           heading: "Adobe Illustrator",
           text: "Vector-Based Campaign Assets",
         },
 
         {
-          logoUrl: "SiAdobephotoshop",
+          logoUrl: "SiAffinityphoto",
           heading: "Adobe Photoshop",
           text: "Image Manipulation & Retouching",
         },
@@ -1915,7 +1915,7 @@ export const ServicePageData: ServicePageData[] = [
         },
 
         {
-          logoUrl: "SiAdobeindesign",
+          logoUrl: "SiAffinitypublisher",
           heading: "Adobe InDesign",
           text: "Multi-Page & Print Campaign Layouts",
         },

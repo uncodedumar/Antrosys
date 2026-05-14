@@ -4,6 +4,10 @@ import { blogPosts } from '@/lib/data';
 import BlogsSlug from '@/app/components/BlogsSlug';
 import FaqSection from "@/app/components/FaqSection";
 
+/** Pre-render every post so crawlers and static hosts always resolve `/blog/[slug]`. */
+export function generateStaticParams() {
+  return blogPosts.map((post) => ({ slug: post.slug }));
+}
 
 interface BlogPostPageProps {
   params: {

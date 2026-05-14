@@ -33,6 +33,22 @@ const htmlLimitedBots = new RegExp(
 
 const nextConfig: NextConfig = {
   htmlLimitedBots,
+
+  async redirects() {
+    return [
+      {
+        source: "/services/AI%20Chatbot%20Development",
+        destination: "/services/Automated-Chat-Systems",
+        permanent: true,
+      },
+      {
+        source: "/services/Full-Stack%20Web%20Development",
+        destination: "/services/Full-Stack-Web-Development",
+        permanent: true,
+      },
+    ];
+  },
+
   // Modern browser targeting - remove unnecessary polyfills
   // Note: swcMinify is default in Next.js 16, removed to avoid warning
   
