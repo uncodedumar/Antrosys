@@ -27,11 +27,11 @@ export async function generateMetadata(
 
   return {
     title: post.title,
-    description: post.description || post.excerpt,
+    description: post.excerpt,
 
     openGraph: {
       title: post.title,
-      description: post.description || post.excerpt,
+      description: post.excerpt,
       type: "article",
       url: `https://www.antrosys.com/blog/${post.slug}`,
       images: [
@@ -47,7 +47,7 @@ export async function generateMetadata(
     twitter: {
       card: "summary_large_image",
       title: post.title,
-      description: post.description || post.excerpt,
+      description: post.excerpt,
       images: [post.image],
     },
   };
