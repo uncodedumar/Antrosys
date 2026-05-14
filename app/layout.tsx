@@ -197,16 +197,17 @@ export default function RootLayout({
   
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationSchema),
+          }}
+        />
+      </head>
       <body
         className={`${poppins.variable} antialiased`}
       >
-
-        <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(organizationSchema),
-        }}
-      />
         <LoadingBar />
         <TopNavBar />
 
