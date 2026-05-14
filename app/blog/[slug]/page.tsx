@@ -25,13 +25,15 @@ export async function generateMetadata(
     };
   }
 
+  const description = post.abstractContent;
+
   return {
     title: post.title,
-    description: post.excerpt,
+    description,
 
     openGraph: {
       title: post.title,
-      description: post.excerpt,
+      description,
       type: "article",
       url: `https://www.antrosys.com/blog/${post.slug}`,
       images: [
@@ -47,7 +49,7 @@ export async function generateMetadata(
     twitter: {
       card: "summary_large_image",
       title: post.title,
-      description: post.excerpt,
+      description,
       images: [post.image],
     },
   };
