@@ -1,6 +1,38 @@
 import type { NextConfig } from "next";
+import { HTML_LIMITED_BOT_UA_RE } from "next/dist/shared/lib/router/utils/html-bots";
+
+/**
+ * Next serves "streaming metadata" to crawlers whose UA does *not* match this regex,
+ * which can place `<title>` / `<meta>` after `<body>` opens (bad for HTML-only crawlers).
+ * We extend Next's built-in list so SEO audit tools get a blocking metadata render.
+ *
+ * @see https://nextjs.org/docs/app/api-reference/config/next-config-js/htmlLimitedBots
+ */
+const htmlLimitedBots = new RegExp(
+  HTML_LIMITED_BOT_UA_RE.source +
+    [
+      "|Screaming\\s+Frog\\s+SEO\\s+Spider",
+      "|ScreamingFrogSEOSpider",
+      "|Sitebulb",
+      "|AhrefsSiteAudit",
+      "|AhrefsBot",
+      "|SemrushBot",
+      "|SiteAuditBot",
+      "|DotBot",
+      "|MJ12bot",
+      "|BLEXBot",
+      "|PetalBot",
+      "|Bytespider",
+      "|DataForSeoBot",
+      "|serpstatbot",
+      "|rogerbot",
+      "|meta-externalagent",
+    ].join(""),
+  HTML_LIMITED_BOT_UA_RE.flags
+);
 
 const nextConfig: NextConfig = {
+  htmlLimitedBots,
   // Modern browser targeting - remove unnecessary polyfills
   // Note: swcMinify is default in Next.js 16, removed to avoid warning
   
