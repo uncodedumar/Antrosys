@@ -28,17 +28,9 @@ const ParallaxBackground = ({ scrollYProgress }: { scrollYProgress: MotionValue<
       {decor.map((pos, i) => (
         <motion.div
           key={i}
-          style={{ y: yPos, top: pos.top, left: pos.left }}
-          className="absolute w-12 h-12 md:w-20 md:h-20"
-        >
-          <Image 
-            src={Image1} 
-            alt="" // Decorative images should have empty alt
-            fill
-            sizes="100px"
-            className="object-contain"
-          />
-        </motion.div>
+          style={{ y: yPos, top: pos.top, left: pos.left, backgroundImage: `url(${Image1.src})` }}
+          className="absolute w-12 h-12 md:w-20 md:h-20 bg-contain bg-center bg-no-repeat"
+        />
       ))}
     </div>
   );
@@ -191,8 +183,7 @@ export const Agenda: React.FC = () => {
                           width={450} 
                           height={450} 
                           className="object-cover w-full h-full"
-                          priority={index === 0}
-                          loading={index === 0 ? "eager" : "lazy"}
+                          loading="lazy"
                         />
                       </div>
                     </div>
@@ -208,7 +199,7 @@ export const Agenda: React.FC = () => {
                           width={450} 
                           height={450} 
                           className="object-cover w-full h-full"
-                          priority={index === 0}
+                          loading="lazy"
                         />
                       </div>
                     </div>

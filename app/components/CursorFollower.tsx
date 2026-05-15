@@ -1,14 +1,13 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
 
-const images = [
-  "https://api.dicebear.com/7.x/shapes/svg?seed=1",
-  "https://api.dicebear.com/7.x/shapes/svg?seed=6",
-  "https://api.dicebear.com/7.x/shapes/svg?seed=3",
-  "https://api.dicebear.com/7.x/shapes/svg?seed=8",
-  "https://api.dicebear.com/7.x/shapes/svg?seed=9",
+const cursorBackgrounds = [
+  "radial-gradient(circle at 30% 30%, #fb923c, #111827 65%)",
+  "radial-gradient(circle at 70% 30%, #f97316, #312e81 70%)",
+  "radial-gradient(circle at 45% 65%, #facc15, #7c2d12 68%)",
+  "radial-gradient(circle at 60% 40%, #fdba74, #18181b 70%)",
+  "radial-gradient(circle at 35% 70%, #fed7aa, #9a3412 66%)",
 ];
 
 const CursorFollower = () => {
@@ -33,7 +32,7 @@ const CursorFollower = () => {
   // 2. Cycle images (State is okay here since it's infrequent)
   useEffect(() => {
     const interval = setInterval(() => {
-      setImgIndex((prev) => (prev + 1) % images.length);
+      setImgIndex((prev) => (prev + 1) % cursorBackgrounds.length);
     }, 500);
     return () => clearInterval(interval);
   }, []);
@@ -48,14 +47,10 @@ const CursorFollower = () => {
         transition: 'transform 0.05s linear' 
       }}
     >
-      <Image 
-        src={images[imgIndex]} 
-        alt="" 
-        width={24}
-        height={24}
-        className="w-6 h-6 rounded-full shadow-sm"
+      <div
+        className="w-6 h-6 rounded-full shadow-sm bg-cover bg-center"
         aria-hidden="true"
-        unoptimized
+        style={{ background: cursorBackgrounds[imgIndex] }}
       />
     </div>
   );
