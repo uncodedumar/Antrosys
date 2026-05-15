@@ -34,9 +34,9 @@ const htmlLimitedBots = new RegExp(
 const contentSecurityPolicy = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.botpress.cloud https://files.bpcontent.cloud https://www.googletagmanager.com",
-  "style-src 'self' 'unsafe-inline'",
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "img-src 'self' data: blob: https://images.unsplash.com https://flagcdn.com https://www.antrosys.com https://cdn.botpress.cloud https://files.bpcontent.cloud https://grainy-gradients.vercel.app",
-  "font-src 'self' data:",
+  "font-src 'self' data: https://fonts.gstatic.com",
   "connect-src 'self' https://*.botpress.cloud wss://*.botpress.cloud https://www.google-analytics.com https://vitals.vercel-insights.com https://*.vercel-insights.com",
   "frame-src 'self' https://cal.com https://*.botpress.cloud",
   "object-src 'none'",
