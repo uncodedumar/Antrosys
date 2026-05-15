@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "The Story of Antrosys | Engineering the Future",
     description: "Meet the team behind 1,200+ successful projects. Learn how Antrosys combines creative UI/UX with high-performance AI and cloud infrastructure.",
-    url: "https://antrosys.com/about",
+    url: "https://www.antrosys.com/about",
     images: [
       {
         url: "/AboutImages/call.avif", // Recommended: A photo of the leadership or team office
@@ -38,6 +38,9 @@ export const metadata: Metadata = {
       },
     ],
     type: "profile", // "profile" is great for About pages that highlight founders/teams
+  },
+  alternates: {
+    canonical: "/about",
   },
 };
 

@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Antrosys FAQs | Everything You Need to Know",
     description: "Clearing the path to digital transformation. Learn about our process, technology stack, and elite BPO support.",
-    url: "https://antrosys.com/faqs",
+    url: "https://www.antrosys.com/faqs",
     type: "website",
     images: [
       {
@@ -30,6 +30,9 @@ export const metadata: Metadata = {
         alt: "Antrosys Frequently Asked Questions",
       },
     ],
+  },
+  alternates: {
+    canonical: "/faqs",
   },
 };
 export default function Contact() {

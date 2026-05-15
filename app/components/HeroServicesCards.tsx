@@ -13,8 +13,8 @@ const services = [
     title: "AI & Machine Learning", 
     icon: Cpu,
     subServices: [
-      { name: "Enterprise AI Solutions", href: "/services/AI-Solutions" },
-      { name: "Automated-Chat-Systems", href: "/services/Automated-Chat-Systems" },
+      { name: "Enterprise AI Solutions", href: "/services/ai-solutions" },
+      { name: "AI Chatbot Development", href: "/services/automated-chat-systems" },
     ] 
   },
   { 
@@ -23,8 +23,8 @@ const services = [
     icon: Code,
     subServices: [
       { name: "SaaS Software Development", href: "/services/custom-software-development" },
-      { name: "Quality Assurance & QC", href: "/services/QA-QC" },
-      { name: "Cloud Infrastructure & AWS", href: "/services/Cloud-Solutions" }
+      { name: "Quality Assurance & QC", href: "/services/qa-qc" },
+      { name: "Cloud Infrastructure & AWS", href: "/services/cloud-solutions" }
     ] 
   },
   { 
@@ -32,9 +32,9 @@ const services = [
     title: "Digital Marketing & Ads (SMM)", 
     icon: Megaphone,
     subServices: [
-      { name: "Performance Marketing & Ads", href: "/services/Marketing-n-Advertising" },
-      { name: "Social Media Marketing (SMM)", href: "/services/Social-Media-Graphics" },
-      { name: "Marketing Automation", href: "/services/Growth-Analytics-n-Marketing-Automation" }
+      { name: "Performance Marketing & Ads", href: "/services/marketing-n-advertising" },
+      { name: "Social Media Marketing (SMM)", href: "/services/social-media-graphics" },
+      { name: "Marketing Automation", href: "/services/growth-analytics-n-marketing-automation" }
     ] 
   },
   { 
@@ -42,8 +42,8 @@ const services = [
     title: "Mobile & Desktop Apps", 
     icon: Smartphone,
     subServices: [
-      { name: "iOS/Android Development", href: "/services/App-Dev" },
-      { name: "Next Gen Desktop Application", href: "/services/Next-Gen-Desktop-Applications" },
+      { name: "iOS/Android Development", href: "/services/app-dev" },
+      { name: "Next Gen Desktop Application", href: "/services/next-gen-desktop-applications" },
     ] 
   },
   { 
@@ -51,11 +51,11 @@ const services = [
     title: "UI/UX & Creative Design", 
     icon: Palette,
     subServices: [
-      { name: "Product Packaging Design", href: "/services/Packaging-n-Label-Design" },
-      { name: "Brand Identity", href: "/services/Logo-n-Brand-Identity" },
-      { name: "UI/UX Interface Design (Web/App)", href: "/services/Web-n-Application-Design" },
-      { name: "Digital Art & Illustration", href: "/services/Art-n-Illustration"},
-      { name: "Print & Vector Graphics", href: "/services/Print-Design" }
+      { name: "Product Packaging Design", href: "/services/packaging-n-label-design" },
+      { name: "Brand Identity", href: "/services/logo-n-brand-identity" },
+      { name: "UI/UX Interface Design (Web/App)", href: "/services/web-n-application-design" },
+      { name: "Digital Art & Illustration", href: "/services/art-n-illustration"},
+      { name: "Print & Vector Graphics", href: "/services/print-design" }
     ] 
   },
   { 
@@ -63,13 +63,13 @@ const services = [
     title: "Web Development & SEO", 
     icon: Globe,
     subServices: [
-      { name: "React & Next.js Front-End", href: "/services/Front-End-Development" },
-      { name: "Node & Cloud Back-End", href: "/services/Back-End-Web-Development" },
-      { name: "Full-Stack Web Solutions", href: "/services/Full-Stack-Web-Development" },
-      { name: "Web Support & Maintenance (SEO)", href: "/services/Website-Maintenance" },
-      { name: "No-Code Web Solutions", href: "/services/No-Code-Easy-to-Manage-Websites" },
-      { name: "Headless WordPress Dev", href: "/services/WordPress-Engineered-Websites" },
-      { name: "Shopify & E-commerce Stores", href: "/services/Shopify-Websites" },
+      { name: "React & Next.js Front-End", href: "/services/front-end-development" },
+      { name: "Node & Cloud Back-End", href: "/services/back-end-web-development" },
+      { name: "Full-Stack Web Solutions", href: "/services/full-stack-web-development" },
+      { name: "Web Support & Maintenance (SEO)", href: "/services/website-maintenance" },
+      { name: "No-Code Web Solutions", href: "/services/no-code-easy-to-manage-websites" },
+      { name: "Headless WordPress Dev", href: "/services/wordpress-engineered-websites" },
+      { name: "Shopify & E-commerce Stores", href: "/services/shopify-websites" },
     ] 
   },
   { 

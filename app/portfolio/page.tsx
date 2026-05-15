@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "The Antrosys Portfolio | Excellence in Digital Engineering",
     description: "From startups to enterprises, see how we’ve delivered 1,200+ bold and authentic digital solutions worldwide.",
-    url: "https://antrosys.com/portfolio",
+    url: "https://www.antrosys.com/portfolio",
     images: [
       {
         url: "/AboutImages/call.avif", // Use an image showing a grid of your best work
@@ -32,6 +32,9 @@ export const metadata: Metadata = {
       },
     ],
     type: "website",
+  },
+  alternates: {
+    canonical: "/portfolio",
   },
   twitter: {
     card: "summary_large_image",

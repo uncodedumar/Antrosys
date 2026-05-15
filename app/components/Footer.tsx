@@ -20,13 +20,6 @@ const Footer = () => {
    "GO DEEPER": [
       { name: "About", href: "/about" },
       { name: "Get in Touch", href: "/contact" },
-      { name: "Book a Meeting", href: "https://cal.com/antrosys" },
-    ],
-    SOCIALS: [
-      { name: "Linkedin", href: "https://www.linkedin.com/company/antrosys" },
-      { name: "Instagram", href: "https://www.instagram.com/antrosys/" },
-      { name: "Behance", href: "https://behance.net" },
-      { name: "X", href: "https://x.com/antrosys" },
     ],
   };
 

@@ -184,7 +184,7 @@ const getImagesFromFolder = (folderName: string, imageFiles: string[]): string[]
 
 export const caseStudies: CaseStudy[] = [
   {
-    slug: "Antrosys",
+    slug: "antrosys",
     title: "Antrosys : Creative AI Agency",
     description:
       "This project was architected with a singular focus: Systemic Excellence. We bypassed the conventional to build a high-performance ecosystem where design intelligence meets raw engineering power. From the initial logic mapping to the final pixel optimization, we’ve developed a solution that doesn’t just run—it dominates. This isn't just a website; it’s a scalable, future-proof framework engineered for those who demand clarity, speed, and undeniable impact.",
@@ -1058,7 +1058,7 @@ export const ServicePageData: ServicePageData[] = [
    
   },
   {
-    slug: "Logo-n-Brand-Identity",
+    slug: "logo-n-brand-identity",
     hero: {
       title: "Brand Identities That Stick and Sell",
       subHero: "Clarity. Consistency. Confidence.",
@@ -1222,7 +1222,7 @@ export const ServicePageData: ServicePageData[] = [
 
   },
   {
-    slug: "Web-n-Application-Design",
+    slug: "web-n-application-design",
     hero: {
       title: "Web & App Experiences That Flow (UI/UX)",
       subHero: "Where Function Meets Feeling",
@@ -1359,7 +1359,7 @@ export const ServicePageData: ServicePageData[] = [
   },
 
   {
-    slug: "Art-n-Illustration",
+    slug: "art-n-illustration",
     hero: {
       title: "Illustrations That Spark Imagination",
       subHero: "Every Vision, Illustrated",
@@ -1472,7 +1472,7 @@ export const ServicePageData: ServicePageData[] = [
 
   },
   {
-    slug: "Print-Design",
+    slug: "print-design",
     hero: {
       title: "Print Design",
       subHero: "Design That Speaks Loudly",
@@ -1572,7 +1572,7 @@ export const ServicePageData: ServicePageData[] = [
 
   },
   {
-    slug: "Packaging-n-Label-Design",
+    slug: "packaging-n-label-design",
     hero: {
       title: "Packaging That Sells Before It’s Opened",
       subHero: "Design That Sells",
@@ -1690,7 +1690,7 @@ export const ServicePageData: ServicePageData[] = [
 
   },
   {
-    slug: "Social-Media-Graphics",
+    slug: "social-media-graphics",
     hero: {
       title: "Social Media, Elevated",
       subHero: "Design That Gets Noticed",
@@ -1816,7 +1816,7 @@ export const ServicePageData: ServicePageData[] = [
 
   },
   {
-    slug: "Marketing-n-Advertising",
+    slug: "marketing-n-advertising",
     hero: {
       title: "Marketing & Advertising",
       subHero: "Creativity Meets Conversion",
@@ -1937,7 +1937,7 @@ export const ServicePageData: ServicePageData[] = [
   },
 
   {
-    slug: "Growth-Analytics-n-Marketing-Automation",
+    slug: "growth-analytics-n-marketing-automation",
     hero: {
       title: "Growth, Analytics & Marketing Automation",
       subHero: "Smarter Marketing, Better Growth",
@@ -2069,7 +2069,7 @@ export const ServicePageData: ServicePageData[] = [
 
   },
   {
-    slug: "Front-End-Development",
+    slug: "front-end-development",
     hero: {
       title: "Front-End Web Development",
       subHero: "Performance You Can Feel",
@@ -2211,7 +2211,7 @@ export const ServicePageData: ServicePageData[] = [
 
   },
   {
-    slug: "Back-End-Web-Development",
+    slug: "back-end-web-development",
     hero: {
       title: "Back-End Web Development",
       subHero: "The Engine Behind Growth",
@@ -2378,7 +2378,7 @@ export const ServicePageData: ServicePageData[] = [
 
   },
   {
-    slug: "Website-Maintenance",
+    slug: "website-maintenance",
     hero: {
       title: "Proactive Care, Zero Stress Website Maintenance",
       subHero: "The Engine Behind Growth",
@@ -2590,7 +2590,7 @@ export const ServicePageData: ServicePageData[] = [
 
   },
   {
-    slug: "Full-Stack-Web-Development",
+    slug: "full-stack-web-development",
     hero: {
       title: "Complete Solutions, Seamlessly Delivered Full-Stack Web Development",
       subHero: "The Engine Behind Growth",
@@ -2870,7 +2870,7 @@ export const ServicePageData: ServicePageData[] = [
 
   },
   {
-    slug: "No-Code-Easy-to-Manage-Websites",
+    slug: "no-code-easy-to-manage-websites",
     hero: {
       title: "No-Code Easy-to-Manage Websites",
       subHero: "Professional Without the Hassle",
@@ -3014,7 +3014,7 @@ export const ServicePageData: ServicePageData[] = [
 
   },
   {
-    slug: "WordPress-Engineered-Websites",
+    slug: "wordpress-engineered-websites",
     hero: {
       title: "WordPress Engineered Websites",
       subHero: "Professional. Secure. Effortless.",
@@ -3126,7 +3126,7 @@ export const ServicePageData: ServicePageData[] = [
 
   },
   {
-    slug: "Shopify-Websites",
+    slug: "shopify-websites",
     hero: {
       title: "Shopify Websites",
       subHero: "Launch. Sell. Scale. Repeat.",
@@ -3226,7 +3226,7 @@ export const ServicePageData: ServicePageData[] = [
 
   },
   {
-    slug: "Next-Gen-Desktop-Applications",
+    slug: "next-gen-desktop-applications",
     hero: {
       title: "Next-Gen Desktop Applications",
       subHero: "High-Performance, User-Focused.",
@@ -3334,7 +3334,7 @@ export const ServicePageData: ServicePageData[] = [
     },
   },
   {
-    slug: "Automated-Chat-Systems",
+    slug: "automated-chat-systems",
     hero: {
       title: "Automated Chat Systems (Chatbots)",
       subHero: "Smart Conversations, Simplified",
@@ -3430,7 +3430,7 @@ export const ServicePageData: ServicePageData[] = [
 
   },
   {
-    slug: "Cloud-Solutions",
+    slug: "cloud-solutions",
     hero: {
       title: "Cloud Solutions Services",
       subHero: "Powering Growth in Cloud",
@@ -3563,7 +3563,7 @@ export const ServicePageData: ServicePageData[] = [
 
   },
   {
-    slug: "AI-Solutions",
+    slug: "ai-solutions",
     hero: {
       title: "Artificial Intelligence (AI) Solutions",
       subHero: "Smart Systems, Real Impact",
@@ -3674,7 +3674,7 @@ export const ServicePageData: ServicePageData[] = [
 
   },
   {
-    slug: "QA-QC",
+    slug: "qa-qc",
     hero: {
       title: "Quality Assurance / Quality Control",
       subHero: "Precision in Every Detail",
@@ -3765,7 +3765,7 @@ export const ServicePageData: ServicePageData[] = [
   },
 
   {
-    slug: "App-Dev",
+    slug: "app-dev",
     hero: {
       title: "Cross-Platform Mobile App Development",
       subHero: "Built Once, Scales Everywhere",

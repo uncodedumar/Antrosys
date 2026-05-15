@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Elite AI & Development Services | Antrosys',
     description: 'Empowering brands with next-gen technology, from intelligent chatbots to high-performance enterprise integrations.',
-    url: 'https://antrosys.com/services',
+    url: 'https://www.antrosys.com/services',
     images: [
       {
         url: '/AboutImages/call.avif', // Recommended: Use a high-quality graphic of your tech stack
@@ -30,6 +30,9 @@ export const metadata: Metadata = {
       },
     ],
     type: 'website',
+  },
+  alternates: {
+    canonical: '/services',
   },
 };
 

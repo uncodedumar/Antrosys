@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { ServicePageData, homePageData } from "@/lib/data";
 import ServiceSlugHero from "@/app/components/ServiceSlugHero";
@@ -23,7 +23,8 @@ export async function generateMetadata({
   params,
 }: ServicePageProps): Promise<Metadata> {
   const { slug } = await params;
-  const service = ServicePageData.find((s) => s.slug === slug);
+  const normalizedSlug = slug.toLowerCase();
+  const service = ServicePageData.find((s) => s.slug === normalizedSlug);
 
   if (!service) {
     return {
@@ -38,12 +39,20 @@ export async function generateMetadata({
     title: `${title} - Antrosys Services`,
     description:
       service.hero?.subHero || "Our comprehensive service offering",
+    alternates: {
+      canonical: `/services/${service.slug}`,
+    },
   };
 }
 
 export default async function ServicePage({ params }: ServicePageProps) {
   const { slug } = await params;
-  const service = ServicePageData.find((s) => s.slug === slug);
+  const normalizedSlug = slug.toLowerCase();
+  const service = ServicePageData.find((s) => s.slug === normalizedSlug);
+
+  if (service && slug !== service.slug) {
+    redirect(`/services/${service.slug}`);
+  }
 
   if (!service) {
     notFound();
@@ -54,7 +63,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
   return (
     <>
-      <ServiceSlugHero slug={slug} />
+      <ServiceSlugHero slug={service.slug} />
       <ServiceSuite data={service.serviceSuite} />
       <TechStack data={service.techStack} />
       <FinalSection data={homeData.finalSection} />

@@ -19,39 +19,39 @@ type ServiceCardData = {
 };
 
 const getCategory = (slug: string): string => {
-  if (['Automated-Chat-Systems', 'AI-Solutions'].includes(slug)) return 'AI Development';
-  if (['App-Dev', 'Next-Gen-Desktop-Applications'].includes(slug)) return 'Application Development';
-  if (['Logo-n-Brand-Identity', 'Web-n-Application-Design', 'Art-n-Illustration', 'Print-Design', 'Packaging-n-Label-Design', 'Social-Media-Graphics'].includes(slug)) return 'Design';
-  if (['Marketing-n-Advertising', 'Growth-Analytics-n-Marketing-Automation'].includes(slug)) return 'Marketing';
-  if (slug === 'QA-QC') return 'QA Testing';
+  if (['automated-chat-systems', 'ai-solutions'].includes(slug)) return 'AI Development';
+  if (['app-dev', 'next-gen-desktop-applications'].includes(slug)) return 'Application Development';
+  if (['logo-n-brand-identity', 'web-n-application-design', 'art-n-illustration', 'print-design', 'packaging-n-label-design', 'social-media-graphics'].includes(slug)) return 'Design';
+  if (['marketing-n-advertising', 'growth-analytics-n-marketing-automation'].includes(slug)) return 'Marketing';
+  if (slug === 'qa-qc') return 'QA Testing';
   if (slug === 'custom-software-development') return 'Software Development';
   return 'Web Development';
 };
 
 const getSpecific = (slug: string): string => {
   const mapping: Record<string, string> = {
-    'AI-Solutions': 'AI Solutions',
-    'App-Dev': 'Mobile Apps',
-    'Next-Gen-Desktop-Applications': 'Desktop Applications',
-    'Logo-n-Brand-Identity': 'Brand Identity',
-    'Web-n-Application-Design': 'Web & App Design',
-    'Art-n-Illustration': 'Art & Illustration',
-    'Print-Design': 'Print Design',
-    'Packaging-n-Label-Design': 'Packaging Design',
-    'Social-Media-Graphics': 'Social Media Graphics',
-    'Marketing-n-Advertising': 'Advertising',
-    'Growth-Analytics-n-Marketing-Automation': 'Growth & Analytics',
-    'QA-QC': 'Quality Assurance',
+    'ai-solutions': 'AI Solutions',
+    'app-dev': 'Mobile Apps',
+    'next-gen-desktop-applications': 'Desktop Applications',
+    'logo-n-brand-identity': 'Brand Identity',
+    'web-n-application-design': 'Web & App Design',
+    'art-n-illustration': 'Art & Illustration',
+    'print-design': 'Print Design',
+    'packaging-n-label-design': 'Packaging Design',
+    'social-media-graphics': 'Social Media Graphics',
+    'marketing-n-advertising': 'Advertising',
+    'growth-analytics-n-marketing-automation': 'Growth & Analytics',
+    'qa-qc': 'Quality Assurance',
     'custom-software-development': 'Custom Software',
-    'Front-End-Development': 'Front-End Development',
-    'Back-End-Web-Development': 'Back-End Development',
-    'Full-Stack Web Development': 'Full-Stack Development',
-    'Website-Maintenance': 'Website Maintenance',
-    'No-Code-Easy-to-Manage-Websites': 'No-Code Websites',
-    'WordPress-Engineered-Websites': 'WordPress',
-    'Shopify-Websites': 'Shopify',
-    'Automated-Chat-Systems': 'Chat Systems',
-    'Cloud-Solutions': 'Cloud Solutions',
+    'front-end-development': 'Front-End Development',
+    'back-end-web-development': 'Back-End Development',
+    'full-stack-web-development': 'Full-Stack Development',
+    'website-maintenance': 'Website Maintenance',
+    'no-code-easy-to-manage-websites': 'No-Code Websites',
+    'wordpress-engineered-websites': 'WordPress',
+    'shopify-websites': 'Shopify',
+    'automated-chat-systems': 'Chat Systems',
+    'cloud-solutions': 'Cloud Solutions',
   };
   return mapping[slug] || slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 };

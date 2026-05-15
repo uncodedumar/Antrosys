@@ -9,38 +9,38 @@ import { ServicePageData } from "@/lib/data";
 import Image from "next/image";
 
 const getCategory = (slug: string): string => {
-  if (["Automated-Chat-Systems", "AI-Solutions"].includes(slug)) return "AI & Machine Learning";
-  if (["App-Dev", "Next-Gen-Desktop-Applications"].includes(slug)) return "Mobile & Desktop Apps";
-  if (["Logo-n-Brand-Identity", "Web-n-Application-Design", "Art-n-Illustration", "Print-Design", "Packaging-n-Label-Design", ].includes(slug)) return "UI/UX & Creative Design";
-  if (["Marketing-n-Advertising","Social-Media-Graphics", "Growth-Analytics-n-Marketing-Automation"].includes(slug)) return "Digital Marketing & Ads (SMM)";
-  if (["custom-software-development", "Cloud-Solutions", "QA-QC"].includes(slug)) return "Custom Software Solutions";
+  if (["automated-chat-systems", "ai-solutions"].includes(slug)) return "AI & Machine Learning";
+  if (["app-dev", "next-gen-desktop-applications"].includes(slug)) return "Mobile & Desktop Apps";
+  if (["logo-n-brand-identity", "web-n-application-design", "art-n-illustration", "print-design", "packaging-n-label-design", ].includes(slug)) return "UI/UX & Creative Design";
+  if (["marketing-n-advertising","social-media-graphics", "growth-analytics-n-marketing-automation"].includes(slug)) return "Digital Marketing & Ads (SMM)";
+  if (["custom-software-development", "cloud-solutions", "qa-qc"].includes(slug)) return "Custom Software Solutions";
   return "Web Development & Performance";
 };
 
 const getSpecific = (slug: string): string => {
   const mapping: Record<string, string> = {
-    "AI-Solutions": "Enterprise AI Solutions",
-    "Automated-Chat-Systems": "AI Chatbot Development",
-    "App-Dev": "iOS & Android App Dev",
-    "Next-Gen-Desktop-Applications": "Cross-Platform Desktop Apps",
-    "Logo-n-Brand-Identity": "Brand Identity Design",
-    "Web-n-Application-Design": "UI/UX Interface Design (Web/App)",
-    "Art-n-Illustration": "Digital Art & Illustration",
-    "Print-Design": "Print & Vector Graphics",
-    "Packaging-n-Label-Design": "Product Packaging Design",
-    "Social-Media-Graphics": "Social Media Ad Design (SMM)",
-    "Marketing-n-Advertising": "Performance Marketing & Ads",
-    "Growth-Analytics-n-Marketing-Automation": "Marketing Automation",
-    "QA-QC": "Quality Assurance & QC",
+    "ai-solutions": "Enterprise AI Solutions",
+    "automated-chat-systems": "AI Chatbot Development",
+    "app-dev": "iOS & Android App Dev",
+    "next-gen-desktop-applications": "Cross-Platform Desktop Apps",
+    "logo-n-brand-identity": "Brand Identity Design",
+    "web-n-application-design": "UI/UX Interface Design (Web/App)",
+    "art-n-illustration": "Digital Art & Illustration",
+    "print-design": "Print & Vector Graphics",
+    "packaging-n-label-design": "Product Packaging Design",
+    "social-media-graphics": "Social Media Ad Design (SMM)",
+    "marketing-n-advertising": "Performance Marketing & Ads",
+    "growth-analytics-n-marketing-automation": "Marketing Automation",
+    "qa-qc": "Quality Assurance & QC",
     "custom-software-development": "SaaS Software Development",
-    "Front-End-Development": "React & Next.js Front-End",
-    "Back-End-Web-Development": "Node & Cloud Back-End",
-    "Full-Stack Web Development": "Full-Stack Web Solutions",
-    "Website-Maintenance": "Web Support & Maintenance (SEO)",
-    "No-Code-Easy-to-Manage-Websites": "No-Code Web Solutions",
-    "WordPress-Engineered-Websites": "Headless WordPress Dev",
-    "Shopify-Websites": "Shopify & E-commerce Stores",
-    "Cloud-Solutions": "Cloud Infrastructure & AWS",
+    "front-end-development": "React & Next.js Front-End",
+    "back-end-web-development": "Node & Cloud Back-End",
+    "full-stack-web-development": "Full-Stack Web Solutions",
+    "website-maintenance": "Web Support & Maintenance (SEO)",
+    "no-code-easy-to-manage-websites": "No-Code Web Solutions",
+    "wordpress-engineered-websites": "Headless WordPress Dev",
+    "shopify-websites": "Shopify & E-commerce Stores",
+    "cloud-solutions": "Cloud Infrastructure & AWS",
   };
   return mapping[slug] || slug.split("-").join(" ");
 };
@@ -63,12 +63,12 @@ const generateServicesData = () => {
 const servicesData = generateServicesData();
 
 const navLinks = [
-  { name: "Home", href: "/", title: "Antrosys | Industry-Leading AI & Development Agency", ariaLabel: "Navigate to Antrosys home page" },
+  { name: "Home", href: "/", title: "antrosys | Industry-Leading AI & Development Agency", ariaLabel: "Navigate to antrosys home page" },
   { name: "Services", href: "/services", hasDropdown: true, dropdownType: "services", title: "Comprehensive AI, Web & Mobile Development Services", ariaLabel: "Explore our digital transformation and engineering services" },
   { name: "BPO", href: "/bpo", hasDropdown: true, dropdownType: "bpo", title: "Elite BPO & Scalable Outsourcing Solutions", ariaLabel: "View our business process outsourcing and customer support solutions" },
   { name: "Portfolio", href: "/portfolio", title: "Our Portfolio | 1,200+ Successfully Completed Projects", ariaLabel: "View our gallery of successful digital and AI projects" },
   { name: "Blogs", href: "/blogs", title: "Insights on AI, Machine Learning & Digital Growth", ariaLabel: "Read the latest tech insights and agency news" },
-  { name: "About", href: "/about", title: "About Antrosys | Led by Muhammad Umar Riaz", ariaLabel: "Learn more about our agency's mission and leadership" },
+  { name: "About", href: "/about", title: "About antrosys | Led by Muhammad Umar Riaz", ariaLabel: "Learn more about our agency's mission and leadership" },
 ];
 
 const BouncingLink = ({ name, href, isDropdown = false }: { name: string; href: string; isDropdown?: boolean }) => (
@@ -145,7 +145,7 @@ export default function Navbar() {
       >
         <nav className="flex justify-between items-center h-20 px-6 lg:px-12 max-w-screen-2xl mx-auto relative" aria-label="Main Navigation">
           <Link href="/" className="flex-shrink-0 z-10 hover:scale-105 transition-transform" aria-label="Digital Agency Home">
-            <Image src="/Logow.svg" alt="Antrosys Logo" width={48} height={48} className="w-10 h-10 md:w-12 md:h-12" priority />
+            <Image src="/logow.svg" alt="Antrosys Logo" width={48} height={48} className="w-10 h-10 md:w-12 md:h-12" priority />
           </Link>
 
           {/* Desktop Nav */}
@@ -283,7 +283,7 @@ export default function Navbar() {
               className="fixed inset-0 bg-[#050505] z-[10000] p-8 flex flex-col h-screen w-screen overflow-y-auto"
             >
               <div className="flex justify-between items-center mb-16">
-                <Image src="/Logow.svg" alt="Agency Logo" width={48} height={48} className="w-12 h-12" priority />
+                <Image src="/logow.svg" alt="Agency Logo" width={48} height={48} className="w-12 h-12" priority />
                 <button onClick={closeMobileMenu} aria-label="Close menu" className="p-4 bg-white/5 rounded-full text-white active:rotate-90 transition-transform">
                   <X size={32} aria-hidden="true" />
                 </button>

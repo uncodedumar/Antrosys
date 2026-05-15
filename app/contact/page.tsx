@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Get in Touch with Antrosys | Global Tech & BPO Partner",
     description: "Partner with a global leader in AI and digital transformation. Reach out today for a consultation and maximize your profitability.",
-    url: "https://antrosys.com/contact",
+    url: "https://www.antrosys.com/contact",
     images: [
       {
         url: "/AboutImages/call.avif",
@@ -34,6 +34,9 @@ export const metadata: Metadata = {
       },
     ],
     type: "website",
+  },
+  alternates: {
+    canonical: "/contact",
   },
 };
 

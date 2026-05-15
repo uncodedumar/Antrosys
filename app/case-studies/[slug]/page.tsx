@@ -1,4 +1,4 @@
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import type { Metadata } from 'next';
 import { caseStudies } from '@/lib/data';
 import Image from 'next/image';
@@ -13,7 +13,12 @@ interface CaseStudyPageProps {
 
 export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
   const { slug } = await params;
-  const study = caseStudies.find((s) => s.slug === slug);
+  const normalizedSlug = slug.toLowerCase();
+  const study = caseStudies.find((s) => s.slug === normalizedSlug);
+
+  if (study && slug !== study.slug) {
+    redirect(`/case-studies/${study.slug}`);
+  }
 
   if (!study) {
     notFound();
