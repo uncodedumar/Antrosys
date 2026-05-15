@@ -4,24 +4,28 @@ import { blogPosts } from '@/lib/data';
 import BlogsSlug from '@/app/components/BlogsSlug';
 import FaqSection from "@/app/components/FaqSection";
 
+const getBlogPostBySlug = (slug: string) => blogPosts.find((post) => post.slug === slug);
+
 /** Pre-render every post so crawlers and static hosts always resolve `/blog/[slug]`. */
 export function generateStaticParams() {
   return blogPosts.map((post) => ({ slug: post.slug }));
 }
 
+export const dynamicParams = false;
+
 interface BlogPostPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateMetadata(
   { params }: BlogPostPageProps
 ): Promise<Metadata> {
 
-  const { slug } = params;
+  const { slug } = await params;
 
-  const post = blogPosts.find((p) => p.slug === slug);
+  const post = getBlogPostBySlug(slug);
 
   if (!post) {
     return {
@@ -34,12 +38,15 @@ export async function generateMetadata(
   return {
     title: post.title,
     description,
+    alternates: {
+      canonical: `/blog/${post.slug}`,
+    },
 
     openGraph: {
       title: post.title,
       description,
       type: "article",
-      url: `https://www.antrosys.com/blog/${post.slug}`,
+      url: `/blog/${post.slug}`,
       images: [
         {
           url: post.image,
@@ -61,8 +68,8 @@ export async function generateMetadata(
 
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const { slug } = params;
-  const post = blogPosts.find((p) => p.slug === slug);
+  const { slug } = await params;
+  const post = getBlogPostBySlug(slug);
 
   if (!post) {
     notFound();

@@ -109,11 +109,12 @@ export default function BlogListing() {
 
   // JSON-LD for Search Engines
   const jsonLd = {
-    "@context": "https://antrosys.com",
+    "@context": "https://schema.org",
     "@type": "Blog",
     "name": "Expert Insights Blog",
     "description": "High-performance technical articles on SEO, AI, and Next.js Development.",
-    "publisher": { "@type": "Organization", "name": "Your Brand" }
+    "url": "https://www.antrosys.com/blogs",
+    "publisher": { "@type": "Organization", "name": "Antrosys" }
   };
 
   return (

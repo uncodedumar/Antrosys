@@ -46,6 +46,11 @@ const nextConfig: NextConfig = {
         destination: "/services/Full-Stack-Web-Development",
         permanent: true,
       },
+      {
+        source: "/blogs/:slug",
+        destination: "/blog/:slug",
+        permanent: true,
+      },
     ];
   },
 
