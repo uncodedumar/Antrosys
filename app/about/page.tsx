@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { buildOpenGraph, buildTwitter } from "@/lib/seo";
 
 import TeamHero from "../components/TeamHero";
 import HoverImage from "../components/HoverImage2";
@@ -14,34 +15,29 @@ import ServicesCTA from "../components/servicesCTA";
 
 
 export const metadata: Metadata = {
-  title: "About Antrosys | The Leaders in AI & Digital Transformation",
+  title: "About Antrosys | Software, AI & Design Team",
   description:
-    "Founded by Muhammad Umar Riaz, Antrosys is a global technology consulting firm specializing in AI art, custom software, and elite BPO solutions. Discover our mission to empower brands to dominate the digital landscape.",
+    "Meet Antrosys, a software, AI, UI/UX, branding, e-commerce, and digital product team building practical systems for growing businesses.",
   keywords: [
     "About Antrosys",
-    "Muhammad Umar Riaz",
-    "AI Agency Leadership",
-    "Digital Transformation Experts",
-    "Global Technology Consulting",
-    "Software Engineering Excellence"
+    "software development team",
+    "AI development company",
+    "UI UX design team",
+    "digital product agency",
+    "brand and technology partner"
   ],
-  openGraph: {
-    title: "The Story of Antrosys | Engineering the Future",
-    description: "Meet the team behind 1,200+ successful projects. Learn how Antrosys combines creative UI/UX with high-performance AI and cloud infrastructure.",
-    url: "https://www.antrosys.com/about",
-    images: [
-      {
-        url: "/AboutImages/call.avif", // Recommended: A photo of the leadership or team office
-        width: 1200,
-        height: 630,
-        alt: "About Antrosys - Led by Muhammad Umar Riaz",
-      },
-    ],
-    type: "profile", // "profile" is great for About pages that highlight founders/teams
-  },
   alternates: {
     canonical: "/about",
   },
+  openGraph: buildOpenGraph({
+    title: "About Antrosys | Software, AI & Design Team",
+    description: "Learn how Antrosys blends software engineering, AI development, UI/UX design, branding, and e-commerce delivery.",
+    path: "/about",
+  }),
+  twitter: buildTwitter({
+    title: "About Antrosys | Software, AI & Design Team",
+    description: "A digital product team for custom software, AI systems, websites, apps, e-commerce, and brand experiences.",
+  }),
 };
 
 export default function Portfolio() {

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { buildOpenGraph, buildTwitter } from "@/lib/seo";
 
 import ContactHero from "../components/ContactHero";
 import FaqSection from "../components/FaqSection";
@@ -10,34 +11,28 @@ import ServicesCTA from "../components/servicesCTA";
 
 
 export const metadata: Metadata = {
-  title: "Contact Antrosys | Start Your Digital Transformation Today",
+  title: "Contact Antrosys | Start a Software or AI Project",
   description:
-    "Ready to scale? Contact Antrosys to discuss your next AI integration, mobile app project, or elite BPO outsourcing needs. Let's build something bold together.",
+    "Contact Antrosys to discuss custom software, web development, AI systems, UI/UX design, Shopify, WordPress, branding, or BPO support.",
   keywords: [
-    "Hire Antrosys",
-    "AI Development Consultation",
-    "Software Development Agency Contact",
-    "BPO Partner Inquiry",
-    "Antrosys Support",
-    "Scale Business with AI"
+    "contact Antrosys",
+    "hire software development agency",
+    "AI development consultation",
+    "web development quote",
+    "Shopify development consultation"
   ],
-  openGraph: {
-    title: "Get in Touch with Antrosys | Global Tech & BPO Partner",
-    description: "Partner with a global leader in AI and digital transformation. Reach out today for a consultation and maximize your profitability.",
-    url: "https://www.antrosys.com/contact",
-    images: [
-      {
-        url: "/AboutImages/call.avif",
-        width: 1200,
-        height: 630,
-        alt: "Contact Antrosys for AI and Software Development",
-      },
-    ],
-    type: "website",
-  },
   alternates: {
     canonical: "/contact",
   },
+  openGraph: buildOpenGraph({
+    title: "Contact Antrosys | Start a Software or AI Project",
+    description: "Talk with Antrosys about websites, apps, AI systems, e-commerce builds, UI/UX, branding, and digital operations.",
+    path: "/contact",
+  }),
+  twitter: buildTwitter({
+    title: "Contact Antrosys | Start a Software or AI Project",
+    description: "Discuss your next website, app, AI, Shopify, WordPress, branding, or BPO project.",
+  }),
 };
 
 export default function Contact() {

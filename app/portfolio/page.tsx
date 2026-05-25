@@ -1,58 +1,41 @@
 import type { Metadata } from "next";
+import { buildOpenGraph, buildTwitter } from "@/lib/seo";
 
 import ServicesCTA from '../components/servicesCTA'
 import ThreeCardSection from "../components/ThreeCardSection";
 
 
-
-
 export const metadata: Metadata = {
-  title: "Portfolio | 1,200+ Projects in AI, Apps & Web - Antrosys",
+  title: "Portfolio | Web, Software, AI & E-Commerce Work",
   description:
-    "Discover the Antrosys portfolio: a showcase of 1,200+ successful projects spanning cutting-edge AI art, custom SaaS platforms, mobile apps, and enterprise-level AI integrations.",
+    "Explore Antrosys work across custom websites, software platforms, mobile apps, Shopify stores, AI products, branding, and digital experiences.",
   keywords: [
     "Antrosys Portfolio",
-    "AI Project Case Studies",
-    "Full-Stack Development Examples",
-    "SaaS Portfolio",
-    "Mobile App Showcases",
-    "Digital Transformation Projects",
-    "Custom AI Model Portfolio"
+    "web development portfolio",
+    "software development case studies",
+    "AI project examples",
+    "Shopify portfolio",
+    "UI UX design work"
   ],
-  openGraph: {
-    title: "The Antrosys Portfolio | Excellence in Digital Engineering",
-    description: "From startups to enterprises, see how we’ve delivered 1,200+ bold and authentic digital solutions worldwide.",
-    url: "https://www.antrosys.com/portfolio",
-    images: [
-      {
-        url: "/AboutImages/call.avif", // Use an image showing a grid of your best work
-        width: 1200,
-        height: 630,
-        alt: "Antrosys Portfolio - Showcasing 1,200+ Successful Projects",
-      },
-    ],
-    type: "website",
-  },
   alternates: {
     canonical: "/portfolio",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Portfolio | Antrosys Success Stories",
-    description: "Explore over 1,200 successfully completed projects in AI, Dev, and BPO.",
-  },
+  openGraph: buildOpenGraph({
+    title: "Antrosys Portfolio | Web, Software, AI & E-Commerce Work",
+    description: "Case studies and selected work across custom web development, software platforms, mobile apps, AI, Shopify, and branding.",
+    path: "/portfolio",
+  }),
+  twitter: buildTwitter({
+    title: "Antrosys Portfolio | Web, Software, AI & E-Commerce Work",
+    description: "Explore Antrosys websites, apps, AI products, e-commerce platforms, and brand work.",
+  }),
 };
 
 export default function Portfolio() {
   return (
     <>
       <ThreeCardSection />
-      
-
-      < ServicesCTA/>
-      
-
+      <ServicesCTA/>
     </>
-  
   );
 }

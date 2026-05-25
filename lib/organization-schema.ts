@@ -8,7 +8,19 @@ export const organizationSchema = {
   url: "https://www.antrosys.com",
   logo: "https://www.antrosys.com/logo.svg",
   description:
-    "Strategic Technology For Intelligent Growth. Transform your business with innovative digital solutions, cutting-edge technology, and expert development services.Antrosys goes beyond development to ensure your brand dominates the market. We specialize in performance marketing, growth analytics, and marketing automation designed to maximize ROI and accelerate lead generation. As a premier BPO partner, we provide elite outsourcing solutions and customer support, allowing your business to scale effortlessly while we handle the technical and operational heavy lifting. Partner with Antrosys to turn sophisticated technology into sustainable business growth.",
+    "Antrosys is a digital product and software development company offering custom web development, AI development, UI/UX design, branding, Shopify, headless WordPress, mobile apps, cloud solutions, QA, and BPO services.",
+  knowsAbout: [
+    "Custom web development",
+    "Software development",
+    "AI development",
+    "UI/UX design",
+    "Brand identity design",
+    "Shopify development",
+    "Headless WordPress development",
+    "Mobile app development",
+    "Cloud solutions",
+    "BPO services",
+  ],
   sameAs: [
     "https://www.linkedin.com/company/antrosys",
     "https://www.instagram.com/antrosys/",

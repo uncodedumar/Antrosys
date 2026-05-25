@@ -1,40 +1,30 @@
 import type { Metadata } from 'next';
+import { buildOpenGraph, buildTwitter } from '@/lib/seo';
 import BlogsSection from '../components/BlogsSection';
 
 export const metadata: Metadata = {
-  title: "Blog | AI Insights & Tech Trends - Antrosys",
+  title: "Blog | Software, AI & Digital Product Insights",
   description:
-    "Expert perspectives on AI integrations, custom software development, and digital growth strategies. Stay ahead of the curve with the latest from the Antrosys engineering team.",
+    "Read Antrosys insights on AI development, machine learning, custom software, web platforms, healthcare technology, and product engineering.",
   keywords: [
-    "AI Development Blog",
-    "Tech Transformation Insights",
-    "Next.js Development Tips",
-    "Machine Learning Trends",
-    "BPO Industry News",
-    "Antrosys Engineering Blog"
+    "AI development blog",
+    "software development insights",
+    "machine learning articles",
+    "web development blog",
+    "digital product strategy"
   ],
-  openGraph: {
-    title: "The Antrosys Blog | Mastering Digital Transformation",
-    description: "Deep dives into AI, full-stack engineering, and business scaling strategies from the experts at Antrosys.",
-    url: "https://www.antrosys.com/blogs",
-    type: "website",
-    images: [
-      {
-        url: "/AboutImages/call.avif", // A branded image representing knowledge/innovation
-        width: 1200,
-        height: 630,
-        alt: "Antrosys Blog - AI and Technology Insights",
-      },
-    ],
-  },
   alternates: {
     canonical: "/blogs",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Antrosys Blog | Tech & AI Thought Leadership",
-    description: "Innovative ideas and technical guides to help your business dominate the digital landscape.",
-  },
+  openGraph: buildOpenGraph({
+    title: "Antrosys Blog | Software, AI & Digital Product Insights",
+    description: "Articles on AI, machine learning, software development, web platforms, and product engineering.",
+    path: "/blogs",
+  }),
+  twitter: buildTwitter({
+    title: "Antrosys Blog | Software, AI & Digital Product Insights",
+    description: "Read practical technology insights from Antrosys.",
+  }),
 };
 export default function Service() {
   return (

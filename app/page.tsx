@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import HeroSection from "./components/HeroSection";
 import { homePageData } from "@/lib/data";
+import { buildOpenGraph, buildTwitter } from "@/lib/seo";
 
 
 
@@ -86,34 +87,29 @@ const MY_WORDS = [
 
 
 export const metadata: Metadata = {
-  title: "Antrosys | Cutting-Edge AI, Full-Stack Dev & Elite BPO Solutions",
+  title: "Custom Web, Software & AI Development Agency",
   description:
-    "Antrosys empowers startups and enterprises with custom AI integrations, high-performance mobile & web development, and elite BPO outsourcing. Transform your digital presence with bold, trusted engineering.",
+    "Antrosys builds custom websites, software platforms, AI systems, mobile apps, Shopify stores, headless WordPress sites, UI/UX, and brand identities.",
   keywords: [
-    "AI Development Agency",
-    "Custom SaaS Solutions",
-    "Mobile App Development",
-    "BPO Customer Support",
-    "Enterprise AI Integration",
-    "Antrosys",
-    "Muhammad Umar Riaz"
+    "custom web development agency",
+    "software development company",
+    "AI development services",
+    "UI UX design agency",
+    "Shopify development",
+    "headless WordPress development"
   ],
-  
-  openGraph: {
-    title: "Antrosys | Leading Digital Transformation Agency",
-    description: "Specializing in AI art, custom models, and full-stack development to help businesses scale effortlessly.",
-    url: "https://www.antrosys.com",
-    siteName: "Antrosys",
-    images: [
-      {
-        url: "/AboutImages/call.avif", // Ensure this image exists in your public folder
-        width: 1200,
-        height: 630,
-        alt: "Antrosys - Empowering Brands to Dominate the Digital Landscape",
-      },
-    ],
-    type: "website",
+  alternates: {
+    canonical: "/",
   },
+  openGraph: buildOpenGraph({
+    title: "Antrosys | Custom Web, Software & AI Development",
+    description: "Custom digital products, AI systems, e-commerce platforms, UI/UX design, branding, and scalable web development.",
+    path: "/",
+  }),
+  twitter: buildTwitter({
+    title: "Antrosys | Custom Web, Software & AI Development",
+    description: "Build custom websites, software, AI systems, Shopify stores, and brand experiences with Antrosys.",
+  }),
 };
 export default function Home() {
   // Variant 1: "Our Work" section

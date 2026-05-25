@@ -1,6 +1,7 @@
 import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { ServicePageData, homePageData } from "@/lib/data";
+import { buildOpenGraph, buildTwitter, cleanDescription } from "@/lib/seo";
 import ServiceSlugHero from "@/app/components/ServiceSlugHero";
 import ServiceSuite from "@/app/components/ServiceSuite";
 import TechStack from "@/app/components/TechStack";
@@ -32,16 +33,41 @@ export async function generateMetadata({
     };
   }
 
-  // Get the title from hero section
   const title = service.hero?.title || "Service";
+  const description = cleanDescription(
+    service.hero?.description || service.serviceSuite?.description || service.hero?.subHero || "Explore Antrosys service capabilities."
+  );
+  const keywords = [
+    title,
+    service.hero?.subHero,
+    service.serviceSuite?.title,
+    ...service.serviceSuite.cards.slice(0, 5).map((card) => card.heading),
+    ...service.techStack.items.slice(0, 4).map((item) => item.heading),
+  ].filter(Boolean) as string[];
 
   return {
-    title: `${title} - Antrosys Services`,
-    description:
-      service.hero?.subHero || "Our comprehensive service offering",
+    title,
+    description,
+    keywords,
     alternates: {
       canonical: `/services/${service.slug}`,
     },
+    openGraph: buildOpenGraph({
+      title: `${title} | Antrosys`,
+      description,
+      path: `/services/${service.slug}`,
+      image: {
+        url: service.hero.imageUrl,
+        width: 1200,
+        height: 630,
+        alt: `${title} by Antrosys`,
+      },
+    }),
+    twitter: buildTwitter({
+      title: `${title} | Antrosys`,
+      description,
+      image: service.hero.imageUrl,
+    }),
   };
 }
 

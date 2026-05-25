@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { buildOpenGraph, buildTwitter } from "@/lib/seo";
 
 import FaqsPage from "../components/FaqsPage";
 
@@ -6,34 +7,29 @@ import FaqsPage from "../components/FaqsPage";
 
 
 export const metadata: Metadata = {
-  title: "FAQs | Expert Insights on AI & Development - Antrosys",
+  title: "FAQs | Software, AI & Web Development Questions",
   description:
-    "Find answers to common questions about Antrosys' AI integrations, custom software development, BPO solutions, and how we help brands scale with next-gen technology.",
+    "Answers to common questions about Antrosys services, including custom software, AI development, web design, Shopify, WordPress, branding, and BPO.",
   keywords: [
     "Antrosys FAQ",
-    "AI Agency Questions",
-    "Software Development Process",
-    "BPO Outsourcing FAQ",
-    "Custom AI Integration Cost",
-    "Antrosys Project Timeline"
+    "software development FAQ",
+    "AI development questions",
+    "web development process",
+    "Shopify development FAQ",
+    "BPO outsourcing FAQ"
   ],
-  openGraph: {
-    title: "Antrosys FAQs | Everything You Need to Know",
-    description: "Clearing the path to digital transformation. Learn about our process, technology stack, and elite BPO support.",
-    url: "https://www.antrosys.com/faqs",
-    type: "website",
-    images: [
-      {
-        url: "/AboutImages/call.avif",
-        width: 1200,
-        height: 630,
-        alt: "Antrosys Frequently Asked Questions",
-      },
-    ],
-  },
   alternates: {
     canonical: "/faqs",
   },
+  openGraph: buildOpenGraph({
+    title: "Antrosys FAQs | Software, AI & Web Development",
+    description: "Learn about Antrosys project process, services, technology stack, AI solutions, e-commerce, and support options.",
+    path: "/faqs",
+  }),
+  twitter: buildTwitter({
+    title: "Antrosys FAQs | Software, AI & Web Development",
+    description: "Answers about Antrosys services, process, technology, and project support.",
+  }),
 };
 export default function Contact() {
   return (

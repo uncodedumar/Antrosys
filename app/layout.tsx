@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import { organizationSchema } from "@/lib/organization-schema";
+import { buildOpenGraph, buildTwitter, coreKeywords, defaultOgImage, siteUrl } from "@/lib/seo";
 import "./globals.css";
 import LoadingBar from "./components/Loading";
 import Navigation from "./components/Navigation";
@@ -26,94 +27,14 @@ const poppins = Poppins({
 
 
 
-// ✅ This works because layout.tsx is a Server Component
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.antrosys.com'),
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "Antrosys Global Leader in AI Development & Digital Transformation.",
+    default: "Antrosys | Custom Software, AI & Digital Product Development",
     template: "%s | Antrosys"
   },
-  description: "Antrosys is an industry-leading agency specializing in cutting-edge AI art, custom AI models, and intelligent chatbots. As a premier partner for digital transformation, we provide full-stack development (iOS, Android, Desktop), headless WordPress, and Shopify e-commerce solutions powered by AWS cloud infrastructure. With a portfolio of 1,200+ successful projects, our expertise spans ML/DL solutions, UI/UX interface design, and performance marketing. From startups to enterprises, Antrosys empowers brands to dominate the digital landscape through sophisticated marketing automation and elite BPO outsourcing.",
-  keywords: [
-    // Core Identity & Leadership
-
-    "cretaive ai agency",
-    "ai agency",
-    "design agency",
-    
-    "Antrosys",
-    "Software",
-    "solutions",
-    "software development",
-    "software engineering",
-    "software solutions",
-    "software consulting",
-    "software development agency",
-    "software development company",
-    "software development services",
-    "software development solutions",
-    "software development consultancy",
-    "software development firm",
-    "software development team",
-    "software development experts",
-    "software development services",
-    "software development solutions",
-    "software development consultancy",
-    "design agency",
-    "design services",
-    "design solutions",
-    "design consultancy",
-    "design firm",
-    "design team",
-    "design experts",
-    "design services",
-    "design solutions",
-    "bpo outsourcing",
-    "bpo solutions",
-    "bpo consultancy",
-    "bpo firm",
-    "bpo team",
-    "bpo experts",
-    "bpo services",
-    "bpo solutions",
-    "bpo consultancy",
-    "software design",
-    "software development agency",
-    "software development company",
-    "software development services",
-    "software development solutions",
-    "Muhammad Umar Riaz",
-    "Elite Digital Transformation Agency",
-    "Industry-Leading Technology Consulting",
-    
-    // AI & Advanced Engineering
-    "Custom AI Model Development",
-    "Bespoke AI Art and Illustration",
-    "Enterprise AI Integration",
-    "ML/DL Solutions",
-    "Generative AI for Business",
-    
-    // Software & Web Development
-    "Full-Stack Web Development",
-    "Custom SaaS Software Engineering",
-    "High-Performance Mobile App Development",
-    "Headless WordPress Development",
-    "Shopify E-commerce Experts",
-    "Scalable AWS Cloud Infrastructure",
-    
-    // Design & Growth
-    "Next-Gen UI/UX Interface Design",
-    "Strategic Brand Identity",
-    "Performance Marketing Automation",
-    "Growth Analytics and Lead Generation",
-    "Data-Backed Digital Strategy",
-    
-    // Specialized Services & BPO
-    "Elite BPO Outsourcing Solutions",
-    "Enterprise Customer Support Solutions",
-    "Cross-Platform Desktop Application Development",
-    "Secure Digital Architecture"
-  ],
+  description: "Antrosys designs and builds custom websites, software, AI systems, mobile apps, Shopify stores, headless WordPress platforms, and brand experiences for growing businesses.",
+  keywords: coreKeywords,
   authors: [{ name: "Antrosys" }],
   creator: "Antrosys",
   publisher: "Antrosys",
@@ -137,27 +58,20 @@ export const metadata: Metadata = {
     statusBarStyle: "black-translucent",
     title: "Antrosys",
   },
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://www.antrosys.com",
-    siteName: "Antrosys",
-    title: "Antrosys | Elevate your business with AI & Digital Transformation",
-    description: "Transform your digital presence with Antrosys, a global leader in full-stack web and mobile development. Our engineering team excels in building high-performance applications for iOS, Android, and Desktop, utilizing robust AWS cloud infrastructure. Whether you require a headless WordPress architecture, a high-conversion Shopify e-commerce store, or a custom enterprise software suite, Antrosys blends elite UI/UX design with scalable code to drive global profitability.",
-    images: [
-      {
-        url: "/AboutImages/call.avif",
-        width: 1200,
-        height: 630,
-        alt: "Antrosys | System That Survives",
-      },
-    ],
+  alternates: {
+    canonical: "/",
   },
+  openGraph: buildOpenGraph({
+    title: "Antrosys | Custom Software, AI & Digital Product Development",
+    description: "Custom web development, software engineering, AI development, UI/UX design, Shopify, headless WordPress, branding, and digital operations support.",
+    path: "/",
+    image: defaultOgImage,
+  }),
   twitter: {
-    card: "summary_large_image",
-    title: "ANtrosys | Premier destination for Generative AI and custom machine learning solutions.",
-    description: "Antrosys is the premier destination for Generative AI and custom machine learning solutions. We specialize in engineering intelligent chatbots and custom AI art models that redefine how brands interact with their audiences. By integrating Deep Learning (DL) and sophisticated ML pipelines into your existing ecosystem, we transform raw data into a competitive powerhouse. From AI-driven SaaS platforms to predictive analytics, Antrosys delivers the technical edge needed to lead the AI revolution.",
-    images: ["/AboutImages/call.avif"],
+    ...buildTwitter({
+      title: "Antrosys | Custom Software, AI & Digital Product Development",
+      description: "Build websites, apps, AI systems, e-commerce platforms, and brand experiences with Antrosys.",
+    }),
     creator: "@antrosys",
   },
   
