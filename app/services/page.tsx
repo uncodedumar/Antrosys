@@ -6,29 +6,29 @@ import ServicesCTA from '../components/servicesCTA'
 
 
 export const metadata: Metadata = {
-  title: 'Services | Web, Software, AI, Design & E-Commerce',
+  title: 'Denver Services | Web, Software, AI, Design & E-Commerce',
   description:
-    'Explore Antrosys services for custom software, web development, AI solutions, UI/UX design, branding, Shopify, WordPress, mobile apps, cloud, and BPO.',
+    'Explore Denver-focused Antrosys services for custom software, web development, AI solutions, UI/UX design, branding, Shopify, WordPress, mobile apps, cloud, and BPO.',
   keywords: [
-    'custom software development',
-    'web development services',
-    'AI development services',
-    'UI UX design services',
-    'Shopify development services',
+    'custom software development Denver',
+    'web development company in Denver',
+    'AI development company Denver',
+    'UI UX design agency Denver',
+    'Shopify development Denver',
     'headless WordPress development',
-    'mobile app development'
+    'Denver digital product agency'
   ],
   alternates: {
     canonical: '/services',
   },
   openGraph: buildOpenGraph({
-    title: 'Antrosys Services | Web, Software, AI, Design & E-Commerce',
-    description: 'Custom software, AI systems, websites, apps, UI/UX, branding, Shopify, headless WordPress, cloud, QA, and BPO services.',
+    title: 'Antrosys Denver Services | Web, Software, AI, Design & E-Commerce',
+    description: 'Denver custom software, AI systems, websites, apps, UI/UX, branding, Shopify, headless WordPress, cloud, QA, and BPO services.',
     path: '/services',
   }),
   twitter: buildTwitter({
-    title: 'Antrosys Services | Web, Software, AI, Design & E-Commerce',
-    description: 'Explore Antrosys service capabilities across software, AI, web, design, e-commerce, cloud, and operations.',
+    title: 'Antrosys Denver Services | Web, Software, AI, Design & E-Commerce',
+    description: 'Explore Denver service capabilities across software, AI, web, design, e-commerce, cloud, and operations.',
   }),
 };
 

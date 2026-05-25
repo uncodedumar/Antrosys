@@ -7,7 +7,7 @@ export const defaultOgImage = {
   url: "/AboutImages/call.avif",
   width: 1200,
   height: 630,
-  alt: "Antrosys digital product and software development team",
+  alt: "Antrosys Denver digital product and software development team",
 };
 
 export const coreKeywords = [
@@ -21,6 +21,22 @@ export const coreKeywords = [
   "mobile app development",
   "cloud solutions",
   "BPO services",
+  "web development company in Denver",
+  "software development agency Denver",
+  "AI development company Denver",
+  "Denver web design agency",
+  "custom software development Denver",
+];
+
+export const denverServiceKeywords = [
+  "web development company in Denver",
+  "software development agency Denver",
+  "AI development company Denver",
+  "Denver web design agency",
+  "Shopify development Denver",
+  "UI UX design agency Denver",
+  "custom software development Denver",
+  "Denver digital product agency",
 ];
 
 export function cleanDescription(text: string, maxLength = 155) {

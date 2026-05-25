@@ -62,12 +62,15 @@ export async function generateMetadata(
     };
   }
 
-  const description = cleanDescription(post.abstractContent);
-  const title = `${post.title} | Antrosys Blog`;
-  const keywords = blogKeywordMap[post.slug] || [
+  const description = cleanDescription(`${post.abstractContent} Insights from the Antrosys Denver software and AI team.`);
+  const title = `${post.title} | Antrosys Denver Blog`;
+  const keywords = [
+    ...(blogKeywordMap[post.slug] || [
     post.title,
     "AI development article",
     "software engineering insights",
+    ]),
+    "Denver software development insights",
   ];
 
   return {

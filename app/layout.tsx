@@ -30,10 +30,10 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Antrosys | Custom Software, AI & Digital Product Development",
+    default: "Antrosys | Denver Software, AI & Digital Product Agency",
     template: "%s | Antrosys"
   },
-  description: "Antrosys designs and builds custom websites, software, AI systems, mobile apps, Shopify stores, headless WordPress platforms, and brand experiences for growing businesses.",
+  description: "Antrosys is a Denver, Colorado software and AI agency building custom websites, digital products, Shopify stores, WordPress platforms, and brand experiences.",
   keywords: coreKeywords,
   authors: [{ name: "Antrosys" }],
   creator: "Antrosys",
@@ -62,15 +62,15 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: buildOpenGraph({
-    title: "Antrosys | Custom Software, AI & Digital Product Development",
-    description: "Custom web development, software engineering, AI development, UI/UX design, Shopify, headless WordPress, branding, and digital operations support.",
+    title: "Antrosys | Denver Software, AI & Digital Product Agency",
+    description: "Denver-based custom web development, software engineering, AI development, UI/UX design, Shopify, headless WordPress, branding, and digital operations support.",
     path: "/",
     image: defaultOgImage,
   }),
   twitter: {
     ...buildTwitter({
-      title: "Antrosys | Custom Software, AI & Digital Product Development",
-      description: "Build websites, apps, AI systems, e-commerce platforms, and brand experiences with Antrosys.",
+      title: "Antrosys | Denver Software, AI & Digital Product Agency",
+      description: "Build websites, apps, AI systems, e-commerce platforms, and brand experiences with Antrosys in Denver.",
     }),
     creator: "@antrosys",
   },

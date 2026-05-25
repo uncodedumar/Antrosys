@@ -26,13 +26,13 @@ export async function generateMetadata({
     };
   }
 
-  const description = cleanDescription(study.paragraph || study.description);
+  const description = cleanDescription(`Denver digital product agency case study: ${study.paragraph || study.description}`);
   const title = `${study.title} Case Study`;
   const image = study.images[0] || "/AboutImages/call.avif";
   const category = study.title.split(":")[1]?.trim() || "Digital Product";
 
   return {
-    title,
+    title: `${title} | Denver Digital Product Agency`,
     description,
     keywords: [
       `${study.title} case study`,
@@ -40,12 +40,13 @@ export async function generateMetadata({
       "web development case study",
       "software development portfolio",
       "digital product design",
+      "Denver digital product agency",
     ],
     alternates: {
       canonical: `/case-studies/${study.slug}`,
     },
     openGraph: buildOpenGraph({
-      title: `${title} | Antrosys`,
+      title: `${title} | Denver Digital Product Agency`,
       description,
       path: `/case-studies/${study.slug}`,
       image: {
@@ -56,7 +57,7 @@ export async function generateMetadata({
       },
     }),
     twitter: buildTwitter({
-      title: `${title} | Antrosys`,
+      title: `${title} | Denver Digital Product Agency`,
       description,
       image,
     }),

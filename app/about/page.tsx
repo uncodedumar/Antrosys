@@ -15,28 +15,28 @@ import ServicesCTA from "../components/servicesCTA";
 
 
 export const metadata: Metadata = {
-  title: "About Antrosys | Software, AI & Design Team",
+  title: "About Antrosys | Denver Software, AI & Design Team",
   description:
-    "Meet Antrosys, a software, AI, UI/UX, branding, e-commerce, and digital product team building practical systems for growing businesses.",
+    "Meet Antrosys, a Denver software, AI, UI/UX, branding, e-commerce, and digital product team building practical systems for growing businesses.",
   keywords: [
     "About Antrosys",
-    "software development team",
-    "AI development company",
-    "UI UX design team",
-    "digital product agency",
+    "Denver software development team",
+    "AI development company Denver",
+    "UI UX design agency Denver",
+    "Denver digital product agency",
     "brand and technology partner"
   ],
   alternates: {
     canonical: "/about",
   },
   openGraph: buildOpenGraph({
-    title: "About Antrosys | Software, AI & Design Team",
-    description: "Learn how Antrosys blends software engineering, AI development, UI/UX design, branding, and e-commerce delivery.",
+    title: "About Antrosys | Denver Software, AI & Design Team",
+    description: "Learn how Antrosys blends Denver software engineering, AI development, UI/UX design, branding, and e-commerce delivery.",
     path: "/about",
   }),
   twitter: buildTwitter({
-    title: "About Antrosys | Software, AI & Design Team",
-    description: "A digital product team for custom software, AI systems, websites, apps, e-commerce, and brand experiences.",
+    title: "About Antrosys | Denver Software, AI & Design Team",
+    description: "A Denver digital product team for custom software, AI systems, websites, apps, e-commerce, and brand experiences.",
   }),
 };
 

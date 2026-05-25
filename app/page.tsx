@@ -87,28 +87,28 @@ const MY_WORDS = [
 
 
 export const metadata: Metadata = {
-  title: "Custom Web, Software & AI Development Agency",
+  title: "Denver Web, Software & AI Development Agency",
   description:
-    "Antrosys builds custom websites, software platforms, AI systems, mobile apps, Shopify stores, headless WordPress sites, UI/UX, and brand identities.",
+    "Antrosys is a Denver software and AI agency building custom websites, software platforms, mobile apps, Shopify stores, WordPress sites, UI/UX, and brands.",
   keywords: [
-    "custom web development agency",
-    "software development company",
-    "AI development services",
-    "UI UX design agency",
-    "Shopify development",
-    "headless WordPress development"
+    "web development company in Denver",
+    "software development agency Denver",
+    "AI development company Denver",
+    "Denver web design agency",
+    "Shopify development Denver",
+    "custom software development Denver"
   ],
   alternates: {
     canonical: "/",
   },
   openGraph: buildOpenGraph({
-    title: "Antrosys | Custom Web, Software & AI Development",
-    description: "Custom digital products, AI systems, e-commerce platforms, UI/UX design, branding, and scalable web development.",
+    title: "Antrosys | Denver Web, Software & AI Development",
+    description: "Denver custom digital products, AI systems, e-commerce platforms, UI/UX design, branding, and scalable web development.",
     path: "/",
   }),
   twitter: buildTwitter({
-    title: "Antrosys | Custom Web, Software & AI Development",
-    description: "Build custom websites, software, AI systems, Shopify stores, and brand experiences with Antrosys.",
+    title: "Antrosys | Denver Web, Software & AI Development",
+    description: "Build custom websites, software, AI systems, Shopify stores, and brand experiences with a Denver-based team.",
   }),
 };
 export default function Home() {

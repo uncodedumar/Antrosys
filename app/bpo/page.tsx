@@ -9,27 +9,27 @@ import BpoServices from "../components/BpoServices";
 
 
 export const metadata: Metadata = {
-  title: 'BPO & RPO Services',
+  title: 'Denver BPO & RPO Services',
   description:
-    'Scale operations with Antrosys BPO and RPO services for customer support, recruiting support, back-office workflows, and managed business processes.',
+    'Scale operations with Antrosys Denver BPO and RPO services for customer support, recruiting support, back-office workflows, and managed business processes.',
   keywords: [
-    'BPO services',
-    'RPO services',
-    'customer support outsourcing',
-    'recruitment process outsourcing',
-    'back office support'
+    'Denver BPO services',
+    'Denver RPO services',
+    'customer support outsourcing Denver',
+    'recruitment process outsourcing Denver',
+    'back office support Denver'
   ],
   alternates: {
     canonical: '/bpo',
   },
   openGraph: buildOpenGraph({
-    title: 'BPO & RPO Services | Antrosys',
-    description: 'Customer support, recruitment process outsourcing, back-office workflows, and managed operations for growing teams.',
+    title: 'Denver BPO & RPO Services | Antrosys',
+    description: 'Customer support, recruitment process outsourcing, back-office workflows, and managed operations for Denver teams.',
     path: '/bpo',
   }),
   twitter: buildTwitter({
-    title: 'BPO & RPO Services | Antrosys',
-    description: 'Operational support for customer service, recruiting, back-office workflows, and scalable business processes.',
+    title: 'Denver BPO & RPO Services | Antrosys',
+    description: 'Operational support for customer service, recruiting, back-office workflows, and scalable business processes in Denver.',
   }),
 };
 

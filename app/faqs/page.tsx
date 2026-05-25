@@ -7,28 +7,28 @@ import FaqsPage from "../components/FaqsPage";
 
 
 export const metadata: Metadata = {
-  title: "FAQs | Software, AI & Web Development Questions",
+  title: "FAQs | Denver Software, AI & Web Development",
   description:
-    "Answers to common questions about Antrosys services, including custom software, AI development, web design, Shopify, WordPress, branding, and BPO.",
+    "Answers to common questions about Antrosys Denver services, including custom software, AI development, web design, Shopify, WordPress, branding, and BPO.",
   keywords: [
     "Antrosys FAQ",
-    "software development FAQ",
-    "AI development questions",
-    "web development process",
-    "Shopify development FAQ",
+    "Denver software development FAQ",
+    "AI development questions Denver",
+    "Denver web development process",
+    "Shopify development FAQ Denver",
     "BPO outsourcing FAQ"
   ],
   alternates: {
     canonical: "/faqs",
   },
   openGraph: buildOpenGraph({
-    title: "Antrosys FAQs | Software, AI & Web Development",
-    description: "Learn about Antrosys project process, services, technology stack, AI solutions, e-commerce, and support options.",
+    title: "Antrosys FAQs | Denver Software, AI & Web Development",
+    description: "Learn about Antrosys Denver project process, services, technology stack, AI solutions, e-commerce, and support options.",
     path: "/faqs",
   }),
   twitter: buildTwitter({
-    title: "Antrosys FAQs | Software, AI & Web Development",
-    description: "Answers about Antrosys services, process, technology, and project support.",
+    title: "Antrosys FAQs | Denver Software, AI & Web Development",
+    description: "Answers about Antrosys Denver services, process, technology, and project support.",
   }),
 };
 export default function Contact() {

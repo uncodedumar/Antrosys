@@ -1,7 +1,7 @@
 import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { ServicePageData, homePageData } from "@/lib/data";
-import { buildOpenGraph, buildTwitter, cleanDescription } from "@/lib/seo";
+import { buildOpenGraph, buildTwitter, cleanDescription, denverServiceKeywords } from "@/lib/seo";
 import ServiceSlugHero from "@/app/components/ServiceSlugHero";
 import ServiceSuite from "@/app/components/ServiceSuite";
 import TechStack from "@/app/components/TechStack";
@@ -35,25 +35,27 @@ export async function generateMetadata({
 
   const title = service.hero?.title || "Service";
   const description = cleanDescription(
-    service.hero?.description || service.serviceSuite?.description || service.hero?.subHero || "Explore Antrosys service capabilities."
+    `Denver ${service.hero?.description || service.serviceSuite?.description || service.hero?.subHero || "businesses can explore Antrosys service capabilities."}`
   );
   const keywords = [
+    `${title} Denver`,
     title,
     service.hero?.subHero,
     service.serviceSuite?.title,
     ...service.serviceSuite.cards.slice(0, 5).map((card) => card.heading),
     ...service.techStack.items.slice(0, 4).map((item) => item.heading),
+    ...denverServiceKeywords.slice(0, 4),
   ].filter(Boolean) as string[];
 
   return {
-    title,
+    title: `${title} in Denver`,
     description,
     keywords,
     alternates: {
       canonical: `/services/${service.slug}`,
     },
     openGraph: buildOpenGraph({
-      title: `${title} | Antrosys`,
+      title: `${title} in Denver | Antrosys`,
       description,
       path: `/services/${service.slug}`,
       image: {
@@ -64,7 +66,7 @@ export async function generateMetadata({
       },
     }),
     twitter: buildTwitter({
-      title: `${title} | Antrosys`,
+      title: `${title} in Denver | Antrosys`,
       description,
       image: service.hero.imageUrl,
     }),

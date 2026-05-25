@@ -11,27 +11,27 @@ import ServicesCTA from "../components/servicesCTA";
 
 
 export const metadata: Metadata = {
-  title: "Contact Antrosys | Start a Software or AI Project",
+  title: "Contact Antrosys | Denver Software & AI Projects",
   description:
-    "Contact Antrosys to discuss custom software, web development, AI systems, UI/UX design, Shopify, WordPress, branding, or BPO support.",
+    "Contact Antrosys in Denver to discuss custom software, web development, AI systems, UI/UX design, Shopify, WordPress, branding, or BPO support.",
   keywords: [
     "contact Antrosys",
-    "hire software development agency",
-    "AI development consultation",
-    "web development quote",
-    "Shopify development consultation"
+    "hire software development agency Denver",
+    "AI development consultation Denver",
+    "Denver web development quote",
+    "Shopify development Denver"
   ],
   alternates: {
     canonical: "/contact",
   },
   openGraph: buildOpenGraph({
-    title: "Contact Antrosys | Start a Software or AI Project",
-    description: "Talk with Antrosys about websites, apps, AI systems, e-commerce builds, UI/UX, branding, and digital operations.",
+    title: "Contact Antrosys | Denver Software & AI Projects",
+    description: "Talk with Antrosys in Denver about websites, apps, AI systems, e-commerce builds, UI/UX, branding, and digital operations.",
     path: "/contact",
   }),
   twitter: buildTwitter({
-    title: "Contact Antrosys | Start a Software or AI Project",
-    description: "Discuss your next website, app, AI, Shopify, WordPress, branding, or BPO project.",
+    title: "Contact Antrosys | Denver Software & AI Projects",
+    description: "Discuss your next Denver website, app, AI, Shopify, WordPress, branding, or BPO project.",
   }),
 };
 
