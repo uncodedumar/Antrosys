@@ -47,8 +47,6 @@ const contentSecurityPolicy = [
 ].join("; ");
 
 const legacyUppercaseRedirects = [
-  ["/Logo.svg", "/logo.svg"],
-  ["/Logow.svg", "/logow.svg"],
   ["/case-studies/Antrosys", "/case-studies/antrosys"],
   ["/services/Logo-n-Brand-Identity", "/services/logo-n-brand-identity"],
   ["/services/Web-n-Application-Design", "/services/web-n-application-design"],

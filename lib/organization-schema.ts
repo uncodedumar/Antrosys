@@ -6,7 +6,7 @@ export const organizationSchema = {
   "@type": ["Organization", "LocalBusiness"],
   name: "Antrosys",
   url: "https://www.antrosys.com",
-  logo: "https://www.antrosys.com/logo.svg",
+  logo: "https://www.antrosys.com/logow.svg",
   description:
     "Antrosys is a Denver, Colorado digital product and software development company offering custom web development, AI development, UI/UX design, branding, Shopify, headless WordPress, mobile apps, cloud solutions, QA, and BPO services.",
   knowsAbout: [
