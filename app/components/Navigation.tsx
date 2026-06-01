@@ -145,7 +145,14 @@ export default function Navbar() {
       >
         <nav className="flex justify-between items-center h-20 px-6 lg:px-12 max-w-screen-2xl mx-auto relative" aria-label="Main Navigation">
           <Link href="/" className="flex-shrink-0 z-10 hover:scale-105 transition-transform" aria-label="Digital Agency Home">
-            <Image src="/logow.svg" alt="Antrosys Logo" width={48} height={48} className="w-10 h-10 md:w-12 md:h-12" priority />
+            <Image
+              src="/logow.svg"
+              alt="Antrosys Logo"
+              width={51}
+              height={48}
+              className="h-10 w-auto md:h-12 md:w-auto"
+              priority
+            />
           </Link>
 
           {/* Desktop Nav */}
@@ -283,7 +290,14 @@ export default function Navbar() {
               className="fixed inset-0 bg-[#050505] z-[10000] p-8 flex flex-col h-screen w-screen overflow-y-auto"
             >
               <div className="flex justify-between items-center mb-16">
-                <Image src="/logow.svg" alt="Agency Logo" width={48} height={48} className="w-12 h-12" priority />
+                <Image
+                  src="/logow.svg"
+                  alt="Agency Logo"
+                  width={51}
+                  height={48}
+                  className="h-12 w-auto"
+                  priority
+                />
                 <button onClick={closeMobileMenu} aria-label="Close menu" className="p-4 bg-white/5 rounded-full text-white active:rotate-90 transition-transform">
                   <X size={32} aria-hidden="true" />
                 </button>
