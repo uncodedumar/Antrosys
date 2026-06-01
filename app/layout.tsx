@@ -25,6 +25,7 @@ const poppins = Poppins({
   adjustFontFallback: true,
 });
 
+const enableVercelInsights = process.env.VERCEL === "1";
 
 
 export const metadata: Metadata = {
@@ -108,9 +109,9 @@ export default function RootLayout({
         <Chatbot/>
         {children}
         <Footer />
-        <Analytics />
+        {enableVercelInsights && <Analytics />}
         <GoogleAnalytics gaId="G-8Z2YZEJZVP" />
-        <SpeedInsights />
+        {enableVercelInsights && <SpeedInsights />}
       </body>
     </html>
   );

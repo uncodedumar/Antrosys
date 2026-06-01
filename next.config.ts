@@ -35,7 +35,7 @@ const contentSecurityPolicy = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.botpress.cloud https://files.bpcontent.cloud https://www.googletagmanager.com",
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-  "img-src 'self' data: blob: https://images.unsplash.com https://flagcdn.com https://www.antrosys.com https://cdn.botpress.cloud https://files.bpcontent.cloud https://grainy-gradients.vercel.app",
+  "img-src 'self' data: blob: https://images.unsplash.com https://flagcdn.com https://www.antrosys.com https://cdn.botpress.cloud https://files.bpcontent.cloud",
   "font-src 'self' data: https://fonts.gstatic.com",
   "connect-src 'self' https://*.botpress.cloud wss://*.botpress.cloud https://www.google-analytics.com https://vitals.vercel-insights.com https://*.vercel-insights.com",
   "frame-src 'self' https://cal.com https://*.botpress.cloud",
@@ -43,7 +43,7 @@ const contentSecurityPolicy = [
   "base-uri 'self'",
   "frame-ancestors 'self'",
   "form-action 'self'",
-  "upgrade-insecure-requests",
+  ...(process.env.VERCEL === "1" ? ["upgrade-insecure-requests"] : []),
 ].join("; ");
 
 const legacyUppercaseRedirects = [
@@ -71,6 +71,15 @@ const legacyUppercaseRedirects = [
   ["/services/App-Dev", "/services/app-dev"],
 ] as const;
 
+const productionSecurityHeaders = process.env.VERCEL === "1"
+  ? [
+      {
+        key: "Strict-Transport-Security",
+        value: "max-age=63072000; includeSubDomains; preload",
+      },
+    ]
+  : [];
+
 const nextConfig: NextConfig = {
   htmlLimitedBots,
 
@@ -95,6 +104,15 @@ const nextConfig: NextConfig = {
             key: "Content-Security-Policy",
             value: contentSecurityPolicy,
           },
+          {
+            key: "Cross-Origin-Opener-Policy",
+            value: "same-origin-allow-popups",
+          },
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=()",
+          },
+          ...productionSecurityHeaders,
         ],
       },
     ];

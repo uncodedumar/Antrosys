@@ -12,8 +12,7 @@ const HeroSection = () => {
         />
         {/* Red/Orange Light Overlay - Replicating the dramatic lighting */}
         <div className="absolute inset-0 bg-gradient-to-tr from-red-900/40 via-transparent to-orange-500/20 mix-blend-overlay" />
-        {/* Grain/Noise Overlay */}
-        <div className="absolute inset-0 opacity-[0.15] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+        <div className="absolute inset-0 opacity-[0.15] pointer-events-none bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.18),transparent_60%)]" />
       </div>
 
       {/* Top Navigation Row */}

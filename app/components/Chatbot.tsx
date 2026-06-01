@@ -1,11 +1,31 @@
 "use client";
 
 import Script from "next/script";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Calendar, Phone, MessageSquare, X } from "lucide-react";
 
 const BotpressChat: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const patchBotpressLauncher = () => {
+      document.querySelectorAll<HTMLImageElement>("img.bpFabImage").forEach((image) => {
+        image.alt = "";
+        image.setAttribute("aria-hidden", "true");
+      });
+
+      document.querySelectorAll<HTMLElement>(".bpFabWrapper, #fab-root").forEach((element) => {
+        element.setAttribute("aria-hidden", "true");
+      });
+    };
+
+    patchBotpressLauncher();
+
+    const observer = new MutationObserver(patchBotpressLauncher);
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    return () => observer.disconnect();
+  }, []);
 
   const toggleBotpress = () => {
     // @ts-ignore - Botpress window object
@@ -21,9 +41,15 @@ const BotpressChat: React.FC = () => {
         src="https://cdn.botpress.cloud/webchat/v3.6/inject.js"
         strategy="afterInteractive"
         onLoad={() => {
-          // Hide default button once loaded to use our custom one
+          // Hide the inaccessible default launcher. We provide our own accessible control.
           // @ts-ignore
-          window.botpress.on("ready", () => window.botpress.hideDefaultButton());
+          window.botpress.on("ready", () => {
+            window.botpress.hideDefaultButton();
+            document.querySelectorAll<HTMLImageElement>("img.bpFabImage").forEach((image) => {
+              image.alt = "";
+              image.setAttribute("aria-hidden", "true");
+            });
+          });
         }}
       />
       <Script
@@ -47,6 +73,7 @@ const BotpressChat: React.FC = () => {
           z-index: 9999;
           box-shadow: 0 0 0 0 rgba(239, 87, 27, 0.7);
           animation: pulse 2s infinite;
+          border: 0;
         }
 
         @keyframes pulse {
@@ -74,6 +101,9 @@ const BotpressChat: React.FC = () => {
           display: flex;
           align-items: center;
           gap: 12px;
+          width: 100%;
+          background: transparent;
+          border: 0;
           text-decoration: none;
           color: #333;
           transition: all 0.2s;
@@ -81,6 +111,8 @@ const BotpressChat: React.FC = () => {
           border-bottom: 1px solid rgba(239, 87, 27, 0.1);
           font-size: 14px;
           font-weight: 500;
+          font-family: inherit;
+          text-align: left;
         }
 
         .menu-item:hover { 
@@ -92,12 +124,19 @@ const BotpressChat: React.FC = () => {
       `}</style>
 
       {/* Custom Pulse Button */}
-      <div className="pulse-button" onClick={() => setIsOpen(!isOpen)}>
+      <button
+        type="button"
+        className="pulse-button"
+        onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
+        aria-controls="chat-contact-menu"
+        aria-label={isOpen ? "Close contact options" : "Open contact options"}
+      >
         {isOpen ? <X color="white" /> : <MessageSquare color="white" />}
-      </div>
+      </button>
 
       {/* Selection Menu */}
-      <div className="menu-container">
+      <div className="menu-container" id="chat-contact-menu">
         <a 
           href="https://cal.com/antrosys" 
           target="_blank" 
@@ -113,10 +152,10 @@ const BotpressChat: React.FC = () => {
           <span>Live call agent</span>
         </a>
 
-        <div className="menu-item" onClick={toggleBotpress}>
+        <button type="button" className="menu-item" onClick={toggleBotpress}>
           <MessageSquare size={18} />
           <span>Chat with AI bot</span>
-        </div>
+        </button>
       </div>
     </>
   );
