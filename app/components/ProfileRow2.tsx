@@ -25,6 +25,13 @@ const cardData: ProfileData[] = [
     specialty: 'Digital Marketing Strategy and AI Growth'
   },
   {
+    name: 'Farwa Faisal',
+    title: 'Business Associate',
+    mainImage: '/AboutImages/Team/fara.webp',
+    avatarImage: '/Avatar/team/faraa.webp',
+    specialty: 'Cloud Infrastructure and Deployment Automation'
+  },
+  {
     name: 'Amy',
     title: 'CTO',
     mainImage: '/AboutImages/Team/coo.webp',
@@ -32,13 +39,7 @@ const cardData: ProfileData[] = [
     specialty: 'Operations and Creative Project Management'
   }
   ,
-  {
-    name: 'Fara',
-    title: 'Brand Designer',
-    mainImage: '/AboutImages/Team/fara.webp',
-    avatarImage: '/Avatar/team/faraa.webp',
-    specialty: 'Cloud Infrastructure and Deployment Automation'
-  },
+  
   {
     name: 'Kate',
     title: 'UI/UX Designer',
