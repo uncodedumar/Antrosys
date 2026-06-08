@@ -19,14 +19,14 @@ interface ProfileCardProps {
 const cardData: ProfileData[] = [
   {
     name: 'Mr. Sam',
-    title: 'CMO',
+    title: 'CMO & COO',
     mainImage: '/AboutImages/Team/cmo.webp',
     avatarImage: '/Avatar/team/sama.webp',
     specialty: 'Digital Marketing Strategy and AI Growth'
   },
   {
     name: 'Amy',
-    title: 'COO',
+    title: 'CTO',
     mainImage: '/AboutImages/Team/coo.webp',
     avatarImage: '/Avatar/team/amya.webp',
     specialty: 'Operations and Creative Project Management'
