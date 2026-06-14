@@ -2,8 +2,7 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { 
-  siAdyen, siFord, siDolphin, siEmirates, 
-  siActivision, siPelican, siDacia, siTumblr 
+  siClaude, siAnthropic 
 } from 'simple-icons';
 import Link from "next/link";
 import Image from "next/image";
@@ -101,12 +100,25 @@ const HeroSection: React.FC = () => {
 
           <p className="sr-only">{SEO_KEYWORDS}</p>
 
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-14 mt-12 opacity-50 hover:opacity-100 grayscale hover:grayscale-0 transition-all duration-700 ease-in-out">
-            {[siAdyen, siFord, siDolphin, siEmirates, siActivision, siPelican, siDacia, siTumblr].map((icon, i) => (
-              <svg key={i} role="img" viewBox="0 0 24 24" className="h-8 md:h-9 fill-white" aria-label="Partner Brand">
-                <path d={icon.path} />
-              </svg>
-            ))}
+          {/* --- Highlighted Emphasis Segment --- */}
+          <div className="mt-14 flex flex-col sm:flex-row items-center justify-center gap-6 md:gap-10 tracking-tight select-none group/ribbon">
+            <span className="text-xl md:text-2xl font-black  text-white/90 group-hover/ribbon:text-white transition-all duration-500 ease-out font-mono">
+              Anthropic Claude Partner
+            </span>
+   
+            <div className="flex items-center gap-8 opacity-90 group-hover/ribbon:opacity-100 transition-all duration-500 ease-out transform group-hover/ribbon:scale-105">
+              {[siClaude, siAnthropic ].map((icon, i) => (
+                <svg 
+                  key={i} 
+                  role="img" 
+                  viewBox="0 0 24 24" 
+                  className="h-8 md:h-9 fill-white hover:fill-orange-500 transition-colors duration-300" 
+                  aria-label="Partner Brand"
+                >
+                  <path d={icon.path} />
+                </svg>
+              ))}
+            </div>
           </div>
         </section>
 

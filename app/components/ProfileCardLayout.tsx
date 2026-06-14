@@ -15,7 +15,7 @@ const cardData: ProfileData[] = [
     name: 'Mr. Ryaz',
     role: 'CEO & Founder',
     specialty: 'Expert in AI-Driven Digital Strategy & UI/UX Design',
-    mainImage: '/AboutImages/Team/CEO.webp',
+    mainImage: '/AboutImages/Team/CEO.png',
     avatarImage: '/Avatar/team/ryaza.webp',
   },
 ];

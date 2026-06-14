@@ -10,6 +10,10 @@ const ServiceCards = dynamic(() => import("./components/ServiceCards"), {
   ssr: true,
 });
 
+const LogoTickerSection = dynamic(() => import("./components/LogoTickerSection"), {
+  ssr: true,
+});
+
 const LogoLoopco = dynamic(() => import("./components/logoloopco"), {
   ssr: true,
 });
@@ -118,7 +122,7 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-     
+      <LogoTickerSection />
       <ServiceCards />
       
       
